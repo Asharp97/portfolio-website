@@ -1,0 +1,38 @@
+.lang{
+    width: 800px;
+    margin: auto;
+    padding: 55px;
+    height: 50px;
+}
+
+.cardlang{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: var(--c2);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+}
+.langcat{
+    text-align: center;
+}
+.langcat div{
+    color: var(--c28);
+    transition: 0.2s ease-in-out;
+}
+
+
+.titlequalifiction{
+    display: flex;
+    flex-direction: row;
+    
+}
+.lang h3{
+    color: var(--c5);
+ }
+ .lang img{
+    translate: 0px 1rem;
+ }
+ .langcat div:hover{
+    font-size: larger;
+ }

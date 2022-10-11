@@ -1,0 +1,12 @@
+.container-title {
+    max-width: 800px;
+    margin: auto;
+    padding: 0 2rem;
+  }
+  .container-title p {
+    font-family: "mulish", sans-serif;
+    color: var(--c28);
+    letter-spacing: 0.2px;
+    opacity: 0.9;
+    padding-bottom: 1rem;
+  }
