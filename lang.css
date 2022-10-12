@@ -21,10 +21,7 @@
   transition: 0.2s ease-in-out;
 }
 
-.titlequalifiction {
-  display: flex;
-  flex-direction: row;
-}
+
 .lang h3 {
   color: var(--c5);
 }

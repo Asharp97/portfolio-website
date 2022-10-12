@@ -18,41 +18,28 @@
 
 .educat div {
   color: var(--c28);
-  grid-template-rows: 1fr 1fr;
-}
-.titlequalifiction {
-  display: flex;
-  flex-direction: row;
 }
 
 .edu h3 {
   color: var(--c5);
 }
 
-.edulogo {
-  translate: 0px 1rem;
-}
 .educat img {
   height: 300px;
   cursor: pointer;
   padding: 0cm;
   background-color: var(--c7);
   margin: 1rem;
-  transition: 1s;
 }
-.educat img:hover {
-  max-width: 90%;
+.educat img {
+  transition: 0.4s ease;
 }
+
 .educat date {
   opacity: 0.8;
   color: var(--c5);
 }
-#cud {
-  max-width: 80%;
-}
-#cud:hover {
-  max-width: 7 0%;
-}
+
 @media (orientation: portrait) {
   .edu {
     padding-top: 1rem;

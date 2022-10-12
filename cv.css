@@ -4,6 +4,7 @@
   padding: 0;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  transition: 300ms ease-out;
 }
 *::-webkit-scrollbar {
   display: none;
@@ -16,7 +17,6 @@
   --c5: #ac7088;
   --c6: black;
   --c7: #b9ab9600;
-  transition: ease-in-out 0.5s;
   --c28: black;
 }
 .dark-theme {
@@ -27,8 +27,7 @@
   --c5: #f36d84;
   --c6: rgb(255, 180, 180);
   --c7: rgba(255, 255, 255, 0.788);
-  --c28: WhiteSmoke;
-  transition: ease-in-out 0.5s;
+  --c28:WhiteSmoke;
 }
 
 body {
@@ -104,6 +103,10 @@ body hr {
 
 .summary {
   padding-top: 55px;
+}
+.titlequalifiction {
+  display: flex;
+  flex-direction: row;
 }
 
 @media (max-width: 1000px) {
