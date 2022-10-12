@@ -10,3 +10,8 @@
     opacity: 0.9;
     padding-bottom: 1rem;
   }
+  @media (max-width: 1000px) {
+    .container-title {
+      max-width: 80%;
+    }
+  }

@@ -1,38 +1,51 @@
-.lang{
-    width: 800px;
-    margin: auto;
-    padding: 55px;
-    height: 50px;
+.lang {
+  width: 800px;
+  margin: auto;
+  padding-bottom: 1rem;
+  padding-top: 55px;
 }
 
-.cardlang{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    background-color: var(--c2);
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1rem;
+.cardlang {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: var(--c2);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
 }
-.langcat{
-    text-align: center;
+.langcat {
+  text-align: center;
 }
-.langcat div{
-    color: var(--c28);
-    transition: 0.2s ease-in-out;
+.langcat div {
+  color: var(--c28);
+  transition: 0.2s ease-in-out;
 }
 
-
-.titlequalifiction{
+.titlequalifiction {
+  display: flex;
+  flex-direction: row;
+}
+.lang h3 {
+  color: var(--c5);
+}
+.lang img {
+  translate: 0px 1rem;
+}
+.langcat div:hover {
+  font-size: larger;
+}
+@media (max-width: 1000px) {
+  .lang {
+    align-items: center;
+    width: 90%;
+    padding-top: 1rem;
+  }
+  .cardlang {
+    height: auto;
     display: flex;
-    flex-direction: row;
-    
+    flex-direction: column;
+  }
+  .cardlang h3 {
+    padding: 4px;
+  }
 }
-.lang h3{
-    color: var(--c5);
- }
- .lang img{
-    translate: 0px 1rem;
- }
- .langcat div:hover{
-    font-size: larger;
- }

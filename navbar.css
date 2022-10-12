@@ -56,3 +56,9 @@ ul{
     height: 20px;
     
 }
+@media (max-width: 1000px)  {
+    .navbar{
+        display: none;
+    }
+    
+}

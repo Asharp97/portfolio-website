@@ -1,7 +1,6 @@
 .skills{
     width: 800px;
     margin: auto;
-    padding-top: 1rem;
     padding-bottom: 1rem;
     padding-top: 55px;
 }
@@ -10,7 +9,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     height:170px ;
-    
     background-color: var(--c2);
     margin-left: auto;
     margin-right: auto;
@@ -34,4 +32,21 @@
  }
  .skillCategory div:hover{
     font-size: larger;
+ }
+
+ @media (max-width:1000px) {
+    .skills{
+        align-items: center;
+        width: 90%;
+        padding-top: 1rem;
+    }
+    .cardSkills{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .cardSkills h3{
+        padding: 4px;
+    }
  }
