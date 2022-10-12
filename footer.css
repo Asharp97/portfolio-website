@@ -53,7 +53,7 @@ li{
 .footer li a:hover{
     opacity: 0.5;
 }
-@media (max-width : 1000px) {   
+@media (orientation: portrait) {   
     .footer{
         font-size: small;
     }

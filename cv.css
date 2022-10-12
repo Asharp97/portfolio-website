@@ -126,7 +126,7 @@ body hr {
   font-size: 140%;
   }
 }
-@media (max-width : 1000px) {
+@media (orientation: portrait) {
   .main-header{
     height: 20vh;
 

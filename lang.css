@@ -34,7 +34,7 @@
 .langcat div:hover {
   font-size: larger;
 }
-@media (max-width: 1000px) {
+@media (orientation: portrait) {
   .lang {
     align-items: center;
     width: 90%;
