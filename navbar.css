@@ -70,7 +70,7 @@ ul{
     }
 
     .sidenav{
-        /*display: unset;*/
+        display: unset;
         height: 100%;
         width: 0;
         position: fixed;
@@ -81,22 +81,26 @@ ul{
         opacity: 0.9;
         padding-top:60px;
         transition: 500ms;
-
+        
     }
-
     .sidenav a{
+        margin-bottom: 3rem;
+    }
+    
+    .sidenav div{
+        opacity: 0;
         padding: 10px 10px 10px 30px;
         transition: 300ms;
         width: 0;
 
     }
-    .sidenav .btn-close{
+    /* .sidenav .btn-close{
         position: absolute;
         top: 0;
         right: 22px;
         font-size: 36px;
         margin-left: 25px;
-    }
+    } */
     #nightMob{
         display: unset;
         height: 25px;

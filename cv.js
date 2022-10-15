@@ -22,9 +22,11 @@ iconMob.onclick = function () {
 
 function openSlideMenu(){
   document.getElementById('sideMenu').style.width='200px';
-
+  document.getElementById('sideMenuLinks').style.opacity='1';
+  
 }
 function closeSlideMenu(){
   document.getElementById('sideMenu').style.width='0';
+  document.getElementById('sideMenuLinks').style.opacity='0';
 
 }

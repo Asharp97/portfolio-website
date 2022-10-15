@@ -10,8 +10,15 @@
     opacity: 0.9;
     padding-bottom: 1rem;
   }
+  h1 {
+    font-size: 75px;
+  }
   @media (orientation: portrait) {
     .container-title {
       max-width: 80%;
+    }
+    h1{
+      font-size: 200%;
+      letter-spacing: 2px;
     }
   }

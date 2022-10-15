@@ -25,75 +25,77 @@
             <span>
 
                 <li><a href="#home">
-                    <img class="logo"  id="logo" src="images/hashtag.png" alt=""></a></li>
-                </span>
-                
-                <li><img src="images/summary.png" alt="">
-                    <a href="#summary">SUMMARY</a>
-                </li>
-                <li>
-                    <div class="separator"></div>
-                </li>
-                
-                
-                <li><img src="images/exp.png" alt="">
-                    <a href="#exp">EXPERIENCE </a>
-                </li>
-                <li>
-                    <div class="separator"></div>
-                </li>
-                
-                <li><img src="images/skills.png" alt="">
+                        <img class="logo" id="logo" src="images/hashtag.png" alt=""></a></li>
+            </span>
+
+            <li><img src="images/summary.png" alt="">
+                <a href="#summary">SUMMARY</a>
+            </li>
+            <li>
+                <div class="separator"></div>
+            </li>
+
+
+            <li><img src="images/exp.png" alt="">
+                <a href="#exp">EXPERIENCE </a>
+            </li>
+            <li>
+                <div class="separator"></div>
+            </li>
+
+            <li><img src="images/skills.png" alt="">
                 <a href="#skills">SKILLS</a>
             </li>
             <li>
                 <div class="separator"></div>
             </li>
-            
+
             <li><img src="images/language.png" alt="">
                 <a href="#lang">LANGUAGES</a>
             </li>
             <li>
                 <div class="separator"></div>
             </li>
-            
+
             <li><img src="images/edu.png" alt="">
                 <a href="#edu">EDUCATION</a>
             </li>
             <li>
                 <div class="separator"></div>
             </li>
-            
+
             <li><img src="images/phone.png" alt="">
                 <a href="#contact">CONTACT</a>
             </li>
-            
-            
-            <li><img src="images/NightMode.png" class="night" id="night"></li>
-            
-            
-        </header>
-        <img class="logoSideBar" onclick="openSlideMenu()" id="logo" src="images/hashtag.png" >
-        <div id="sideMenu" class="sidenav" >
 
-            <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-            
-            <a href="#summary">SUMMARY</a>
-            <a href="#exp">EXPERIENCE </a>
-            <a href="#skills">SKILLS</a>
-            <a href="#lang">LANGUAGES</a>
-            <a href="#edu">EDUCATION</a>
-            <a href="#contact">CONTACT</a>
+
+            <li><img src="images/NightMode.png" class="night" id="night"></li>
+
+
+        </header>
+    </ul>
+        <img class="logoSideBar" onclick="openSlideMenu()" id="logo" src="images/hashtag.png">
+        <div id="sideMenu" class="sidenav" onclick="closeSlideMenu()">
+
+            <!-- <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a> -->
+            <div id="sideMenuLinks">
+
+                <a href="#summary">SUMMARY</a>
+                <a href="#exp">EXPERIENCE </a>
+                <a href="#skills">SKILLS</a>
+                <a href="#lang">LANGUAGES</a>
+                <a href="#edu">EDUCATION</a>
+                <a href="#contact">CONTACT</a>
+            </div>
             
         </div>
-    </ul>
-    
+
 
     <header id="home" class="main-header">
         <h1>Ali El-Sayed</h1>
         <p>Front-end developer with a passion for graphic design, also musician.</p>
     </header>
-    <main class="container-title" data-aos="zoom-in">
+    <main class="container-title" data-aos="zoom-in" >
 
 
         <section id="summary" class="summary">
@@ -243,7 +245,7 @@
             <div class="educat" data-aos="fade-right" data-aos-offset="50">
 
                 <a href="https://www.cud.ac.ae/">
-                    <img src="images/cud.png" alt="" data-aos="fade-right" data-aos-delay="100" id="cud">
+                    <img src="images/cud.png" alt="" data-aos="fade-up" data-aos-delay="100" id="cud">
                 </a>
 
 
@@ -260,7 +262,7 @@
             <div class="educat" data-aos="fade-left" data-aos-offset="50">
 
                 <a href="https://www.dogus.edu.tr/">
-                    <img src="images/dogus.png" alt="" data-aos="fade-left" data-aos-delay="100" id="cud">
+                    <img src="images/dogus.png" alt="" data-aos="fade-up" data-aos-delay="100" id="cud">
                 </a>
 
                 <div>
@@ -274,7 +276,7 @@
         </div>
     </section>
 
-    <section class="footer">
+    <section  class="footer">
         <div class="contain-footer">
 
             <li>
@@ -292,11 +294,12 @@
             <p>
                 © 2022 dev. by Ali Elsayed.<br>
                 <span>
-                    All rights reserved, I guess  idk what that means
+                    All rights reserved, I guess idk what that means
                 </span>
             </p>
         </div>
     </section>
+    <div id="contact"></div>
 
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
