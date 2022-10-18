@@ -22,11 +22,16 @@ iconMob.onclick = function () {
 
 function openSlideMenu(){
   document.getElementById('sideMenu').style.width='200px';
+  document.getElementById("nightMob").style.marginLeft = "200px";
   document.getElementById('sideMenuLinks').style.opacity='1';
+  document.getElementById('all').style.filter='blur(3px)';
+  
   
 }
 function closeSlideMenu(){
   document.getElementById('sideMenu').style.width='0';
+  document.getElementById("nightMob").style.marginLeft = "0";
   document.getElementById('sideMenuLinks').style.opacity='0';
+  document.getElementById('all').style.filter='blur(0)';
 
 }

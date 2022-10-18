@@ -17,7 +17,8 @@
   --c5: #ac7088;
   --c6: black;
   --c7: #b9ab9600;
-  --c28: black;
+  --c28:black;
+  --c30:#b9ab96;
 }
 .dark-theme {
   --c1: #16213e;
@@ -28,6 +29,7 @@
   --c6: rgb(255, 180, 180);
   --c7: rgba(255, 255, 255, 0.788);
   --c28:WhiteSmoke;
+  --c30:#1a3a61;
 }
 
 body {
@@ -61,11 +63,6 @@ h2 {
   transition: 0.5s;
 }
 
-.main-header h1 {
-  letter-spacing: 2px;
-  padding: 0;
-  margin: 0;
-}
 
 .mail img {
   height: 20px;
@@ -84,9 +81,7 @@ h2 {
   padding: 2rem;
   padding-top: 12rem;
 }
-.main-header h1 {
-  letter-spacing: 1rem;
-}
+
 .main-header p {
   letter-spacing: 1px;
   font-size: 2rem;
@@ -106,26 +101,6 @@ body hr {
   flex-direction: row;
 }
 
-@media (max-width: 1000px) {
-  body {
-    background: var(--c1);
-  
-    font-family: "Oswald", sans-serif;
-    font-size: 1rem;
-  }
-  li,
-  a,
-  h1 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  color: var(--c4);
-  text-decoration: none;
-  }
-  h1 {
-  font-size: 140%;
-  }
-}
 @media (orientation: portrait) {
   .main-header{
     height: 20vh;

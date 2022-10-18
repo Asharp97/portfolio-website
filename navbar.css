@@ -14,11 +14,10 @@
     z-index: 1;
     height: auto;
 }
-#nightMob{
+.mobnav{
     display: none;
 }
    
-
 ul{
     list-style-type:none;
 }
@@ -56,9 +55,7 @@ ul{
 .sidenav{
     display: none;
 }
-.logoSideBar{
-    display: none;
-}
+
 .separator {
     border-left: 1px solid black;
     height: 20px;
@@ -77,7 +74,7 @@ ul{
         z-index: 1;
         top: 0;
         left: 0;
-        background-color: var(--c3);
+        background-color: var(--c2);
         opacity: 0.9;
         padding-top:60px;
         transition: 500ms;
@@ -86,13 +83,13 @@ ul{
     .sidenav a{
         margin-bottom: 3rem;
     }
-    
-    .sidenav div{
+    .sideMenuLinks{
         opacity: 0;
+    }
+    .sidenav div{
         padding: 10px 10px 10px 30px;
         transition: 300ms;
         width: 0;
-
     }
     /* .sidenav .btn-close{
         position: absolute;
@@ -101,20 +98,31 @@ ul{
         font-size: 36px;
         margin-left: 25px;
     } */
-    #nightMob{
+
+    .mobnav{
+        /* background-color: var(--c30); */
         display: unset;
-        height: 25px;
+        display: flex;
+        justify-content: space-around;
         padding: 25px;
-        position: absolute;
+        position: fixed;
+        width: 10%;
         top: 0;
         right: 0;
+        left: 0;
+        height: 25px;
+        z-index: 1;
+    }    
+    .mobnav :last-child{
+        margin-left: auto;
+    }
+    .nightMob{
+        /* margin-left: auto;
+        padding-right: 1rem; */
+        height: 25px;
     }
     .logoSideBar{
-        display: unset;
         height: 25px;
-        padding: 25px;
-        position: absolute;
-        top: 0;
-        left: 0;
+
     }
 }
