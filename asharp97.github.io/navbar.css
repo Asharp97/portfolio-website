@@ -17,10 +17,7 @@
 .mobnav{
     display: none;
 }
-   
-ul{
-    list-style-type:none;
-}
+
 .navbar li{
     padding-inline: 1rem;
     transition: 0.5s;
