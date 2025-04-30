@@ -2,14 +2,20 @@ export default defineAppConfig({
   // https://ui.nuxt.com/getting-started/theme#design-system
   ui: {
     colors: {
-      primary: 'copper',
-      neutral: 'stone',
+      primary: "copper",
+      neutral: "stone",
     },
-    button: {
+    card: {
+      variants: {
+        variant: {
+          solid: {
+            root: "bg-inverted text-inverted bg-copper-50 text-black rounded-2xl overflow-clip",
+          },
+        },
+      },
       defaultVariants: {
-        // Set default button color to neutral
-        // color: 'neutral'
-      }
-    }
-  }
-})
+        variant: "solid",
+      },
+    },
+  },
+});
