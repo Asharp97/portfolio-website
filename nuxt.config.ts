@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxt/icon",
     "@nuxtjs/mdc",
+    "nuxt-swiper",
   ],
 
   css: ["~/assets/css/main.css"],

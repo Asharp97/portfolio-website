@@ -3,7 +3,7 @@
 
 @theme static {
   --font-sans: "Roboto", sans-serif;
-  
+
   --color-copper-50: #faf6f0;
   --color-copper-100: #efe4d6;
   --color-copper-200: #dec7a9;
@@ -15,6 +15,13 @@
   --color-copper-800: #6e3c32;
   --color-copper-900: #5c322b;
   --color-copper-950: #331815;
+
+  --animate-spin: spin 20s linear infinite;
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 h1 {
@@ -29,9 +36,9 @@ h1 span {
 
 h2 {
   font-weight: 600; /* font-semibold */
-  font-size: 1.25rem; /* text-xl */
-  color: #4b5563; /* text-gray-600 */
-  text-transform: capitalize;
+  font-size: 1rem; /* text-xl */
+  color: #5c322ba9; /* text-gray-600 */
+  /* text-transform: capitalize; */
 }
 h3 {
   font-size: var(--text-lg); /* 1.125rem (18px) */

@@ -1,28 +1,38 @@
 export const skills = [
   {
-    title: "Artificial Intelligence and Machine Learning",
-    points: [`**Libraries and Tools:** TensorFlow, Scikit-learn, LangChain.`],
+    title: "Artificial Intelligence & Machine Learning",
+    points: [
+      { label: "Deep learning", value: "TensorFlow" },
+      { label: "ML workflows", value: "Scikit-learn" },
+      { label: "LLM apps", value: "LangChain" },
+    ],
   },
   {
     title: "Software Engineering Principles",
     points: [
-      `SDLC, Agile Methodology, Scalable Architecture, Features Engineering.`,
+      { label: "Project lifecycle", value: "SDLC" },
+      { label: "Team processes", value: "Agile Methodology" },
+      { label: "System design", value: "Scalable Architecture" },
+      { label: "Data prep", value: "Feature Engineering" },
     ],
   },
   {
-    title: "Programming Languages",
+    title: "Programming Languages & Frameworks",
     points: [
-      `**Primary:** Python, JavaScript, TypeScript.`,
-      `**Frameworks:** Nuxt.js., Vue.js, React.js`,
-      `**Databases:** SQL`,
+      { label: "Languages", value: "Python, JavaScript, TypeScript" },
+      { label: "Frameworks", value: "Nuxt.js, Vue.js, React.js" },
+      { label: "Databases", value: "SQL" },
     ],
   },
   {
-    title: "Cloud Computing",
+    title: "Cloud Computing & Services",
     points: [
-      `**Platforms**: Google Cloud Platform (GCP).`,
-      `**Services**: Vertex AI, BigQuery, AutoML.`,
-      `**Specializations**: Predictive Modeling, Data Analysis, Cloud-Based AI Solutions`,
+      { label: "Platform", value: "Google Cloud Platform (GCP)" },
+      { label: "Services", value: "Vertex AI, BigQuery, AutoML" },
+      {
+        label: "Specialties",
+        value: "Predictive Modeling, Data Analysis, Cloud-Based AI Solutions",
+      },
     ],
   },
 ];
@@ -34,6 +44,7 @@ export const certificates = [
   },
   {
     title: "Google Cloud Console Skill Badges",
+    subtitle: "Credly",
     link: "https://www.credly.com/users/ali-elsayed.b0f75bda",
     description: `Completed multiple **GCP skill badges** in areas like **Machine Learning Fundamentals** and **Data Engineering**, showcasing hands-on cloud expertise and practical understanding of real-world AI pipelines.`,
   },
@@ -59,7 +70,7 @@ export const experience = [
     title: "Software Engineer",
     subtitle: "Hasel",
     link: "https://hasel.com/",
-    description: `Built responsive, user-friendly web projects with a strong focus on accessibility, cross-device performance, and clean design. Led QA efforts and consistently delivered on time, laying a solid foundation in modern software development practices.`,
+    description: `Built **responsive**, **user-friendly web projects** with a strong focus on **accessibility**, **cross-device performance**, and **clean design**. **Led QA efforts** and consistently **delivered on time**, laying a solid foundation in **modern software development practices**.`,
     date: "2023 | 2024",
     location: "Istanbul, Türkiye",
   },
@@ -95,19 +106,17 @@ export const education = [
     link: "https://www.cud.ac.ae/",
     date: "2017 - 2018",
     location: "Dubai, UAE",
-    description:
-      "Graduated with a **Bachelor’s in Computer Engineering** from **Doğuş University**, where I built a strong foundation in **machine learning, systems design, and algorithms**.",
+    description: `Studied at **Canadian University Dubai**, completing core coursework in **object-oriented programming**, **logic circuits**, and **computer architecture**, building early technical fluency in CS fundamentals.`,
   },
 ];
 
 export const lang = [
   {
-    points: ["English"],
-  },
-  {
-    points: ["Arabic"],
-  },
-  {
-    points: ["Turkish"],
+    title: "Languages",
+    points: [
+      { label: "English", value: "★★★★★" },
+      { label: "Arabic", value: "★★★★★" },
+      { label: "Turkish", value: "★★★★★" },
+    ],
   },
 ];

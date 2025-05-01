@@ -1,22 +1,32 @@
 <template>
   <div class="bg-copper-100 min-h-dvh py-32">
     <div class="container mx-auto">
-      <div class="grid grid-cols-12 gap-6">
-        <UCard class="col-span-12">
+      <div class="grid grid-cols-12 gap-1">
+        <UCard class="col-span-12 shadow-sm">
           <div class="flex justify-between">
             <div class="flex-1">
               <h1>Ali <span>Elsayed</span></h1>
-              <!-- <h2 class="font-semibold text-xl text-gray-600 capitalize">
-                Machine learning & software engineer
-              </h2> -->
+              <h2 class="font-semibold text-xl text-gray-600">
+                But you can call me A Sharp
+              </h2>
             </div>
             <div class="flex flex-1 justify-between">
               <ul class="columns-2">
-                <li v-for="title in titles" :key="title" class="mr-2 min-w-36">
+                <li
+                  v-for="title in titles"
+                  :key="title"
+                  class="mr-2 min-w-36"
+                  @click="
+                    () => {
+                      activeContent == title
+                        ? (activeContent = '')
+                        : (activeContent = title);
+                    }
+                  ">
                   <NuxtLink
                     :to="'#' + title"
                     class="flex items-center gap-1 mb-1 group">
-                    <Hashtag />
+                    <Hashtag :active="activeContent == title" />
                     <h3>{{ title }}</h3>
                   </NuxtLink>
                 </li>
@@ -35,9 +45,11 @@
           </div>
           <div class="h-32" />
           <div class="flex justify-between flex-wrap">
-            <p class="w-full md:w-1/2"><MDC :value="summary" /></p>
+            <client-only>
+              <p class="w-full md:w-1/2"><MDC :value="summary" /></p>
+            </client-only>
             <div class="flex-1 flex justify-end items-end">
-              <ul>
+              <!-- <ul>
                 <li v-for="x in personal" :key="x">
                   <NuxtLink
                     :to="x.link ? x.link : `javascript:;`"
@@ -48,68 +60,38 @@
                     <h4>{{ x.name }}</h4>
                   </NuxtLink>
                 </li>
-              </ul>
-            </div>
-          </div>
-        </UCard>
-        <UCard class="col-span-7 overflow-clip">
-          <div class="flex items-center gap-2 min-h-54">
-            <div class="flex flex-col relative">
-              <div v-for="(e, n) in experience" :key="n" class="">
-                <Transition
-                  :name="n < active_exp ? `slide-up` : `slide-down`"
-                  mode="out-in">
-                  <div v-show="n == active_exp" class="flex flex-col">
-                    <div class="flex justify-between items-center">
-                      <div>
-                        <h5 class="text-4xl font-light">{{ e.title }}</h5>
-                        <NuxtLink :to="e.link">
-                          <h2>
-                            {{ e.subtitle }}
-                            <span v-if="e.link"
-                              ><Icon
-                                class="text-sm"
-                                name="cuida:open-in-new-tab-outline"
-                            /></span>
-                          </h2>
-                        </NuxtLink>
-                      </div>
-                      <div class="text-right">
-                        <h6>{{ e.date }}</h6>
-                        <h6 class="font-semibold">{{ e.location }}</h6>
-                      </div>
-                    </div>
-                    <Placeholder class="h-16" />
-                    <p><MDC :value="e.description" /></p>
-                  </div>
-                </Transition>
-              </div>
-            </div>
-            <div class="w-fit flex flex-col gap-2">
+              </ul> -->
               <div
-                v-for="(e, n) in experience"
-                :key="n"
-                class="flex justify-center">
-                <Hashtag :active="n == active_exp" @click="active_exp = n" />
+                class="text-right bg-copper-100 rounded-lg px-4 py-2 text-md text-gray-800 hover:shadow-xl transition duration-300 cursor-pointer">
+                <p>
+                  <!-- Let's talk, always happy to connect, share ideas, or just
+                  chat. -->
+                </p>
+                <h5>Wanna talk?</h5>
               </div>
             </div>
           </div>
         </UCard>
-        <UCard class="col-span-5">
-          {{ skills }}
-        </UCard>
-        <UCard class="col-span-5">
-          {{ projects }}
-        </UCard>
-        <UCard class="col-span-5">
-          {{ education }}
-        </UCard>
-        <UCard class="col-span-2">
-          {{ lang }}
-        </UCard>
-        <UCard class="col-span-8">
-          {{ certificates }}
-        </UCard>
+
+        <Card
+          :content="experience"
+          :span="7"
+          :active="activeContent == 'Experiences'" />
+        <Card :content="skills" :span="5" :active="activeContent == 'Skills'" />
+        <Card
+          :content="projects"
+          :span="5"
+          :active="activeContent == 'Side Projects'" />
+        <Card
+          :content="education"
+          :span="5"
+          :active="activeContent == 'Education'" />
+        <Card
+          :content="lang"
+          :span="2"
+          :active="activeContent == 'Languages'" />
+        <Card :content="certificates" :span="5" />
+        <Card :span="7"> <Form-component /></Card>
       </div>
     </div>
   </div>
@@ -124,7 +106,16 @@ import {
   projects,
   certificates,
 } from "../../content.js";
-const active_exp = ref(0);
+
+const activeContent = ref("");
+watch(
+  () => activeContent.value,
+  () => {
+    setTimeout(() => {
+      activeContent.value = "";
+    }, 3000);
+  }
+);
 const titles = [
   "Skills",
   "Certificates",
@@ -160,38 +151,4 @@ const personal = [
 ];
 </script>
 
-<style scoped>
-.slide-up-enter-active,
-.slide-up-leave-active,
-.slide-down-enter-active,
-.slide-down-leave-active {
-  transition: all 700ms cubic-bezier(0, 1, 0.6, 1);
-}
-.slide-down-leave-active,
-.slide-up-leave-active {
-  position: absolute;
-  opacity: 1;
-}
-
-.slide-up-enter-from,
-.slide-up-leave-to {
-  transform: translateY(200px);
-  /* opacity: 0; */
-}
-
-/* Appear from top or disappear to top */
-.slide-down-enter-from,
-.slide-down-leave-to {
-  transform: translateY(-200px);
-  /* opacity: 0; */
-}
-
-/* Final visible state for all */
-.slide-up-enter-to,
-.slide-down-enter-to,
-.slide-up-leave-from,
-.slide-down-leave-from {
-  transform: translateY(0);
-  /* opacity: 1; */
-}
-</style>
+<style scoped></style>
