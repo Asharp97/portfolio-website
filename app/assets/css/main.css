@@ -17,6 +17,7 @@
   --color-copper-950: #331815;
 
   --animate-spin: spin 20s linear infinite;
+  --animate-spin-slower: spin 60s ease infinite;
   @keyframes spin {
     to {
       transform: rotate(360deg);
@@ -48,4 +49,13 @@ h3 {
 h4 {
   font-size: var(--text-md);
   font-weight: 500;
+}
+
+.tada-enter-from {
+  transform: perspective(750px) translate3d(0px, 0px, -250px) rotateX(27deg)
+    scale(0.9, 0.9);
+}
+.tada-enter-active,
+.tada {
+  transition: 0.5s cubic-bezier(0.44, 0, 0.64, 0.99);
 }

@@ -1,3 +1,5 @@
+const inputSettings = "bg-white! placeholder:text-copper-900 w-full";
+const inputRootSettings = "w-full";
 export default defineAppConfig({
   // https://ui.nuxt.com/getting-started/theme#design-system
   ui: {
@@ -15,6 +17,24 @@ export default defineAppConfig({
       },
       defaultVariants: {
         variant: "solid",
+      },
+    },
+    input: {
+      slots: {
+        root: [inputRootSettings],
+        base: [inputSettings],
+      },
+      defaultVariants: {
+        variant: "soft",
+      },
+    },
+    textarea: {
+      slots: {
+        root: [inputRootSettings],
+        base: [inputSettings],
+      },
+      defaultVariants: {
+        variant: "soft",
       },
     },
   },
