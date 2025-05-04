@@ -8,8 +8,16 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxt/icon",
     "@nuxtjs/mdc",
-    "nuxt-swiper",
+    "@nuxtjs/i18n",
+    "nuxt3-lenis",
   ],
+  i18n: {
+    locales: [
+      { code: "en", language: "en-US" },
+      { code: "tr", language: "tr-TR" },
+    ],
+    defaultLocale: "en",
+  },
 
   css: ["~/assets/css/main.css"],
 

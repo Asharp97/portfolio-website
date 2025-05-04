@@ -27,8 +27,8 @@
 
 h1 {
   font-size: var(--text-7xl);
-  line-height: var(--text-7xl--line-height); /* 1 */
-  letter-spacing: var(--tracking-wide); /* 0.025em */
+  line-height: var(--text-7xl--line-height);
+  letter-spacing: var(--tracking-wide);
   font-weight: 100;
 }
 h1 span {
@@ -36,15 +36,14 @@ h1 span {
 }
 
 h2 {
-  font-weight: 600; /* font-semibold */
-  font-size: 1rem; /* text-xl */
-  color: #5c322ba9; /* text-gray-600 */
-  /* text-transform: capitalize; */
+  font-weight: 600;
+  font-size: 1rem;
+  color: #5c322ba9;
 }
 h3 {
-  font-size: var(--text-lg); /* 1.125rem (18px) */
-  line-height: var(--text-lg--line-height); /* calc(1.75 / 1.125) */
-  transition-duration: 300ms; /* duration-300 */
+  font-size: var(--text-lg);
+  line-height: var(--text-lg--line-height);
+  transition-duration: 300ms;
 }
 h4 {
   font-size: var(--text-md);
@@ -53,9 +52,10 @@ h4 {
 
 .tada-enter-from {
   transform: perspective(750px) translate3d(0px, 0px, -250px) rotateX(27deg)
-    scale(0.9, 0.9);
+    scale(0.8) translateY(100dvh);
+    filter: blur(50px);
 }
-.tada-enter-active,
-.tada {
-  transition: 0.5s cubic-bezier(0.44, 0, 0.64, 0.99);
+.tada-enter-active {
+  transition: 0.3s;
+  transition-timing-function: cubic-bezier(0, 1, 0.6, 1);
 }

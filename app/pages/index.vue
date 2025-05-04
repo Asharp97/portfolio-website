@@ -1,163 +1,166 @@
 <template>
-  <div class="bg-copper-100 py-32">
-    <div class="container mx-auto">
+  <div class="bg-copper-100 min-h-dvh py-32">
+    <button
+      class="text-lg uppercase text-black hover:text-white hover:tracking-widest font-normal fixed top-2 right-2 hover:bg-copper-500 p-4 hover:p-4.5 duration-300 rounded-full cursor-pointer"
+      @click="setLocale(locale == 'en' ? 'tr' : 'en')">
+      {{ locale == "en" ? "tr" : "en" }}
+    </button>
+    <div class="max-w-400 px-1 mx-auto">
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-1"
-      >
-        <UCard
-          class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12 shadow-sm"
-        >
-          <div class="flex justify-between flex-wrap gap-3">
-            <div class="flex-1">
-              <h1>Ali <span>Elsayed</span></h1>
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-1 w-full">
+        <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
+          <Card class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
+            <div class="flex justify-between flex-wrap gap-3">
+              <div class="flex-1">
+                <h1>Ali <span>Elsayed</span></h1>
+              </div>
+              <div class="flex flex-1 justify-between flex-wrap gap-2 w-full">
+                <ul class="columns-2">
+                  <li
+                    v-for="(title, n) in content.titles"
+                    :key="title"
+                    class="mr-2 min-w-36"
+                    @mouseleave="activeContent = null"
+                    @mouseover="activeContent = n">
+                    <NuxtLink
+                      :to="'#' + title"
+                      class="flex items-center gap-1 mb-1 group">
+                      <Hashtag :active="activeContent == title" />
+                      <h3>{{ title }}</h3>
+                    </NuxtLink>
+                  </li>
+                </ul>
+                <ul
+                  class="flex flex-col items-end flex-wrap w-full lg:w-20 text-right">
+                  <li v-for="social in content.socials" :key="social">
+                    <NuxtLink :to="social.link" target="_blank">
+                      <!-- <Icon :name="social.icon" class="text-3xl text-copper-950" /> -->
+                      <h3 class="capitalize underline">
+                        {{ social.name }}
+                      </h3>
+                    </NuxtLink>
+                  </li>
+                  <li>
+                    <a
+                      :href="`/ali-elsayed-resume-${locale}.pdf`"
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <h3 class="capitalize underline">Résumé</h3>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="flex flex-1 justify-between flex-wrap gap-2">
-              <ul class="columns-2">
-                <li
-                  v-for="(title, n) in titles"
-                  :key="title"
-                  class="mr-2 min-w-36"
-                  @click="
-                    () => {
-                      activeContent == n
-                        ? (activeContent = '')
-                        : (activeContent = n);
-                    }
-                  "
-                >
-                  <NuxtLink
-                    :to="'#' + title"
-                    class="flex items-center gap-1 mb-1 group"
-                  >
-                    <Hashtag :active="activeContent == title" />
-                    <h3>{{ title }}</h3>
-                  </NuxtLink>
-                </li>
-              </ul>
-              <ul
-                class="flex flex-col items-end flex-wrap w-full lg:w-30 text-right"
-              >
-                <li v-for="social in socials" :key="social">
-                  <NuxtLink :to="social.link" target="_blank">
-                    <!-- <Icon :name="social.icon" class="text-3xl text-copper-950" /> -->
-                    <h3 class="capitalize underline">
-                      {{ social.name }}
-                    </h3>
-                  </NuxtLink>
-                </li>
-              </ul>
+            <div class="h-12" />
+            <div class="flex justify-between items-end flex-wrap">
+              <client-only>
+                <p class="w-full md:w-1/2"><MDC :value="content.summary" /></p>
+              </client-only>
+              <div class="flex-1 flex justify-end items-end">
+                <Hashtag
+                  :active="true"
+                  :logo="true"
+                  @mouseleave="activeContent = null"
+                  @mouseover="activeContent = 6" />
+              </div>
             </div>
-          </div>
-          <div class="h-32" />
-          <div class="flex justify-between flex-wrap">
-            <client-only>
-              <p class="w-full md:w-1/2"><MDC :value="summary" /></p>
-            </client-only>
-            <div class="flex-1 flex justify-end items-end">
-              <hashtag :active="true" :logo="true" />
-              <!-- <div
-                class="text-right w-fit bg-copper-100 rounded-lg px-4 py-2 text-md text-gray-800 hover:shadow-xl transition duration-300 cursor-pointer"
-                @click="activeContent = 6"
-              >
-                <h5>Wanna talk?</h5>
-              </div> -->
-            </div>
-          </div>
-        </UCard>
+          </Card>
+        </div>
 
-        <Card
-          v-if="mounted"
-          class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-7"
-          :content="experience"
-          :active="activeContent == 0"
-          :name="titles[0]"
-        />
+        <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-7">
+          <Card
+            :content="content.experience"
+            :active="activeContent == 0"
+            delay="300ms"
+            :name="content.titles[0]" />
+        </div>
 
-        <Card
-          v-if="mounted"
-          :content="skills"
-          class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5"
-          :active="activeContent == 1"
-          :name="titles[1]"
-        />
-        <Card
-          v-if="mounted"
-          :content="projects"
-          class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4"
-          :active="activeContent == 2"
-          :name="titles[2]"
-        />
-        <Card
-          v-if="mounted"
-          :content="education"
-          class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5"
-          :active="activeContent == 3"
-          :name="titles[3]"
-        />
-        <Card
-          v-if="mounted"
-          class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3"
-          :active="activeContent == 4"
-          :name="titles[4]"
-        >
-          <div class="flex flex-col justify-between h-full">
-            <h5 class="text-4xl font-light">{{ lang.title }}</h5>
-            <Placeholder class="py-8" />
+        <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
+          <Card
+            :content="content.skills"
+            delay="400ms"
+            :active="activeContent == 1"
+            :name="content.titles[1]" />
+        </div>
+
+        <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
+          <Card
+            :content="content.projects"
+            delay="100ms"
+            :active="activeContent == 2"
+            :name="content.titles[2]" />
+        </div>
+        <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
+          <Card
+            :content="content.education"
+            delay="150ms"
+            :active="activeContent == 3"
+            :name="content.titles[3]" />
+        </div>
+
+        <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2">
+          <Card
+            delay="400ms"
+            :active="activeContent == 4"
+            :name="content.titles[4]">
             <ul>
               <li
-                v-for="(x, n) in lang.points"
+                v-for="(x, n) in content.languages.points"
                 :key="n"
-                class="flex justify-between w-full"
-              >
-                <div class="font-semibold">{{ x.label }}</div>
-                {{ x.value }}
+                class="flex flex-col gap-1">
+                <div class="text-xl">{{ x.label }}</div>
+                <div class="text-xl text-right">{{ x.value }}</div>
               </li>
             </ul>
-          </div>
-        </Card>
-        <Card
-          v-if="mounted"
-          :content="certificates"
-          :active="activeContent == 5"
-          :name="titles[5]"
-          class="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-5"
-        />
-        <Card
-          v-if="mounted"
-          :active="activeContent == 6"
-          :name="titles[6]"
-          class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-7"
-        >
-          <Form-component
-        /></Card>
+          </Card>
+        </div>
+
+        <div class="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-6">
+          <Card
+            delay="400ms"
+            :content="content.certificates"
+            :active="activeContent == 5"
+            :name="content.titles[5]" />
+        </div>
+
+        <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-6">
+          <Card :active="activeContent == 6" :name="content.titles[6]">
+            <Form-component :text="content.callMe" :locale="locale" />
+          </Card>
+        </div>
+
+        <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
+          <Card delay="900ms">
+            <div class="flex justify-between text-md">
+              <div>
+                © {{ new Date().getFullYear() }} {{ content.footer[0] }}
+              </div>
+              <div class="text-right">
+                {{ content.footer[1] }}
+              </div>
+            </div>
+          </Card>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {
-  titles,
-  socials,
-  summary,
-  experience,
-  lang,
-  skills,
-  education,
-  projects,
-  certificates,
-} from "../../content.js";
+import contentEn from "../../content-en.js";
+import contentTr from "../../content-tr.js";
+
+const { locale, setLocale } = useI18n();
+
+const content = computed(() => {
+  switch (locale.value) {
+    case "tr":
+      return contentTr;
+    case "en":
+    default:
+      return contentEn;
+  }
+});
 
 const activeContent = ref(null);
-watch(
-  () => activeContent.value,
-  () => {
-    setTimeout(() => {
-      activeContent.value = null;
-    }, 800);
-  }
-);
-
 </script>
-
-<style scoped></style>

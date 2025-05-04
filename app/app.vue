@@ -1,6 +1,8 @@
 <template>
   <UApp>
-    <NuxtPage />
+    <Lenis root>
+      <NuxtPage />
+    </Lenis>
   </UApp>
 </template>
 

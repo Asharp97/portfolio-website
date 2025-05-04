@@ -1,4 +1,4 @@
-export const skills = [
+const skills = [
   {
     title: "Artificial Intelligence & Machine Learning",
     points: [
@@ -37,7 +37,7 @@ export const skills = [
   },
 ];
 
-export const certificates = [
+const certificates = [
   {
     title: "Google Professional Machine Learning Engineer",
     description: `Earned Google’s **Professional Machine Learning Engineer** certification, demonstrating advanced expertise in designing, deploying, and maintaining scalable ML solutions on **Google Cloud Platform**.`,
@@ -49,7 +49,7 @@ export const certificates = [
     description: `Completed multiple **GCP skill badges** in areas like **Machine Learning Fundamentals** and **Data Engineering**, showcasing hands-on cloud expertise and practical understanding of real-world AI pipelines.`,
   },
 ];
-export const experience = [
+const experience = [
   {
     title: "Lead Software Engineer",
     subtitle: "Ayhanlar Holding",
@@ -75,22 +75,20 @@ export const experience = [
     location: "Istanbul, Türkiye",
   },
 ];
-export const projects = [
+const projects = [
   {
     title: "Quizly",
     subtitle: "A SaaS platform enabling users to create and take quizzes",
     titleLink: "https://quizly-app.tiiny.site/",
-    date: "2024",
     description: `Built **Quizly**, a SaaS platform that uses a **RAG-based AI pipeline** to turn user-uploaded notes into personalized quizzes with interactive analytics. Designed for speed, simplicity, and intelligent content generation.`,
   },
   {
     title: "Landclub",
     subtitle: "A side project for a real estate investment company",
-    date: "2024",
     description: `Developed **Landclub**, a real estate e-commerce platform with a custom admin panel, streamlined property uploads, and a **97% performance score**. Focused on scalability, responsive design, and clean UX.`,
   },
 ];
-export const education = [
+const education = [
   {
     title: "Doğuş University",
     subtitle: "Bachelor Degree in Computer Engineering",
@@ -109,7 +107,7 @@ export const education = [
   },
 ];
 
-export const lang = {
+const languages = {
   title: "Languages",
   points: [
     { label: "English", value: "★★★★★" },
@@ -118,10 +116,10 @@ export const lang = {
   ],
 };
 
-export const summary =
+const summary =
   "**Machine Learning** & **Full-Stack Software Engineer** with a background in Computer Engineering. Experienced in building smart, scalable apps using **Vertex AI**, **TensorFlow**, **BigQuery**, **Vue.js**, **Node.js**, and **Python**—blending AI with clean, high-performance code for real-world impact.";
 
-export const socials = [
+const socials = [
   {
     name: "github",
     link: "https://github.com/Asharp97",
@@ -134,7 +132,7 @@ export const socials = [
   },
 ];
 
-export const titles = [
+const titles = [
   "Experiences",
   "Skills",
   "Side Projects",
@@ -142,3 +140,20 @@ export const titles = [
   "Languages",
   "Certificates",
 ];
+
+const footer = ["All rights reserved", "Made with ❤️ in Istanbul"];
+const callMe = "I'm always happy to connect, brainstorm, or even chat!";
+
+export default {
+  callMe,
+  footer,
+  titles,
+  socials,
+  summary,
+  languages,
+  education,
+  projects,
+  certificates,
+  skills,
+  experience,
+};

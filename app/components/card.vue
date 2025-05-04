@@ -1,41 +1,43 @@
 <template>
-  <Transition name="tada" appear>
+  <Transition name="tada">
     <div
       v-show="mounted"
+      :style="{ '--delay': delay }"
       :class="[
-        'border-2 duration-300 rounded-2xl',
-        active ? `border-copper-700` : 'border-transparent',
-      ]"
-    >
+        'border-1 duration-300 rounded-2xl h-full',
+        active ? `border-copper-700 shadow-xl` : 'border-transparent',
+      ]">
       <UCard :id="`#${name}`" class="h-full">
-        <div v-if="content" class="flex items-center gap-2 min-h-54">
+        <div
+          v-if="content"
+          class="flex flex-col sm:flex-row h-90 sm:h-full sm:items-center gap-2 w-full">
           <div
             :class="active ? `scale-101` : ''"
-            class="flex w-1/2 flex-1 h-54 duration-300"
-          >
+            class="flex sm:w-1/2 flex-1 lg:h-60 duration-300 w-full md:h-90 h-40">
             <ClientOnly>
               <Swiper
-                class="w-full"
-                :module="modules"
+                :modules="modules"
                 direction="vertical"
                 :space-between="50"
+                :speed="300"
+                :mousewheel="true"
                 :autoplay="{
-                  delay: 500,
-                  disableOnInteraction: true,
+                  delay: contentDelay,
+                  disableOnInteraction: false,
                 }"
                 @swiper="onSwiper"
-                @slide-change="onSlideChange"
-              >
+                @slide-change="onSlideChange">
                 <Swiper-slide v-for="(e, n) in content" :key="n">
-                  <div class="flex flex-col justify-between h-full">
+                  <div
+                    class="flex flex-col justify-between h-full duration-500">
                     <div class="flex justify-between items-center">
                       <div>
                         <NuxtLink :to="e.titleLink">
-                          <h5 class="text-4xl font-light">
+                          <h5 class="text-2xl sm:text-4xl font-light group">
                             {{ e.title }}
                             <span v-if="e.titleLink"
                               ><Icon
-                                class="text-sm"
+                                class="text-sm group-hover:translate-1-px"
                                 name="cuida:open-in-new-tab-outline"
                             /></span>
                           </h5>
@@ -51,20 +53,19 @@
                           </h2>
                         </NuxtLink>
                       </div>
-                      <div class="text-right">
+                      <div v-if="e.date || e.location" class="text-right">
                         <h6>{{ e.date }}</h6>
                         <USeparator v-if="e.location" decorative="true" />
                         <h6 class="font-semibold">{{ e.location }}</h6>
                       </div>
                     </div>
                     <!-- <Placeholder class="h-16" /> -->
-                    <p><MDC :value="e.description" /></p>
-                    <ul class="points">
+                    <p v-if="e.description"><MDC :value="e.description" /></p>
+                    <ul v-if="e.points" class="points">
                       <li
                         v-for="x in e.points"
                         :key="x"
-                        class="flex hover:bg-copper-100 duration-300 p-1"
-                      >
+                        class="flex hover:bg-copper-100 duration-300 p-1">
                         <MDC :value="x.label" class="w-37 font-semibold" />
                         <MDC :value="x.value" class="flex-1" />
                       </li>
@@ -74,18 +75,18 @@
               </Swiper>
             </ClientOnly>
           </div>
-          <div v-if="content.length > 1" class="w-fit flex flex-col">
+          <div v-if="content.length > 1" class="w-fit flex md:flex-col">
             <div
               v-for="n in content.length"
               :key="n"
               class="flex justify-center p-1 pointer-cursor"
-              @click="paginationHandle(n - 1)"
-            >
+              @mouseover="paginationHandle(n - 1)"
+              @click="paginationHandle(n - 1)">
               <Hashtag :active="n - 1 === pagination" />
             </div>
           </div>
         </div>
-        <slot v-else />
+        <slot v-else class="flex items-center" />
       </UCard>
     </div>
   </Transition>
@@ -93,32 +94,45 @@
 
 <script setup>
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Mousewheel, Autoplay } from "swiper/modules";
+import { Mousewheel, Autoplay, Keyboard } from "swiper/modules";
 import "swiper/css";
-
-defineProps(["content", "active", "name"]);
+import "swiper/css/mousewheel";
+import "swiper/css/autoplay";
+import "swiper/css/keyboard";
+import getDelay from "../utils/getDelayByContent.js";
+const modules = [Mousewheel, Autoplay, Keyboard];
 
 const slider = ref(null);
 
 const onSwiper = (swiper) => {
   slider.value = swiper;
+  slider.value.slideTo(props.content.length, 900);
 };
+
+const props = defineProps(["content", "active", "name", "delay"]);
 
 const pagination = ref(0);
-
+const contentDelay = ref();
 const onSlideChange = (e) => {
   pagination.value = e.activeIndex;
+
+  const currentContent = props.content[e.activeIndex];
+  contentDelay.value = getDelay(currentContent);
 };
+
 const paginationHandle = (e) => {
   pagination.value = e;
   slider.value.slideTo(e, 900);
 };
-const modules = [Mousewheel, Autoplay];
+
 const mounted = ref(false);
 onMounted(() => {
   setTimeout(() => {
     mounted.value = true;
-  }, 800);
+  }, 400);
+  setTimeout(() => {
+    paginationHandle(0);
+  }, 700);
 });
 </script>
 
@@ -129,8 +143,18 @@ onMounted(() => {
 .swiper-slide {
   transition: 300ms;
 }
+.swiper-slide-active {
+  gap: 0;
+}
+.swiper-slide-next {
+  gap: 2rem;
+}
 .swiper-slide-prev,
 .swiper-slide-next {
   filter: blur(2px);
+}
+.tada-enter-active,
+.tada {
+  transition-delay: var(--delay);
 }
 </style>

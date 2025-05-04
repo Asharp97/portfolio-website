@@ -1,0 +1,165 @@
+const skills = [
+  {
+    title: "Yapay Zeka & Makine Öğrenmesi",
+    points: [
+      { label: "Derin öğrenme", value: "TensorFlow" },
+      { label: "ML süreçleri", value: "Scikit-learn" },
+      { label: "LLM uygulamaları", value: "LangChain" },
+    ],
+  },
+  {
+    title: "Yazılım Mühendisliği Prensipleri",
+    points: [
+      { label: "Proje yaşam döngüsü", value: "SDLC" },
+      { label: "Ekip süreçleri", value: "Çevik (Agile) Yöntemoloji" },
+      { label: "Sistem tasarımı", value: "Ölçeklenebilir Mimari" },
+      { label: "Veri hazırlığı", value: "Öznitelik Mühendisliği" },
+    ],
+  },
+  {
+    title: "Programlama Dilleri & Framework'ler",
+    points: [
+      { label: "Diller", value: "Python, JavaScript, TypeScript" },
+      { label: "Framework'ler", value: "Nuxt.js, Vue.js, React.js" },
+      { label: "Veritabanları", value: "SQL" },
+    ],
+  },
+  {
+    title: "Bulut Bilişim & Servisler",
+    points: [
+      { label: "Platform", value: "Google Cloud Platform (GCP)" },
+      { label: "Servisler", value: "Vertex AI, BigQuery, AutoML" },
+      {
+        label: "Uzmanlıklar",
+        value:
+          "Tahmine Dayalı Modelleme, Veri Analizi, Bulut Tabanlı AI Çözümleri",
+      },
+    ],
+  },
+];
+
+const certificates = [
+  {
+    title: "Google Professional Machine Learning Engineer",
+    description: `Google’ın **Profesyonel Makine Öğrenmesi Mühendisi** sertifikasını alarak, **Google Cloud Platform** üzerinde ölçeklenebilir ML çözümleri tasarlama, yayına alma ve sürdürme konularında ileri seviye uzmanlık kazandım.`,
+  },
+  {
+    title: "Google Cloud Console Skill Badges",
+    subtitle: "Credly",
+    subtitleLink: "https://www.credly.com/users/ali-elsayed.b0f75bda",
+    description: `**Makine Öğrenmesi Temelleri** ve **Veri Mühendisliği** gibi alanlarda tamamladığım çeşitli **GCP beceri rozetleri**, pratik cloud deneyimimi ve gerçek dünyaya uygun AI akışlarındaki bilgimi yansıtmaktadır.`,
+  },
+];
+
+const experience = [
+  {
+    title: "Lead Software Engineer",
+    subtitle: "Ayhanlar Holding",
+    subtitleLink: "https://www.ayhanlar.com.tr/",
+    description: `**Paran Olacak** adlı güvenli bankacılık web uygulamasının geliştirilmesine liderlik ettim. Performans, güvenilirlik ve kullanıcı güveni önceliğiydi. **SEO'yu %100 artırmak için AI ve büyük dil modellerini entegre ettim**, ayrıca tüm **altyapı ve dağıtım süreçlerini** üstlenerek her ortamda sorunsuz geçişler sağladım.`,
+    date: "2025 | Günümüz",
+    location: "İstanbul, Türkiye",
+  },
+  {
+    title: "Makine Öğrenmesi Mühendisi",
+    subtitle: "ITTI - Iman Trade Tourism Construction Ltd.",
+    subtitleLink: "https://itti.com.tr/",
+    description: `Türkiye’nin başkentinden elde edilen büyük bir veri kümesi üzerinde çalışarak, Python ve Scikit-learn kullanarak **emlak fiyat tahmin modeli** geliştirdim. Bu süreçte ileri seviye özellik mühendisliği tekniklerinden yararlandım.`,
+    date: "2024 | 2025",
+    location: "İstanbul, Türkiye",
+  },
+  {
+    title: "Yazılım Mühendisi",
+    subtitle: "Hasel",
+    subtitleLink: "https://hasel.com/",
+    description: `**Erişilebilirlik**, **cihazlar arası performans** ve **temiz tasarım** odaklı, kullanıcı dostu web projeleri geliştirdim. **Kalite kontrol süreçlerine liderlik ettim** ve projeleri **zamanında teslim ederek** modern yazılım geliştirme pratiklerinde sağlam bir temel edindim.`,
+    date: "2023 | 2024",
+    location: "İstanbul, Türkiye",
+  },
+];
+
+const projects = [
+  {
+    title: "Quizly",
+    subtitle:
+      "Kullanıcıların kendi quizlerini oluşturup çözebildiği bir SaaS platformu",
+    titleLink: "https://quizly-app.tiiny.site/",
+    description: `**Quizly** platformunu sıfırdan geliştirdim. Kullanıcıların yüklediği notlardan **RAG tabanlı bir AI pipeline** ile kişisel quizler oluşturan, etkileşimli analizler sunan bir sistem. Hızlı, sade ve akıllı içerik üretimi odaklı tasarlandı.`,
+  },
+  {
+    title: "Landclub",
+    subtitle: "Bir gayrimenkul yatırım şirketi için yan proje",
+    description: `**Landclub** adlı e-ticaret gayrimenkul platformunu geliştirdim. Özel bir yönetim paneli, kolay mülk yükleme sistemi ve **%97 performans skoru** ile tamamlandı. Ölçeklenebilirlik, duyarlı tasarım ve temiz kullanıcı deneyimine odaklandım.`,
+  },
+];
+
+const education = [
+  {
+    title: "Doğuş Üniversitesi",
+    subtitle: "Bilgisayar Mühendisliği Lisans Eğitimi",
+    titleLink: "https://www.dogus.edu.tr/",
+    date: "2018 - 2024",
+    location: "İstanbul, Türkiye",
+    description: `**Bilgisayar Mühendisliği lisansımı** Doğuş Üniversitesi'nde tamamladım. Burada **makine öğrenmesi, sistem tasarımı ve algoritmalar** konularında güçlü bir altyapı kazandım.`,
+  },
+  {
+    title: "Canadian University",
+    subtitle: "Bilgisayar Mühendisliği Dersleri",
+    titleLink: "https://www.cud.ac.ae/",
+    date: "2017 - 2018",
+    location: "Dubai, BAE",
+    description: `**Canadian University Dubai**'de eğitim aldım. **Nesne yönelimli programlama**, **mantık devreleri** ve **bilgisayar mimarisi** gibi temel dersleri tamamladım, bilgisayar mühendisliği temellerine erkenden hâkim oldum.`,
+  },
+];
+
+const languages = {
+  title: "Diller",
+  points: [
+    { label: "İngilizce", value: "★★★★★" },
+    { label: "Arapça", value: "★★★★★" },
+    { label: "Türkçe", value: "★★★★★" },
+  ],
+};
+
+const summary =
+  "**Makine Öğrenmesi** ve **Full-Stack Yazılım Mühendisliği** alanında uzman, Bilgisayar Mühendisliği geçmişine sahip bir mühendisim. **Vertex AI**, **TensorFlow**, **BigQuery**, **Vue.js**, **Node.js** ve **Python** kullanarak akıllı, ölçeklenebilir uygulamalar geliştiriyor, yapay zekâyı sade ve yüksek performanslı kodlarla gerçeğe dönüştürüyorum.";
+
+const socials = [
+  {
+    name: "github",
+    link: "https://github.com/Asharp97",
+    icon: "mdi:github",
+  },
+  {
+    name: "LinkedIn",
+    link: "https://www.linkedin.com/in/ali-elsayed-25974b130/",
+    icon: "mdi:linkedin",
+  },
+];
+
+const titles = [
+  "Deneyimler",
+  "Yetenekler",
+  "Projeler",
+  "Eğitim",
+  "Diller",
+  "Sertifikalar",
+];
+
+const footer = ["Tüm hakları saklıdır", "İstanbul’da ❤️ ile geliştirildi"];
+const callMe =
+  "İletişim kurmak, fikir alışverişi yapmak ya da sadece sohbet etmek istersen her zaman buradayım!";
+
+export default {
+  callMe,
+  footer,
+  titles,
+  socials,
+  summary,
+  languages,
+  education,
+  projects,
+  certificates,
+  skills,
+  experience,
+};
