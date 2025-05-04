@@ -4,10 +4,13 @@
       v-show="mounted"
       :style="{ '--delay': delay }"
       :class="[
-        'border-1 duration-300 rounded-2xl h-full',
-        active ? `border-copper-700 shadow-xl` : 'border-transparent',
+        'border-1 duration-300 rounded-2xl h-full ',
+        active ? `border-copper-700 shadow-xl ` : 'border-transparent',
       ]">
-      <UCard :id="`#${name}`" class="h-full">
+      <UCard
+        :id="`#${name}`"
+        class="h-full duration-300 default-bg"
+        :class="[active ? 'active-bg' : '']">
         <div
           v-if="content"
           class="flex flex-col sm:flex-row h-90 sm:h-full sm:items-center gap-2 w-full">
@@ -25,6 +28,8 @@
                   delay: contentDelay,
                   disableOnInteraction: false,
                 }"
+                @mouseover="lockScroll"
+                @mouseleave="unlockScroll"
                 @swiper="onSwiper"
                 @slide-change="onSlideChange">
                 <Swiper-slide v-for="(e, n) in content" :key="n">
@@ -33,21 +38,22 @@
                     <div class="flex justify-between items-center">
                       <div>
                         <NuxtLink :to="e.titleLink">
-                          <h5 class="text-2xl sm:text-4xl font-light group">
+                          <h5
+                            class="text-2xl sm:text-4xl flex font-light group">
                             {{ e.title }}
                             <span v-if="e.titleLink"
                               ><Icon
-                                class="text-sm group-hover:translate-1-px"
+                                class="text-sm group-hover:translate-x-1 group-hover:-translate-y-1 duration-300"
                                 name="cuida:open-in-new-tab-outline"
                             /></span>
                           </h5>
                         </NuxtLink>
                         <NuxtLink :to="e.subtitleLink">
-                          <h2>
+                          <h2 class="group">
                             {{ e.subtitle }}
                             <span v-if="e.subtitleLink"
                               ><Icon
-                                class="text-sm"
+                                class="text-sm group-hover:translate-x-1 group-hover:-translate-y-1 duration-300"
                                 name="cuida:open-in-new-tab-outline"
                             /></span>
                           </h2>
@@ -65,7 +71,7 @@
                       <li
                         v-for="x in e.points"
                         :key="x"
-                        class="flex hover:bg-copper-100 duration-300 p-1">
+                        class="flex hover:bg-copper-100 duration-300 p-1 px-2">
                         <MDC :value="x.label" class="w-37 font-semibold" />
                         <MDC :value="x.value" class="flex-1" />
                       </li>
@@ -113,18 +119,26 @@ const props = defineProps(["content", "active", "name", "delay"]);
 
 const pagination = ref(0);
 const contentDelay = ref();
-const onSlideChange = (e) => {
+const animationTrigger = ref(true);
+
+const onSlideChange = async (e) => {
   pagination.value = e.activeIndex;
 
   const currentContent = props.content[e.activeIndex];
   contentDelay.value = getDelay(currentContent);
+
+  animationTrigger.value = false;
+  await new Promise((resolve) => setTimeout(resolve, 600));
+  animationTrigger.value = true;
 };
 
 const paginationHandle = (e) => {
   pagination.value = e;
-  slider.value.slideTo(e, 900);
+  // slider.value.slideTo(e);
+  console.log(e)
 };
 
+// const mounted = ref(true);
 const mounted = ref(false);
 onMounted(() => {
   setTimeout(() => {
@@ -134,6 +148,20 @@ onMounted(() => {
     paginationHandle(0);
   }, 700);
 });
+
+const lockScroll = () => {
+  document.documentElement.style.overflow = 'hidden' // <html>
+  document.body.style.overflow = 'hidden'
+  document.body.style.position = 'fixed'            // Prevent touch move
+  document.body.style.width = '100%'                // Prevent layout shift
+}
+
+const unlockScroll = () => {
+  document.documentElement.style.overflow = ''
+  document.body.style.overflow = ''
+  document.body.style.position = ''
+  document.body.style.width = ''
+}
 </script>
 
 <style scoped>

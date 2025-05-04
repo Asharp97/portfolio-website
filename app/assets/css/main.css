@@ -16,6 +16,8 @@
   --color-copper-900: #5c322b;
   --color-copper-950: #331815;
 
+  --active-bg: url(https://ik.imagekit.io/sharp/active-bg.jpg);
+
   --animate-spin: spin 20s linear infinite;
   --animate-spin-slower: spin 60s ease infinite;
   @keyframes spin {
@@ -53,7 +55,7 @@ h4 {
 .tada-enter-from {
   transform: perspective(750px) translate3d(0px, 0px, -250px) rotateX(27deg)
     scale(0.8) translateY(100dvh);
-    filter: blur(50px);
+  filter: blur(50px);
 }
 .tada-enter-active {
   transition: 0.3s;

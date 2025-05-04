@@ -5,7 +5,8 @@
     </Lenis>
   </UApp>
 </template>
-
-<!-- open thesse -->
-<!-- https://brittanychiang.com/ -->
-<!-- https://www.carlhauser.com/ -->
+<style>
+body {
+  overflow: hidden;
+}
+</style>

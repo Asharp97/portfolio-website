@@ -8,10 +8,14 @@ export default defineAppConfig({
       neutral: "stone",
     },
     card: {
+      slots: {
+        body: "w-full",
+      },
       variants: {
         variant: {
           solid: {
-            root: "bg-inverted text-inverted bg-copper-50 text-black rounded-2xl overflow-clip",
+            root: "bg-inverted text-inverted bg-copper-50 text-black rounded-2xl overflow-clip flex items-center",
+            base: "w-full ",
           },
         },
       },
