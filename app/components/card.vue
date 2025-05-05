@@ -6,40 +6,56 @@
       :class="[
         'border-1 duration-300 rounded-2xl h-full ',
         active ? `border-copper-700 shadow-xl ` : 'border-transparent',
-      ]">
+      ]"
+    >
       <UCard
         :id="`#${name}`"
-        class="h-full duration-300 default-bg"
-        :class="[active ? 'active-bg' : '']">
+        class="h-full duration-300 default-bg z-10 relative"
+        :class="[active ? 'active-bg' : '']"
+      >
         <div
           v-if="content"
-          class="flex flex-col sm:flex-row h-90 sm:h-full sm:items-center gap-2 w-full">
+          class="flex flex-col sm:flex-row h-90 sm:h-full sm:items-center gap-2 w-full"
+        >
           <div
             :class="active ? `scale-101` : ''"
-            class="flex sm:w-1/2 flex-1 lg:h-60 duration-300 w-full md:h-90 h-40">
+            class="flex sm:w-1/2 flex-1 lg:h-60 duration-300 w-full md:h-90 h-40"
+          >
             <ClientOnly>
+              <!-- direction="vertical" -->
               <Swiper
                 :modules="modules"
-                direction="vertical"
+                :rewind="true"
+                :breakpoints="{
+                  '640': {
+                    direction: 'horizontal',
+                  },
+                  '768': {
+                    direction: 'vertical',
+                  },
+                }"
                 :space-between="50"
-                :speed="300"
+                :speed="400"
                 :mousewheel="true"
                 :autoplay="{
                   delay: contentDelay,
                   disableOnInteraction: false,
                 }"
-                @mouseover="lockScroll"
-                @mouseleave="unlockScroll"
                 @swiper="onSwiper"
-                @slide-change="onSlideChange">
+                @slide-change="onSlideChange"
+              >
+                <!-- @mouseover="lockScroll"
+                @mouseleave="unlockScroll" -->
                 <Swiper-slide v-for="(e, n) in content" :key="n">
                   <div
-                    class="flex flex-col justify-between h-full duration-500">
+                    class="flex flex-col justify-between h-full duration-500"
+                  >
                     <div class="flex justify-between items-center">
                       <div>
                         <NuxtLink :to="e.titleLink">
                           <h5
-                            class="text-2xl sm:text-4xl flex font-light group">
+                            class="text-2xl sm:text-4xl flex font-light group"
+                          >
                             {{ e.title }}
                             <span v-if="e.titleLink"
                               ><Icon
@@ -71,7 +87,8 @@
                       <li
                         v-for="x in e.points"
                         :key="x"
-                        class="flex hover:bg-copper-100 duration-300 p-1 px-2">
+                        class="flex hover:bg-copper-100 duration-300 p-1 px-2"
+                      >
                         <MDC :value="x.label" class="w-37 font-semibold" />
                         <MDC :value="x.value" class="flex-1" />
                       </li>
@@ -87,7 +104,8 @@
               :key="n"
               class="flex justify-center p-1 pointer-cursor"
               @mouseover="paginationHandle(n - 1)"
-              @click="paginationHandle(n - 1)">
+              @click="paginationHandle(n - 1)"
+            >
               <Hashtag :active="n - 1 === pagination" />
             </div>
           </div>
@@ -100,13 +118,13 @@
 
 <script setup>
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Mousewheel, Autoplay, Keyboard } from "swiper/modules";
+import { Autoplay, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/mousewheel";
 import "swiper/css/autoplay";
-import "swiper/css/keyboard";
+
 import getDelay from "../utils/getDelayByContent.js";
-const modules = [Mousewheel, Autoplay, Keyboard];
+const modules = [Autoplay, Mousewheel];
 
 const slider = ref(null);
 
@@ -134,8 +152,7 @@ const onSlideChange = async (e) => {
 
 const paginationHandle = (e) => {
   pagination.value = e;
-  // slider.value.slideTo(e);
-  console.log(e)
+  if (slider.value) slider.value.slideTo(e);
 };
 
 // const mounted = ref(true);
@@ -148,20 +165,6 @@ onMounted(() => {
     paginationHandle(0);
   }, 700);
 });
-
-const lockScroll = () => {
-  document.documentElement.style.overflow = 'hidden' // <html>
-  document.body.style.overflow = 'hidden'
-  document.body.style.position = 'fixed'            // Prevent touch move
-  document.body.style.width = '100%'                // Prevent layout shift
-}
-
-const unlockScroll = () => {
-  document.documentElement.style.overflow = ''
-  document.body.style.overflow = ''
-  document.body.style.position = ''
-  document.body.style.width = ''
-}
 </script>
 
 <style scoped>

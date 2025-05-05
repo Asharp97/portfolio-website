@@ -1,7 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-
+  app: {
+    head: {
+      title: "Ali Elsayed | Machine Learning & Software Engineer", // default fallback title
+      htmlAttrs: {
+        lang: "en",
+      },
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    },
+  },
   modules: [
     "@nuxt/ui",
     "@nuxt/eslint",
