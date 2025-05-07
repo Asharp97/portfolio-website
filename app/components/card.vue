@@ -6,25 +6,20 @@
       :class="[
         'border-1 duration-300 rounded-2xl h-full ',
         active ? `border-copper-700 shadow-xl ` : 'border-transparent',
-      ]"
-    >
+      ]">
       <UCard
         :id="`#${name}`"
         class="h-full duration-300 default-bg z-10 relative"
-        :class="[active ? 'active-bg' : '']"
-      >
+        :class="[active ? 'active-bg' : '']">
         <div
           v-if="content"
-          class="flex flex-col sm:flex-row h-90 sm:h-full sm:items-center gap-2 w-full"
-        >
+          class="flex flex-col sm:flex-row h-90 sm:h-full sm:items-center gap-2 w-full">
           <div
-            :class="active ? `scale-101` : ''"
-            class="flex sm:w-1/2 flex-1 lg:h-60 duration-300 w-full md:h-90 h-40"
-          >
+            :class="active ? `scale-104` : ''"
+            class="flex sm:w-1/2 flex-1 lg:h-60 duration-300 w-full md:h-90 h-40">
             <ClientOnly>
-              <!-- direction="vertical" -->
               <Swiper
-                :modules="modules"
+                :modules="[Autoplay]"
                 :rewind="true"
                 :breakpoints="{
                   '640': {
@@ -42,20 +37,15 @@
                   disableOnInteraction: false,
                 }"
                 @swiper="onSwiper"
-                @slide-change="onSlideChange"
-              >
-                <!-- @mouseover="lockScroll"
-                @mouseleave="unlockScroll" -->
+                @slide-change="onSlideChange">
                 <Swiper-slide v-for="(e, n) in content" :key="n">
                   <div
-                    class="flex flex-col justify-between h-full duration-500"
-                  >
+                    class="flex flex-col justify-between h-full duration-500">
                     <div class="flex justify-between items-center">
                       <div>
                         <NuxtLink :to="e.titleLink">
                           <h5
-                            class="text-2xl sm:text-4xl flex font-light group"
-                          >
+                            class="text-2xl sm:text-4xl flex font-light group">
                             {{ e.title }}
                             <span v-if="e.titleLink"
                               ><Icon
@@ -87,8 +77,7 @@
                       <li
                         v-for="x in e.points"
                         :key="x"
-                        class="flex hover:bg-copper-100 duration-300 p-1 px-2"
-                      >
+                        class="flex hover:bg-copper-100 duration-300 p-1 px-2">
                         <MDC :value="x.label" class="w-37 font-semibold" />
                         <MDC :value="x.value" class="flex-1" />
                       </li>
@@ -104,8 +93,7 @@
               :key="n"
               class="flex justify-center p-1 pointer-cursor"
               @mouseover="paginationHandle(n - 1)"
-              @click="paginationHandle(n - 1)"
-            >
+              @click="paginationHandle(n - 1)">
               <Hashtag :active="n - 1 === pagination" />
             </div>
           </div>
@@ -118,13 +106,12 @@
 
 <script setup>
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Autoplay, Mousewheel } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/mousewheel";
 import "swiper/css/autoplay";
 
 import getDelay from "../utils/getDelayByContent.js";
-const modules = [Autoplay, Mousewheel];
 
 const slider = ref(null);
 
@@ -137,17 +124,12 @@ const props = defineProps(["content", "active", "name", "delay"]);
 
 const pagination = ref(0);
 const contentDelay = ref();
-const animationTrigger = ref(true);
 
 const onSlideChange = async (e) => {
   pagination.value = e.activeIndex;
 
   const currentContent = props.content[e.activeIndex];
   contentDelay.value = getDelay(currentContent);
-
-  animationTrigger.value = false;
-  await new Promise((resolve) => setTimeout(resolve, 600));
-  animationTrigger.value = true;
 };
 
 const paginationHandle = (e) => {

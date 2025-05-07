@@ -128,12 +128,10 @@ const socials = [
   {
     name: "github",
     link: "https://github.com/Asharp97",
-    icon: "mdi:github",
   },
   {
     name: "LinkedIn",
     link: "https://www.linkedin.com/in/ali-elsayed-25974b130/",
-    icon: "mdi:linkedin",
   },
 ];
 

@@ -1,8 +1,6 @@
 const getDelayByContent = (content) => {
   if (!content) return 3000;
   const charsPerSecond = 15;
-  // const minDelay = 2000;
-  // const maxDelay = 10000;
   let estimatedDelay;
   let totalPoints;
   if (content.description)
@@ -14,7 +12,6 @@ const getDelayByContent = (content) => {
     estimatedDelay = (totalPoints / charsPerSecond) * 1000;
   }
 
-  // return Math.min(Math.max(estimatedDelay, minDelay), maxDelay);
   return estimatedDelay;
 };
 

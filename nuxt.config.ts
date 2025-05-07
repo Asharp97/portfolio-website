@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     "@nuxtjs/mdc",
     "@nuxtjs/i18n",
     "nuxt3-lenis",
+    "motion-v/nuxt",
   ],
   i18n: {
     locales: [
