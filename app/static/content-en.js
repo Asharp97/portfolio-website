@@ -110,9 +110,9 @@ const education = [
 const languages = {
   title: "Languages",
   points: [
-    { label: "English", value: "★★★★★" },
-    { label: "Arabic", value: "★★★★★" },
-    { label: "Turkish", value: "★★★★★" },
+    { label: "English", value: 100 },
+    { label: "Arabic", value: 100 },
+    { label: "Turkish", value: 95 },
   ],
 };
 

@@ -9,7 +9,7 @@
       ]">
       <UCard
         :id="`#${name}`"
-        class="h-full duration-300 default-bg z-10 relative"
+        class="h-full duration-300 default-bg relative"
         :class="[active ? 'active-bg' : '']">
         <div
           v-if="content"

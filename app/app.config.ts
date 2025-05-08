@@ -14,7 +14,7 @@ export default defineAppConfig({
       variants: {
         variant: {
           solid: {
-            root: "bg-inverted text-inverted bg-copper-50 text-black rounded-2xl overflow-clip flex items-center",
+            root: "bg-inverted text-inverted bg-copper-100 text-black rounded-2xl overflow-clip flex items-center",
             base: "w-full ",
           },
         },

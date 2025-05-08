@@ -115,9 +115,9 @@ const education = [
 const languages = {
   title: "Diller",
   points: [
-    { label: "İngilizce", value: "★★★★★" },
-    { label: "Arapça", value: "★★★★★" },
-    { label: "Türkçe", value: "★★★★★" },
+    { label: "İngilizce", value: 100 },
+    { label: "Arapça", value: 100 },
+    { label: "Türkçe", value: 95 },
   ],
 };
 
