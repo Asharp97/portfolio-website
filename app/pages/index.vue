@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div ref="body" class="bg-copper-50 min-h-dvh py-22 text-black">
+    <div class="bg-copper-50 min-h-dvh py-22 text-black">
       <Mouse-Follower
-        :location="mouse.y.value"
+        :location="locationPercent"
         :text="title"
         :x="mouse.x.value"
         :y="mouse.y.value"
         class="absolute z-20" />
       <Transition name="rotate" mode="out-in">
         <button
-          v-if="!switching && hitTop < 20"
+          v-if="!switching && scroll < 100"
           class="text-lg uppercase text-white hover:tracking-widest font-normal fixed top-2 right-2 bg-copper-500 p-4 hover:p-4.5 duration-300 rounded-full cursor-pointer"
           @click="switchLocale()">
           <div>
@@ -47,7 +47,7 @@
                     <ul
                       class="flex flex-col items-end flex-wrap w-full lg:w-20 text-right">
                       <li v-for="social in content.socials" :key="social">
-                        <NuxtLink :to="social.link" target="_blank">
+                        <NuxtLink :to="social.link" skills="_blank">
                           <h3
                             class="capitalize underline hover:tracking-wider duration-300">
                             {{ social.name }}
@@ -57,7 +57,7 @@
                       <li>
                         <a
                           :href="`/ali-elsayed-resume-${locale}.pdf`"
-                          target="_blank"
+                          skills="_blank"
                           rel="noopener noreferrer">
                           <h3
                             class="capitalize underline hover:tracking-wider duration-300">
@@ -87,46 +87,55 @@
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-7">
               <Card
+                ref="experience"
                 class="card"
                 :content="content.experience"
                 :active="activeContent == 0"
                 delay="300ms"
                 :name="content.titles[0]"
+                @hide-follower="activateContent(null)"
                 @mouseenter="activateContent(0)"
                 @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
+                ref="skills"
                 class="card"
                 :content="content.skills"
                 delay="400ms"
                 :active="activeContent == 1"
                 :name="content.titles[1]"
+                @hide-follower="activateContent(null)"
                 @mouseenter="activateContent(1)"
                 @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
+                ref="projects"
                 class="card"
                 :content="content.projects"
                 delay="100ms"
                 :active="activeContent == 2"
                 :name="content.titles[2]"
+                @hide-follower="activateContent(null)"
                 @mouseenter="activateContent(2)"
                 @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
+                ref="education"
                 class="card"
                 :content="content.education"
                 delay="150ms"
                 :active="activeContent == 3"
                 :name="content.titles[3]"
+                @hide-follower="activateContent(null)"
                 @mouseenter="activateContent(3)"
                 @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2">
               <Card
+                ref="languages"
                 class="card"
                 delay="400ms"
                 :active="activeContent == 4"
@@ -154,7 +163,7 @@
                             stiffness: 100,
                           },
                         }"
-                        class="bg-copper-500 h-full rounded-4xl w-full" />
+                        class="bg-gradient-to-r from-copper-400 to-copper-600 h-full rounded-4xl" />
                     </div>
                   </li>
                 </ul>
@@ -162,16 +171,19 @@
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-6">
               <Card
+                ref="certificates"
                 class="card"
                 delay="400ms"
                 :content="content.certificates"
                 :active="activeContent == 5"
                 :name="content.titles[5]"
+                @hide-follower="activateContent(null)"
                 @mouseenter="activateContent(5)"
                 @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-6">
               <Card
+                :ref="content.titles[6]"
                 class="card"
                 :active="activeContent == 6"
                 :name="content.titles[6]"
@@ -202,27 +214,16 @@
 <script setup>
 import contentEn from "../static/content-en.js";
 import contentTr from "../static/content-tr.js";
-import { useMouse } from "@vueuse/core";
+import { useMouse, useMouseInElement } from "@vueuse/core";
 import { motion, useScroll } from "motion-v";
-const { scrollY } = useScroll();
 
-const hitTop = ref(0);
+const { scrollY } = useScroll();
+const scroll = ref(0);
 useMotionValueEvent(scrollY, "change", (latest) => {
-  hitTop.value = latest;
+  scroll.value = latest;
 });
 
-const body = ref(null);
 const mouse = useMouse();
-
-// let scroll;
-// scroll = useScroll(body);
-// const scroll = ref();
-// onMounted(() => {
-//   if (body.value) {
-//     const scrollData = useScroll(body);
-//     scroll.value = scrollData;
-//   }
-// });
 
 const { locale, setLocale } = useI18n();
 
@@ -242,6 +243,49 @@ const activateContent = (index) => {
   else title.value = null;
 };
 
+const skills = ref(null);
+const experience = ref(null);
+const projects = ref(null);
+const education = ref(null);
+const languages = ref(null);
+const certificates = ref(null);
+
+const activeContent = ref(null);
+let mouseEl;
+let locationPercent;
+watch(title, () => {
+  const contentSelector = computed(() => {
+    switch (title.value) {
+      case "skills":
+        return skills;
+      case "experience":
+        return experience;
+      case "projects":
+        return projects;
+      case "education":
+        return education;
+      case "languages":
+        return languages;
+      case "certificates":
+        return certificates;
+      default:
+        return null;
+    }
+  });
+  if (title.value) mouseEl = useMouseInElement(contentSelector);
+  locationPercent = computed(() => {
+    return Math.min(
+      1,
+      Math.max(
+        0,
+        (mouseEl.elementX.value / mouseEl.elementWidth.value) * 0.5 +
+          (mouseEl.elementY.value / mouseEl.elementHeight.value) * 0.5
+      )
+    );
+  });
+  console.log(locationPercent)
+});
+
 const switching = ref(false);
 const switchLocale = async () => {
   switching.value = true;
@@ -249,8 +293,6 @@ const switchLocale = async () => {
   await setLocale(locale.value == "en" ? "tr" : "en");
   switching.value = false;
 };
-
-const activeContent = ref(null);
 </script>
 <style>
 .rotate-leave-active,

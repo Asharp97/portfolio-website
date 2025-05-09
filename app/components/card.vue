@@ -4,18 +4,17 @@
       v-show="mounted"
       :style="{ '--delay': delay }"
       :class="[
-        'border-1 duration-300 rounded-2xl h-full ',
-        active ? `border-copper-700 shadow-xl ` : 'border-transparent',
+        'border-1 rounded-2xl duration-300 h-full ',
+        active
+          ? `border-copper-700 shadow-xl origin-left  `
+          : 'border-transparent',
       ]">
-      <UCard
-        :id="`#${name}`"
-        class="h-full duration-300 default-bg relative"
-        :class="[active ? 'active-bg' : '']">
+      <UCard :id="`#${name}`" class="h-full duration-300 default-bg relative">
         <div
           v-if="content"
           class="flex flex-col sm:flex-row h-90 sm:h-full sm:items-center gap-2 w-full">
           <div
-            :class="active ? `scale-104` : ''"
+            :class="active ? `scale-103` : ''"
             class="flex sm:w-1/2 flex-1 lg:h-60 duration-300 w-full md:h-90 h-40">
             <ClientOnly>
               <Swiper
@@ -71,7 +70,6 @@
                         <h6 class="font-semibold">{{ e.location }}</h6>
                       </div>
                     </div>
-                    <!-- <Placeholder class="h-16" /> -->
                     <p v-if="e.description"><MDC :value="e.description" /></p>
                     <ul v-if="e.points" class="points">
                       <li
@@ -113,6 +111,8 @@ import "swiper/css/autoplay";
 
 import getDelay from "../utils/getDelayByContent.js";
 
+const emit = defineEmits(["hideFollower"]);
+
 const slider = ref(null);
 
 const onSwiper = (swiper) => {
@@ -135,6 +135,7 @@ const onSlideChange = async (e) => {
 const paginationHandle = (e) => {
   pagination.value = e;
   if (slider.value) slider.value.slideTo(e);
+  emit("hideFollower");
 };
 
 // const mounted = ref(true);

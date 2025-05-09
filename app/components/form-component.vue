@@ -7,11 +7,7 @@
       </p>
     </div>
 
-    <UForm
-      :schema="schema"
-      :state="state"
-      class="space-y-4 w-full sm:w-1/2"
-      @submit="onSubmit">
+    <UForm :state="state" class="space-y-4 w-full sm:w-1/2" @submit="onSubmit">
       <UFormField name="email">
         <UInput
           v-model="state.email"
@@ -27,7 +23,7 @@
           v-model="state.msg"
           :placeholder="locale == 'tr' ? 'Mesaj' : 'Message'" />
       </UFormField>
-      <UButton type="submit" class="text-white">
+      <UButton type="submit" class="text-white cursor-pointer" @click="send">
         {{ locale == "tr" ? "Gönder" : "Send" }}
       </UButton>
     </UForm>
@@ -41,6 +37,7 @@ const state = reactive({
   name: "",
   msg: "",
 });
+
 </script>
 
 <style lang="scss" scoped></style>
