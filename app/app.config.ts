@@ -11,12 +11,12 @@ export default defineAppConfig({
     },
     card: {
       slots: {
-        body: "w-full",
+        body: "w-full h-full",
       },
       variants: {
         variant: {
           solid: {
-            root: "bg-inverted text-inverted bg-copper-100 text-black rounded-2xl overflow-clip flex items-center",
+            root: "bg-inverted text-inverted bg-white text-black rounded-2xl overflow-clip flex items-center",
             base: "w-full ",
           },
         },

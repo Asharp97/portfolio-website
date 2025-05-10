@@ -12,10 +12,9 @@
           v-if="!switching && scroll < 100"
           class="text-lg uppercase text-white hover:tracking-widest font-normal fixed top-2 right-2 bg-copper-500 p-4 hover:p-4.5 duration-300 rounded-full cursor-pointer"
           @click="switchLocale()">
-          <div>
-            {{ locale == "en" ? "tr" : "en" }}
-          </div>
+          {{ locale == "en" ? "tr" : "en" }}
         </button>
+        <!-- <button @click="isDark = !isDark">{{ isDark }}</button> -->
       </Transition>
       <Transition name="switch">
         <div v-if="!switching" class="max-w-400 px-1 mx-auto">
@@ -93,8 +92,9 @@
                 :active="activeContent == 0"
                 delay="300ms"
                 :name="content.titles[0]"
-                @hide-follower="activateContent(null)"
+                @click="hideMouse(0)"
                 @mouseenter="activateContent(0)"
+                @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
@@ -105,8 +105,9 @@
                 delay="400ms"
                 :active="activeContent == 1"
                 :name="content.titles[1]"
-                @hide-follower="activateContent(null)"
+                @click="hideMouse(1)"
                 @mouseenter="activateContent(1)"
+                @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
@@ -117,8 +118,9 @@
                 delay="100ms"
                 :active="activeContent == 2"
                 :name="content.titles[2]"
-                @hide-follower="activateContent(null)"
+                @click="hideMouse(2)"
                 @mouseenter="activateContent(2)"
+                @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
@@ -129,8 +131,9 @@
                 delay="150ms"
                 :active="activeContent == 3"
                 :name="content.titles[3]"
-                @hide-follower="activateContent(null)"
+                @click="hideMouse(3)"
                 @mouseenter="activateContent(3)"
+                @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2">
@@ -140,9 +143,10 @@
                 delay="400ms"
                 :active="activeContent == 4"
                 :name="content.titles[4]"
+                @click="hideMouse(4)"
                 @mouseenter="activateContent(4)"
                 @mouseleave="activateContent(null)">
-                <ul class="">
+                <ul class="flex flex-col gap-6">
                   <li
                     v-for="(x, n) in content.languages.points"
                     :key="n"
@@ -177,8 +181,9 @@
                 :content="content.certificates"
                 :active="activeContent == 5"
                 :name="content.titles[5]"
-                @hide-follower="activateContent(null)"
+                @click="hideMouse(5)"
                 @mouseenter="activateContent(5)"
+                @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-6">
@@ -187,6 +192,7 @@
                 class="card"
                 :active="activeContent == 6"
                 :name="content.titles[6]"
+                @click="hideMouse(6)"
                 @mouseenter="activateContent(6)"
                 @mouseleave="activateContent(null)">
                 <Form-component :text="content.callMe" :locale="locale" />
@@ -214,9 +220,18 @@
 <script setup>
 import contentEn from "../static/content-en.js";
 import contentTr from "../static/content-tr.js";
-import { useMouse, useMouseInElement } from "@vueuse/core";
+import { useMouse } from "@vueuse/core";
 import { motion, useScroll } from "motion-v";
 
+// const colorMode = useColorMode();
+// const isDark = computed({
+//   get() {
+//     return colorMode.value === "dark";
+//   },
+//   set(_isDark) {
+//     colorMode.preference = _isDark ? "dark" : "light";
+//   },
+// });
 const { scrollY } = useScroll();
 const scroll = ref(0);
 useMotionValueEvent(scrollY, "change", (latest) => {
@@ -242,49 +257,12 @@ const activateContent = (index) => {
   if (index != null) title.value = content.value.titles[index];
   else title.value = null;
 };
-
-const skills = ref(null);
-const experience = ref(null);
-const projects = ref(null);
-const education = ref(null);
-const languages = ref(null);
-const certificates = ref(null);
+const hideMouse = (index) => {
+  if (title.value) title.value = null;
+  else title.value = content.value.titles[index];
+};
 
 const activeContent = ref(null);
-let mouseEl;
-let locationPercent;
-watch(title, () => {
-  const contentSelector = computed(() => {
-    switch (title.value) {
-      case "skills":
-        return skills;
-      case "experience":
-        return experience;
-      case "projects":
-        return projects;
-      case "education":
-        return education;
-      case "languages":
-        return languages;
-      case "certificates":
-        return certificates;
-      default:
-        return null;
-    }
-  });
-  if (title.value) mouseEl = useMouseInElement(contentSelector);
-  locationPercent = computed(() => {
-    return Math.min(
-      1,
-      Math.max(
-        0,
-        (mouseEl.elementX.value / mouseEl.elementWidth.value) * 0.5 +
-          (mouseEl.elementY.value / mouseEl.elementHeight.value) * 0.5
-      )
-    );
-  });
-  console.log(locationPercent)
-});
 
 const switching = ref(false);
 const switchLocale = async () => {
