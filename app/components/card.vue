@@ -30,7 +30,6 @@
                 }"
                 :space-between="50"
                 :speed="400"
-                :mousewheel="true"
                 :autoplay="{
                   delay: contentDelay,
                   disableOnInteraction: false,

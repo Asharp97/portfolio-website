@@ -1,9 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  // supabase: {
+  //   redirect: false,
+  // },
   devtools: { enabled: true },
   app: {
     head: {
-      title: "Ali Elsayed | Machine Learning & Software Engineer", // default fallback title
+      title: "Machine Learning & Software Engineer", // default fallback title
       htmlAttrs: {
         lang: "en",
       },
@@ -19,6 +22,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "nuxt3-lenis",
     "motion-v/nuxt",
+    "@nuxtjs/supabase",
   ],
   i18n: {
     locales: [
