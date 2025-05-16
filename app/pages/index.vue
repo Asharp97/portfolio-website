@@ -1,7 +1,8 @@
 <template>
   <div>
+    <div class="noise" />
     <div
-      class="from-copper-50 to-copper-100 bg-radial-[at_50%_-50%] from-15% to-85% dark:from-slate-600 dark:to-gray-900 min-h-dvh text-black">
+      class="from-gray-50 to-white bg-radial-[at_50%_-50%] from-15% to-85% dark:from-slate-600 dark:to-gray-900 bg-repeat min-h-dvh text-black py-30">
       <Mouse-Follower
         :location="locationPercent"
         :text="title"
@@ -9,10 +10,11 @@
         :y="mouse.y.value"
         class="absolute z-20" />
 
-      <nav class="max-w-380 mx-auto flex justify-between pt-22 mb-6 px-4">
+      <nav
+        class="max-w-380 flex justify-between top-15 left-1/2 -translate-1/2 px-10 fixed w-full">
         <Transition name="rotate" mode="out-in">
           <button
-            v-if="!switchingLocale && scroll < 100"
+            v-show="!switchingLocale && scroll < 100"
             :class="bubbleClass"
             @click="switchLocale()">
             {{ locale == "en" ? "tr" : "en" }}
@@ -20,7 +22,7 @@
         </Transition>
         <Transition name="rotate" mode="out-in">
           <button
-            v-if="!switchingTheme && scroll < 100"
+            v-show="!switchingTheme && scroll < 100"
             :class="bubbleClass"
             @click="switchTheme()">
             <Icon
@@ -34,7 +36,7 @@
         </Transition>
       </nav>
       <Transition name="switch">
-        <div v-if="!switching" class="max-w-380 px-4 mx-auto">
+        <div v-if="!switchingLocale" class="max-w-380 px-4 mx-auto">
           <div
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-1 w-full">
             <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
@@ -306,5 +308,64 @@ const bubbleClass =
   rotate: 360deg;
   opacity: 0.7;
   filter: blur(2px);
+}
+
+.noise {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.noise::after {
+  background-image: url(../../app/assets/img/noise.jpg);
+  content: "";
+  width: calc(100% + 20rem);
+  height: calc(100% + 20rem);
+  position: absolute;
+  left: -10rem;
+  top: -10rem;
+  opacity: 0.08;
+  will-change: transform;
+  animation: noise 1s steps(2) infinite;
+}
+@keyframes noise {
+  0% {
+    transform: translate3d(0, 9rem, 0);
+  }
+
+  10% {
+    transform: translate3d(-1rem, -4rem, 0);
+  }
+  20% {
+    transform: translate3d(-8rem, 2rem, 0);
+  }
+  30% {
+    transform: translate3d(9rem, -9rem, 0);
+  }
+  40% {
+    transform: translate3d(-2rem, 7rem, 0);
+  }
+  50% {
+    transform: translate3d(-9rem, -4rem, 0);
+  }
+  60% {
+    transform: translate3d(2rem, 6rem, 0);
+  }
+  70% {
+    transform: translate3d(7rem, -8rem, 0);
+  }
+  80% {
+    transform: translate3d(-9rem, 1rem, 0);
+  }
+  90% {
+    transform: translate3d(6rem, -5rem, 0);
+  }
+  100% {
+    transform: translate3d(-7rem, 0, 0);
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 const inputBaseSettings =
-  "bg-copper-50! placeholder:text-gray-800 text-black! placeholder:font-light w-full";
+  "bg-white! placeholder:text-gray-800 text-black! placeholder:font-light w-full";
 const inputRootSettings = "w-full ";
 
 export default defineAppConfig({
@@ -16,7 +16,7 @@ export default defineAppConfig({
       variants: {
         variant: {
           solid: {
-            root: "bg-inverted text-inverted bg-white dark:bg-slate-950 dark:text-white text-black rounded-2xl overflow-clip flex items-center",
+            root: "bg-inverted text-inverted bg-gray-100 dark:bg-slate-950 dark:text-white text-black rounded-2xl overflow-clip flex items-center",
             base: "w-full ",
           },
         },
@@ -45,3 +45,4 @@ export default defineAppConfig({
     },
   },
 });
+

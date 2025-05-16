@@ -1,6 +1,6 @@
 <template>
   <div
-    class="-translatex-30 -translate-y-10"
+    class="-translatex-20 -translate-y-40"
     :style="{
       transform: `translate(${x}px, ${y}px)`,
     }">
@@ -29,8 +29,8 @@ import { AnimatePresence, motion } from "motion-v";
 defineProps(["text", "x", "y", "location"]);
 const animateFrom = ref({
   opacity: 0,
-  y: 50,
-  filter: "blur(5px)",
+  // y: 50,
+  filter: "blur(10px)",
   borderRadius: "0px",
 });
 const animateTo = ref({
