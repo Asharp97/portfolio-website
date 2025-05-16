@@ -53,7 +53,7 @@
                           </h5>
                         </NuxtLink>
                         <NuxtLink :to="e.subtitleLink">
-                          <h2 class="group">
+                          <h2 class="group text-copper-700 dark:text-gray-400">
                             {{ e.subtitle }}
                             <span v-if="e.subtitleLink"
                               ><Icon
@@ -74,7 +74,7 @@
                       <li
                         v-for="x in e.points"
                         :key="x"
-                        class="flex hover:bg-copper-100 duration-300 p-1 px-2">
+                        class="flex hover:bg-copper-100 dark:hover:bg-slate-600 duration-300 p-1 px-2 rounded-xl">
                         <MDC :value="x.label" class="w-37 font-semibold" />
                         <MDC :value="x.value" class="flex-1" />
                       </li>

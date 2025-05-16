@@ -1,28 +1,42 @@
 <template>
   <div>
-    <div class="bg-copper-50 min-h-dvh py-22 text-black">
+    <div
+      class="from-copper-50 to-copper-100 bg-radial-[at_50%_-50%] from-15% to-85% dark:from-slate-600 dark:to-gray-900 min-h-dvh text-black">
       <Mouse-Follower
         :location="locationPercent"
         :text="title"
         :x="mouse.x.value"
         :y="mouse.y.value"
-        class="absolute z-20"
-      />
-      <Transition name="rotate" mode="out-in">
-        <button
-          v-if="!switching && scroll < 100"
-          class="text-lg uppercase text-white hover:tracking-widest font-normal fixed top-2 right-2 bg-copper-500 p-4 hover:p-4.5 duration-300 rounded-full cursor-pointer"
-          @click="switchLocale()"
-        >
-          {{ locale == "en" ? "tr" : "en" }}
-        </button>
-        <!-- <button @click="isDark = !isDark">{{ isDark }}</button> -->
-      </Transition>
+        class="absolute z-20" />
+
+      <nav class="max-w-380 mx-auto flex justify-between pt-22 mb-6 px-4">
+        <Transition name="rotate" mode="out-in">
+          <button
+            v-if="!switchingLocale && scroll < 100"
+            :class="bubbleClass"
+            @click="switchLocale()">
+            {{ locale == "en" ? "tr" : "en" }}
+          </button>
+        </Transition>
+        <Transition name="rotate" mode="out-in">
+          <button
+            v-if="!switchingTheme && scroll < 100"
+            :class="bubbleClass"
+            @click="switchTheme()">
+            <Icon
+              class="translate-y-1"
+              :name="
+                isDark
+                  ? 'material-symbols:light-mode'
+                  : 'material-symbols:dark-mode'
+              " />
+          </button>
+        </Transition>
+      </nav>
       <Transition name="switch">
-        <div v-if="!switching" class="max-w-380 px-1 mx-auto">
+        <div v-if="!switching" class="max-w-380 px-4 mx-auto">
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-1 w-full"
-          >
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-1 w-full">
             <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
               <Card class="card">
                 <div class="flex justify-between flex-wrap gap-3">
@@ -30,16 +44,14 @@
                     <h1>Ali <span>Elsayed</span></h1>
                   </div>
                   <div
-                    class="flex flex-1 justify-between flex-wrap gap-2 w-full"
-                  >
+                    class="flex flex-1 justify-between flex-wrap gap-2 w-full">
                     <ul class="columns-2">
                       <li
                         v-for="(name, n) in content.titles"
                         :key="n"
                         class="mr-2 min-w-36"
                         @mouseleave="activeContent = null"
-                        @mouseover="activeContent = n"
-                      >
+                        @mouseover="activeContent = n">
                         <div class="flex items-center gap-1 mb-1 group">
                           <Hashtag :active="activeContent == name" />
                           <h3>{{ name }}</h3>
@@ -47,13 +59,11 @@
                       </li>
                     </ul>
                     <ul
-                      class="flex flex-col items-end flex-wrap w-full lg:w-20 text-right"
-                    >
+                      class="flex flex-col items-end flex-wrap w-full lg:w-20 text-right">
                       <li v-for="social in content.socials" :key="social">
                         <NuxtLink :to="social.link" skills="_blank">
                           <h3
-                            class="capitalize underline hover:tracking-wider duration-300"
-                          >
+                            class="capitalize underline hover:tracking-wider duration-300">
                             {{ social.name }}
                           </h3>
                         </NuxtLink>
@@ -62,11 +72,9 @@
                         <a
                           :href="`/ali-elsayed-resume-${locale}.pdf`"
                           skills="_blank"
-                          rel="noopener noreferrer"
-                        >
+                          rel="noopener noreferrer">
                           <h3
-                            class="capitalize underline hover:tracking-wider duration-300"
-                          >
+                            class="capitalize underline hover:tracking-wider duration-300">
                             Résumé
                           </h3>
                         </a>
@@ -86,8 +94,7 @@
                       :active="true"
                       :logo="true"
                       @mouseleave="activeContent = null"
-                      @mouseover="activeContent = 6"
-                    />
+                      @mouseover="activeContent = 6" />
                   </div>
                 </div>
               </Card>
@@ -103,8 +110,7 @@
                 @click="hideMouse(0)"
                 @mouseenter="activateContent(0)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)"
-              />
+                @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
@@ -117,8 +123,7 @@
                 @click="hideMouse(1)"
                 @mouseenter="activateContent(1)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)"
-              />
+                @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
@@ -131,8 +136,7 @@
                 @click="hideMouse(2)"
                 @mouseenter="activateContent(2)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)"
-              />
+                @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
@@ -145,8 +149,7 @@
                 @click="hideMouse(3)"
                 @mouseenter="activateContent(3)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)"
-              />
+                @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2">
               <Card
@@ -157,18 +160,15 @@
                 :name="content.titles[4]"
                 @click="hideMouse(4)"
                 @mouseenter="activateContent(4)"
-                @mouseleave="activateContent(null)"
-              >
+                @mouseleave="activateContent(null)">
                 <ul class="flex flex-col gap-6">
                   <li
                     v-for="(x, n) in content.languages.points"
                     :key="n"
-                    class="flex flex-col gap-1"
-                  >
+                    class="flex flex-col gap-1">
                     <div class="text-2xl font-light">{{ x.label }}</div>
                     <div
-                      class="bg-copper-200 h-2 rounded-4xl w-9/12 ml-auto my-2"
-                    >
+                      class="bg-copper-200 dark:bg-slate-200 h-2 rounded-4xl w-9/12 ml-auto my-2">
                       <motion.div
                         :initial="{ width: 0 }"
                         :animate="{ width: `${x.value}%` }"
@@ -182,8 +182,7 @@
                             stiffness: 100,
                           },
                         }"
-                        class="bg-gradient-to-r from-copper-400 to-copper-600 h-full rounded-4xl"
-                      />
+                        class="bg-gradient-to-r from-copper-400 to-copper-600 dark:from-slate-700 dark:to-slate-400 h-full rounded-4xl" />
                     </div>
                   </li>
                 </ul>
@@ -200,8 +199,7 @@
                 @click="hideMouse(5)"
                 @mouseenter="activateContent(5)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)"
-              />
+                @mouseleave="activateContent(null)" />
             </div>
             <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-6">
               <Card
@@ -211,8 +209,7 @@
                 :name="content.titles[6]"
                 @click="hideMouse(6)"
                 @mouseenter="activateContent(6)"
-                @mouseleave="activateContent(null)"
-              >
+                @mouseleave="activateContent(null)">
                 <Form-component :text="content.callMe" :locale="locale" />
               </Card>
             </div>
@@ -238,18 +235,27 @@
 <script setup>
 import contentEn from "../static/content-en.js";
 import contentTr from "../static/content-tr.js";
-import { useMouse } from "@vueuse/core";
+import { useMouse, useDark, useToggle } from "@vueuse/core";
 import { motion, useScroll } from "motion-v";
 
-// const colorMode = useColorMode();
-// const isDark = computed({
-//   get() {
-//     return colorMode.value === "dark";
-//   },
-//   set(_isDark) {
-//     colorMode.preference = _isDark ? "dark" : "light";
-//   },
-// });
+const switchingLocale = ref(false);
+const switchingTheme = ref(false);
+
+const isDark = useDark();
+const toggleDark = useToggle(isDark);
+const switchTheme = async () => {
+  switchingTheme.value = true;
+  await new Promise((resolve) => setTimeout(resolve, 200));
+  toggleDark();
+  switchingTheme.value = false;
+};
+const switchLocale = async () => {
+  switchingLocale.value = true;
+  await new Promise((resolve) => setTimeout(resolve, 200));
+  await setLocale(locale.value == "en" ? "tr" : "en");
+  switchingLocale.value = false;
+};
+
 const { scrollY } = useScroll();
 const scroll = ref(0);
 useMotionValueEvent(scrollY, "change", (latest) => {
@@ -281,14 +287,8 @@ const hideMouse = (index) => {
 };
 
 const activeContent = ref(null);
-
-const switching = ref(false);
-const switchLocale = async () => {
-  switching.value = true;
-  await new Promise((resolve) => setTimeout(resolve, 200));
-  await setLocale(locale.value == "en" ? "tr" : "en");
-  switching.value = false;
-};
+const bubbleClass =
+  "text-lg uppercase text-white hover:tracking-widest font-normal bg-copper-500 dark:bg-slate-500 p-3 px-3.5 hover:p-4.5 duration-300 rounded-full cursor-pointer";
 </script>
 <style>
 .rotate-leave-active,

@@ -1,10 +1,11 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme static {
   --font-sans: "Roboto", sans-serif;
 
-  --color-copper-50: #F2F1EF;
+  --color-copper-50: #f2f1ef;
   --color-copper-100: #efe4d6;
   --color-copper-200: #dec7a9;
   --color-copper-300: #cda87c;
@@ -16,8 +17,6 @@
   --color-copper-900: #5c322b;
   --color-copper-950: #020100;
 
-  --active-bg: url(https://ik.imagekit.io/sharp/active-bg.jpg);
-
   --animate-spin: spin 20s linear infinite;
   --animate-spin-slower: spin 60s ease infinite;
 
@@ -27,6 +26,9 @@
       transform: rotate(360deg);
     }
   }
+}
+* {
+  transition: 300ms;
 }
 
 h1 {
@@ -42,7 +44,6 @@ h1 span {
 h2 {
   font-weight: 600;
   font-size: 1rem;
-  color: #5c322ba9;
 }
 h3 {
   font-size: var(--text-lg);

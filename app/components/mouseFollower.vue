@@ -1,13 +1,13 @@
 <template>
   <div
-    class="-translatex-20 -translate-y-20"
+    class="-translatex-30 -translate-y-10"
     :style="{
       transform: `translate(${x}px, ${y}px)`,
     }">
     <AnimatePresence>
       <motion.div
         v-if="text"
-        class="absolute overflow-clip bg-copper-600 text-white p-2 whitespace-nowrap h-10 flex flex-col gap-2"
+        class="absolute overflow-clip bg-copper-600 dark:bg-slate-600 text-white p-2 whitespace-nowrap h-10 flex flex-col gap-2"
         :initial="animateFrom"
         :animate="animateTo"
         :exit="animateFrom">

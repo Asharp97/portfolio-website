@@ -1,11 +1,15 @@
 <template>
-  <div class="flex items-center">
+  <div>
     <ClientOnly>
-      <Swiper class="h-full" @swiper="onSwiper">
+      <Swiper
+        class="h-full flex items-center"
+        :allow-slide-next="swiperLock"
+        :allow-slide-prev="swiperLock"
+        @swiper="onSwiper">
         <Swiper-slide>
           <div class="flex flex-warp gap-8 h-full">
             <div
-              class="flex-1 rounded-lg text-md text-gray-800 transition duration-300">
+              class="flex-1 rounded-lg text-md text-gray-800 dark:text-gray-50 transition duration-300">
               <p class="text-3xl font-light text-right">
                 {{ text }}
               </p>
@@ -42,7 +46,7 @@
                 <div v-if="errorMsg['msg']" :class="errorClass">
                   {{ errorMsg["msg"] }}
                 </div>
-                <UButton type="submit" class="text-white cursor-pointer">
+                <UButton type="submit" class="text-white dark:bg-slate-700 cursor-pointer">
                   {{ locale == "tr" ? "Gönder" : "Send" }}
                 </UButton>
               </TransitionGroup>
@@ -129,23 +133,27 @@ const validate = (field) => {
 
   return success;
 };
-
+const slider = ref(null);
+const onSwiper = (swiper) => {
+  slider.value = swiper;
+};
 const errorClass = "text-red-500 text-sm";
 const send = async () => {
   return await supabase.from("contacts").insert(state);
 };
+
+const swiperLock = ref(false);
+
 const onSubmit = async () => {
   if (validate("email") && validate("name") && validate("msg")) {
-    slider.value.slideTo(1);
+    swiperLock.value = true;
+    await slider.value.slideTo(1);
     const { error } = await send();
     if (!error) {
-      slider.value.slideTo(2);
-    } else slider.value.slideTo(3);
+      await slider.value.slideTo(2);
+    } else await slider.value.slideTo(3);
+    swiperLock.value = false;
   }
-};
-const slider = ref(null);
-const onSwiper = (swiper) => {
-  slider.value = swiper;
 };
 </script>
 
