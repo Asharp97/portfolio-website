@@ -1,5 +1,5 @@
 const inputBaseSettings =
-  "bg-white! placeholder:text-gray-800 text-black! placeholder:font-light w-full";
+  "bg-white! dark:bg-slate-200! placeholder:text-gray-800 text-black! placeholder:font-light w-full";
 const inputRootSettings = "w-full ";
 
 export default defineAppConfig({

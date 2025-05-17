@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="noise" />
+    <div class="noise bg-[var(--overlay)] dark:bg-transparent" />
     <div
       class="from-gray-50 to-white bg-radial-[at_50%_-50%] from-15% to-85% dark:from-slate-600 dark:to-gray-900 bg-repeat min-h-dvh text-black py-30">
       <Mouse-Follower
@@ -39,7 +39,7 @@
         <div v-if="!switchingLocale" class="max-w-380 px-4 mx-auto">
           <!-- MAIN PARENT -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-1 w-full">
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-3 w-full">
             <!-- HERO -->
             <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
               <Card class="card h-fit!">
@@ -50,11 +50,8 @@
               </Card>
             </div>
 
-            <gap height="40" />
-
             <!-- Experiences -->
-            <div
-              class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-7">
+            <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-7">
               <Card
                 ref="experience"
                 class="card"
@@ -82,8 +79,6 @@
                 @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
-
-            <gap height="10" />
 
             <!-- Side Projects -->
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
@@ -129,8 +124,6 @@
                 <Langs :content="content.languages.points" />
               </Card>
             </div>
-
-            <gap height="30" />
 
             <!-- Certificates -->
             <div class="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-6">

@@ -170,22 +170,4 @@ onMounted(() => {
 .tada {
   transition-delay: var(--delay);
 }
-
-.from-below-blur {
-  animation: from-below-blur cubic-bezier(0, 0, 0.06, 1) both;
-  animation-timeline: view(block);
-  animation-range: cover 30% cover 40%;
-}
-@keyframes from-below-blur {
-  from {
-    opacity: 0;
-    transform: translateY(200px);
-    filter: blur(15px);
-  }
-  to {
-    transform: translateY(0);
-    filter: blur(0px);
-    opacity: 1;
-  }
-}
 </style>
