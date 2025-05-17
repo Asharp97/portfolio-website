@@ -27,9 +27,6 @@
     }
   }
 }
-* {
-  transition: 300ms;
-}
 
 h1 {
   font-size: var(--text-7xl);

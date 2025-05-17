@@ -10,7 +10,7 @@
         :y="mouse.y.value"
         class="absolute z-20" />
 
-      <nav
+      <header
         class="max-w-380 flex justify-between top-15 left-1/2 -translate-1/2 px-10 fixed w-full">
         <Transition name="rotate" mode="out-in">
           <button
@@ -26,7 +26,6 @@
             :class="bubbleClass"
             @click="switchTheme()">
             <Icon
-              class="translate-y-1"
               :name="
                 isDark
                   ? 'material-symbols:light-mode'
@@ -34,74 +33,28 @@
               " />
           </button>
         </Transition>
-      </nav>
+      </header>
+
       <Transition name="switch">
         <div v-if="!switchingLocale" class="max-w-380 px-4 mx-auto">
+          <!-- MAIN PARENT -->
           <div
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-1 w-full">
+            <!-- HERO -->
             <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
-              <Card class="card">
-                <div class="flex justify-between flex-wrap gap-3">
-                  <div class="flex-1">
-                    <h1>Ali <span>Elsayed</span></h1>
-                  </div>
-                  <div
-                    class="flex flex-1 justify-between flex-wrap gap-2 w-full">
-                    <ul class="columns-2">
-                      <li
-                        v-for="(name, n) in content.titles"
-                        :key="n"
-                        class="mr-2 min-w-36"
-                        @mouseleave="activeContent = null"
-                        @mouseover="activeContent = n">
-                        <div class="flex items-center gap-1 mb-1 group">
-                          <Hashtag :active="activeContent == name" />
-                          <h3>{{ name }}</h3>
-                        </div>
-                      </li>
-                    </ul>
-                    <ul
-                      class="flex flex-col items-end flex-wrap w-full lg:w-20 text-right">
-                      <li v-for="social in content.socials" :key="social">
-                        <NuxtLink :to="social.link" skills="_blank">
-                          <h3
-                            class="capitalize underline hover:tracking-wider duration-300">
-                            {{ social.name }}
-                          </h3>
-                        </NuxtLink>
-                      </li>
-                      <li>
-                        <a
-                          :href="`/ali-elsayed-resume-${locale}.pdf`"
-                          skills="_blank"
-                          rel="noopener noreferrer">
-                          <h3
-                            class="capitalize underline hover:tracking-wider duration-300">
-                            Résumé
-                          </h3>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="h-96" />
-                <div class="flex justify-between items-end flex-wrap">
-                  <client-only>
-                    <p class="w-full md:w-1/2">
-                      <MDC :value="content.summary" />
-                    </p>
-                  </client-only>
-                  <div class="flex-1 flex justify-end items-end">
-                    <Hashtag
-                      :active="true"
-                      :logo="true"
-                      @mouseleave="activeContent = null"
-                      @mouseover="activeContent = 6" />
-                  </div>
-                </div>
+              <Card class="card h-fit!">
+                <Hero
+                  :titles="content.titles"
+                  :socials="content.socials"
+                  :summary="content.summary" />
               </Card>
             </div>
-            <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-7">
+
+            <gap height="40" />
+
+            <!-- Experiences -->
+            <div
+              class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-7">
               <Card
                 ref="experience"
                 class="card"
@@ -114,6 +67,8 @@
                 @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
+
+            <!-- SKills -->
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
                 ref="skills"
@@ -127,6 +82,10 @@
                 @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
+
+            <gap height="10" />
+
+            <!-- Side Projects -->
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
                 ref="projects"
@@ -140,6 +99,8 @@
                 @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
+
+            <!-- Education -->
             <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
                 ref="education"
@@ -153,6 +114,8 @@
                 @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
+
+            <!-- Languages  -->
             <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2">
               <Card
                 ref="languages"
@@ -163,33 +126,13 @@
                 @click="hideMouse(4)"
                 @mouseenter="activateContent(4)"
                 @mouseleave="activateContent(null)">
-                <ul class="flex flex-col gap-6">
-                  <li
-                    v-for="(x, n) in content.languages.points"
-                    :key="n"
-                    class="flex flex-col gap-1">
-                    <div class="text-2xl font-light">{{ x.label }}</div>
-                    <div
-                      class="bg-copper-200 dark:bg-slate-200 h-2 rounded-4xl w-9/12 ml-auto my-2">
-                      <motion.div
-                        :initial="{ width: 0 }"
-                        :animate="{ width: `${x.value}%` }"
-                        :transition="{
-                          duration: 0.4,
-                          delay: 0.9,
-                          width: {
-                            type: 'spring',
-                            visualDuration: 0.9,
-                            bounce: 1,
-                            stiffness: 100,
-                          },
-                        }"
-                        class="bg-gradient-to-r from-copper-400 to-copper-600 dark:from-slate-700 dark:to-slate-400 h-full rounded-4xl" />
-                    </div>
-                  </li>
-                </ul>
+                <Langs :content="content.languages.points" />
               </Card>
             </div>
+
+            <gap height="30" />
+
+            <!-- Certificates -->
             <div class="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-6">
               <Card
                 ref="certificates"
@@ -203,28 +146,24 @@
                 @hide-follower="activateContent(null)"
                 @mouseleave="activateContent(null)" />
             </div>
+
+            <!-- Contact Form-->
             <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-6">
               <Card
-                :ref="content.titles[6]"
+                ref="form"
                 class="card"
                 :active="activeContent == 6"
                 :name="content.titles[6]"
-                @click="hideMouse(6)"
                 @mouseenter="activateContent(6)"
                 @mouseleave="activateContent(null)">
                 <Form-component :text="content.callMe" :locale="locale" />
               </Card>
             </div>
+
+            <!-- Footer -->
             <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
               <Card class="card" delay="900ms">
-                <div class="flex justify-between text-md">
-                  <div>
-                    © {{ new Date().getFullYear() }} {{ content.footer[0] }}
-                  </div>
-                  <div class="text-right">
-                    {{ content.footer[1] }}
-                  </div>
-                </div>
+                <footer-component :content="content.footer" />
               </Card>
             </div>
           </div>
@@ -265,7 +204,6 @@ useMotionValueEvent(scrollY, "change", (latest) => {
 });
 
 const mouse = useMouse();
-
 const { locale, setLocale } = useI18n();
 
 const content = computed(() => {
@@ -290,8 +228,9 @@ const hideMouse = (index) => {
 
 const activeContent = ref(null);
 const bubbleClass =
-  "text-lg uppercase text-white hover:tracking-widest font-normal bg-copper-500 dark:bg-slate-500 p-3 px-3.5 hover:p-4.5 duration-300 rounded-full cursor-pointer";
+  "text-lg uppercase text-white hover:tracking-widest font-normal bg-copper-500 dark:bg-slate-500 flex justify-center items-center w-15 h-15 hover:translate-y-1 duration-300 rounded-full cursor-pointer";
 </script>
+
 <style>
 .rotate-leave-active,
 .switch-leave-active {
@@ -300,7 +239,6 @@ const bubbleClass =
 .switch-enter-from .card,
 .switch-leave-to .card {
   opacity: 0;
-  /* filter: blur(5px); */
   scale: 0.9;
 }
 .rotate-enter-from,

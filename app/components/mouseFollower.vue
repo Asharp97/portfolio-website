@@ -11,11 +11,8 @@
         :initial="animateFrom"
         :animate="animateTo"
         :exit="animateFrom">
-        <div v-for="n in count" :key="n">
-          <motion.div
-            :style="{
-              transform: `translate(0px, -${18 * count * location}px)`,
-            }">
+        <div>
+          <motion.div>
             {{ text }}
           </motion.div>
         </div>
@@ -39,7 +36,6 @@ const animateTo = ref({
   filter: "blur(0px)",
   borderRadius: "10px",
 });
-const count = 18;
 </script>
 
 <style lang="scss" scoped></style>

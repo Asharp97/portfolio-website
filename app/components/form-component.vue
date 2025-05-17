@@ -7,7 +7,7 @@
         :allow-slide-prev="swiperLock"
         @swiper="onSwiper">
         <Swiper-slide>
-          <div class="flex flex-warp gap-8 h-full">
+          <div class="flex flex-wrap gap-8 h-full">
             <div
               class="flex-1 rounded-lg text-md text-gray-800 dark:text-gray-50 transition duration-300">
               <p class="text-3xl font-light text-right">
@@ -46,7 +46,9 @@
                 <div v-if="errorMsg['msg']" :class="errorClass">
                   {{ errorMsg["msg"] }}
                 </div>
-                <UButton type="submit" class="text-white dark:bg-slate-700 cursor-pointer">
+                <UButton
+                  type="submit"
+                  class="text-white dark:bg-slate-700 cursor-pointer">
                   {{ locale == "tr" ? "Gönder" : "Send" }}
                 </UButton>
               </TransitionGroup>
