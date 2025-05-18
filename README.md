@@ -1,75 +1,38 @@
-# Nuxt UI Starter
+# **Ali Elsayed's Portfolio Website**
 
-Look at [Nuxt docs](https://nuxt.com/docs/getting-started/introduction) and [Nuxt UI docs](https://ui.nuxt.com) to learn more.
+Welcome to my portfolio! This website showcases my journey as a **Machine Learning Engineer** and **Full-Stack Developer**, highlighting my projects, skills, and professional achievements.
 
-## Setup
+## 🌟 **About the Portfolio**
 
-Make sure to install the dependencies:
+This website is designed to present my technical expertise and creative projects in a user-friendly and interactive way. It features:
 
-```bash
-# npm
-npm install
+- A clean, responsive design for seamless navigation
+- Project highlights including **Quizly**, **Landclub**, and other key applications
+- Insights into my **certifications**, **educational background**, and **professional experience**
+- Links to my **GitHub**, **LinkedIn**, and **contact information**
 
-# pnpm
-pnpm install
+## 🛠️ **Technologies Used**
 
-# yarn
-yarn install
+- **Frontend:** Vue.js, Nuxt.js
+- **Backend:** Node.js, Supabase
+- **Deployment:** Vercel
+- **Styling:** Tailwind CSS
+- **Other Tools:** GitHub Actions for CI/CD
 
-# bun
-bun install
-```
+## 🚀 **Features**
 
-## Development Server
+- Interactive project showcases with detailed descriptions
+- Smooth navigation and responsive layout
+- Professional certificates and education sections
 
-Start the development server on `http://localhost:3000`:
+## 🌐 **Live Demo**
 
-```bash
-# npm
-npm run dev
+You can visit the live site here: **[Personal Portfolio](https://portofolio-asharp97s-projects.vercel.app/)**
 
-# pnpm
-pnpm run dev
+## 📝 **Contact**
 
-# yarn
-yarn dev
+Feel free to reach out:
 
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- **Email:** [ali-hisham@hotmail.com](mailto:ali-hisham@hotmail.com)
+- **LinkedIn:** [Ali Elsayed](https://www.linkedin.com/in/ali-elsayed-25974b130/)
+- **GitHub:** [AliElsayed](https://github.com/Asharp97)
