@@ -2,14 +2,15 @@
   <div>
     <div class="flex justify-between flex-wrap gap-3">
       <div class="flex-1">
-        <h1>Ali <span>Elsayed</span></h1>
+        <!-- <h1>Ali <span>Elsayed</span></h1> -->
+        <text-split v-if="mounted" text="Ali Elsayed" tag="h1" />
       </div>
       <div class="flex flex-1 justify-between flex-wrap gap-2 w-full">
         <nav>
           <ul class="columns-2">
             <li v-for="(name, n) in titles" :key="n" class="mr-2 min-w-36">
               <div class="flex items-center gap-1 mb-1 group">
-                <Hashtag :active="activeContent == name" />
+                <Hashtag />
                 <h3>{{ name }}</h3>
               </div>
             </li>
@@ -20,7 +21,8 @@
           <li v-for="social in socials" :key="social">
             <NuxtLink :to="social.link" skills="_blank">
               <h3
-                class="capitalize underline hover:tracking-wider duration-300">
+                class="capitalize underline hover:tracking-wider duration-300"
+              >
                 {{ social.name }}
               </h3>
             </NuxtLink>
@@ -29,9 +31,11 @@
             <a
               :href="`/ali-elsayed-resume-${locale}.pdf`"
               skills="_blank"
-              rel="noopener noreferrer">
+              rel="noopener noreferrer"
+            >
               <h3
-                class="capitalize underline hover:tracking-wider duration-300">
+                class="capitalize underline hover:tracking-wider duration-300"
+              >
                 Résumé
               </h3>
             </a>
@@ -54,7 +58,12 @@
 </template>
 
 <script setup>
-defineProps(["socials", "titles", "summary"]);
+defineProps(["socials", "titles", "summary", "locale"]);
+const mounted = ref(false);
+onMounted(async () => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  mounted.value = true;
+});
 </script>
 
 <style lang="scss" scoped></style>

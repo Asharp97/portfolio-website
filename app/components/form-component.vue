@@ -48,7 +48,7 @@
                 </div>
                 <UButton
                   type="submit"
-                  class="text-white dark:bg-slate-700 cursor-pointer">
+                  class="text-white dark:bg-slate-700 dark:hover:bg-slate-500 duration-300 cursor-pointer">
                   {{ locale == "tr" ? "Gönder" : "Send" }}
                 </UButton>
               </TransitionGroup>

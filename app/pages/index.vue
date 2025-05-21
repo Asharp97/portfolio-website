@@ -2,21 +2,24 @@
   <div>
     <div class="noise bg-[var(--overlay)] dark:bg-transparent" />
     <div
-      class="from-gray-50 to-white bg-radial-[at_50%_-50%] from-15% to-85% dark:from-slate-600 dark:to-gray-900 bg-repeat min-h-dvh text-black py-30">
+      class="from-gray-50 to-white bg-radial-[at_50%_-50%] from-15% to-85% dark:from-slate-600 dark:to-gray-900 bg-repeat min-h-dvh text-black py-30"
+    >
       <Mouse-Follower
-        :location="locationPercent"
         :text="title"
         :x="mouse.x.value"
         :y="mouse.y.value"
-        class="absolute z-20" />
+        class="absolute z-20"
+      />
 
       <header
-        class="max-w-380 flex justify-between top-15 left-1/2 -translate-1/2 px-10 fixed w-full">
+        class="max-w-380 flex justify-between top-15 left-1/2 -translate-1/2 px-10 fixed w-full"
+      >
         <Transition name="rotate" mode="out-in">
           <button
             v-show="!switchingLocale && scroll < 100"
             :class="bubbleClass"
-            @click="switchLocale()">
+            @click="switchLocale()"
+          >
             {{ locale == "en" ? "tr" : "en" }}
           </button>
         </Transition>
@@ -24,13 +27,15 @@
           <button
             v-show="!switchingTheme && scroll < 100"
             :class="bubbleClass"
-            @click="switchTheme()">
+            @click="switchTheme()"
+          >
             <Icon
               :name="
                 isDark
                   ? 'material-symbols:light-mode'
                   : 'material-symbols:dark-mode'
-              " />
+              "
+            />
           </button>
         </Transition>
       </header>
@@ -39,14 +44,17 @@
         <div v-if="!switchingLocale" class="max-w-380 px-4 mx-auto">
           <!-- MAIN PARENT -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-3 w-full">
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-3 w-full"
+          >
             <!-- HERO -->
             <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
               <Card class="card h-fit!">
                 <Hero
+                  :locale="locale"
                   :titles="content.titles"
                   :socials="content.socials"
-                  :summary="content.summary" />
+                  :summary="content.summary"
+                />
               </Card>
             </div>
 
@@ -62,7 +70,8 @@
                 @click="hideMouse(0)"
                 @mouseenter="activateContent(0)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)" />
+                @mouseleave="activateContent(null)"
+              />
             </div>
 
             <!-- SKills -->
@@ -77,7 +86,8 @@
                 @click="hideMouse(1)"
                 @mouseenter="activateContent(1)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)" />
+                @mouseleave="activateContent(null)"
+              />
             </div>
 
             <!-- Side Projects -->
@@ -92,7 +102,8 @@
                 @click="hideMouse(2)"
                 @mouseenter="activateContent(2)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)" />
+                @mouseleave="activateContent(null)"
+              />
             </div>
 
             <!-- Education -->
@@ -107,7 +118,8 @@
                 @click="hideMouse(3)"
                 @mouseenter="activateContent(3)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)" />
+                @mouseleave="activateContent(null)"
+              />
             </div>
 
             <!-- Languages  -->
@@ -120,7 +132,8 @@
                 :name="content.titles[4]"
                 @click="hideMouse(4)"
                 @mouseenter="activateContent(4)"
-                @mouseleave="activateContent(null)">
+                @mouseleave="activateContent(null)"
+              >
                 <Langs :content="content.languages.points" />
               </Card>
             </div>
@@ -137,7 +150,8 @@
                 @click="hideMouse(5)"
                 @mouseenter="activateContent(5)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)" />
+                @mouseleave="activateContent(null)"
+              />
             </div>
 
             <!-- Contact Form-->
@@ -148,7 +162,8 @@
                 :active="activeContent == 6"
                 :name="content.titles[6]"
                 @mouseenter="activateContent(6)"
-                @mouseleave="activateContent(null)">
+                @mouseleave="activateContent(null)"
+              >
                 <Form-component :text="content.callMe" :locale="locale" />
               </Card>
             </div>
