@@ -1,25 +1,21 @@
 <template>
-  <div>
+  <div id="home">
     <div class="noise bg-[var(--overlay)] dark:bg-transparent" />
     <div
-      class="from-gray-50 to-white bg-radial-[at_50%_-50%] from-15% to-85% dark:from-slate-600 dark:to-gray-900 bg-repeat min-h-dvh text-black py-30"
-    >
+      class="from-gray-50 to-white bg-radial-[at_50%_-50%] from-15% to-85% dark:from-dark-900 dark:to-dark-900 min-h-dvh text-black py-30 scroll-smooth!">
       <Mouse-Follower
         :text="title"
         :x="mouse.x.value"
         :y="mouse.y.value"
-        class="absolute z-20"
-      />
+        class="absolute z-20" />
 
       <header
-        class="max-w-380 flex justify-between top-15 left-1/2 -translate-1/2 px-10 fixed w-full"
-      >
+        class="max-w-380 flex justify-between top-15 left-1/2 -translate-1/2 px-10 fixed w-full">
         <Transition name="rotate" mode="out-in">
           <button
             v-show="!switchingLocale && scroll < 100"
             :class="bubbleClass"
-            @click="switchLocale()"
-          >
+            @click="switchLocale()">
             {{ locale == "en" ? "tr" : "en" }}
           </button>
         </Transition>
@@ -27,41 +23,37 @@
           <button
             v-show="!switchingTheme && scroll < 100"
             :class="bubbleClass"
-            @click="switchTheme()"
-          >
+            @click="switchTheme()">
             <Icon
               :name="
                 isDark
                   ? 'material-symbols:light-mode'
                   : 'material-symbols:dark-mode'
-              "
-            />
+              " />
           </button>
         </Transition>
       </header>
-
       <Transition name="switch">
         <div v-if="!switchingLocale" class="max-w-380 px-4 mx-auto">
           <!-- MAIN PARENT -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-3 w-full"
-          >
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-3 w-full">
             <!-- HERO -->
-            <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
+            <div
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12">
               <Card class="card h-fit!">
                 <Hero
                   :locale="locale"
                   :titles="content.titles"
                   :socials="content.socials"
-                  :summary="content.summary"
-                />
+                  :summary="content.summary" />
               </Card>
             </div>
-
             <!-- Experiences -->
-            <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-7">
+            <div
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-7">
               <Card
-                ref="experience"
+                :id="locale == 'en' ? `Experiences` : `Deneyimler`"
                 class="card"
                 :content="content.experience"
                 :active="activeContent == 0"
@@ -70,14 +62,13 @@
                 @click="hideMouse(0)"
                 @mouseenter="activateContent(0)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)"
-              />
+                @mouseleave="activateContent(null)" />
             </div>
-
             <!-- SKills -->
-            <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
+            <div
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
-                ref="skills"
+                :id="locale == 'en' ? `Skills` : `Yetenekler`"
                 class="card"
                 :content="content.skills"
                 delay="400ms"
@@ -86,14 +77,13 @@
                 @click="hideMouse(1)"
                 @mouseenter="activateContent(1)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)"
-              />
+                @mouseleave="activateContent(null)" />
             </div>
-
             <!-- Side Projects -->
-            <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
+            <div
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
-                ref="projects"
+                :id="locale == 'en' ? `Side-Projects` : `Projeler`"
                 class="card"
                 :content="content.projects"
                 delay="100ms"
@@ -102,14 +92,13 @@
                 @click="hideMouse(2)"
                 @mouseenter="activateContent(2)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)"
-              />
+                @mouseleave="activateContent(null)" />
             </div>
-
             <!-- Education -->
-            <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5">
+            <div
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
-                ref="education"
+                :id="locale == 'en' ? `Education` : `Eğitim`"
                 class="card"
                 :content="content.education"
                 delay="150ms"
@@ -118,30 +107,28 @@
                 @click="hideMouse(3)"
                 @mouseenter="activateContent(3)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)"
-              />
+                @mouseleave="activateContent(null)" />
             </div>
-
             <!-- Languages  -->
-            <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2">
+            <div
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-2 lg:col-span-2">
               <Card
-                ref="languages"
+                :id="locale == 'en' ? `Languages` : `Diller`"
                 class="card"
                 delay="400ms"
                 :active="activeContent == 4"
                 :name="content.titles[4]"
                 @click="hideMouse(4)"
                 @mouseenter="activateContent(4)"
-                @mouseleave="activateContent(null)"
-              >
+                @mouseleave="activateContent(null)">
                 <Langs :content="content.languages.points" />
               </Card>
             </div>
-
             <!-- Certificates -->
-            <div class="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-6">
+            <div
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-4 lg:col-span-6">
               <Card
-                ref="certificates"
+                :id="locale == 'en' ? `Certificates` : `Sertifikalar`"
                 class="card"
                 delay="400ms"
                 :content="content.certificates"
@@ -150,26 +137,24 @@
                 @click="hideMouse(5)"
                 @mouseenter="activateContent(5)"
                 @hide-follower="activateContent(null)"
-                @mouseleave="activateContent(null)"
-              />
+                @mouseleave="activateContent(null)" />
             </div>
-
             <!-- Contact Form-->
-            <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-6">
+            <div
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-6">
               <Card
-                ref="form"
+                id="form"
                 class="card"
                 :active="activeContent == 6"
                 :name="content.titles[6]"
                 @mouseenter="activateContent(6)"
-                @mouseleave="activateContent(null)"
-              >
+                @mouseleave="activateContent(null)">
                 <Form-component :text="content.callMe" :locale="locale" />
               </Card>
             </div>
-
             <!-- Footer -->
-            <div class="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-12">
+            <div
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12">
               <Card class="card" delay="900ms">
                 <footer-component :content="content.footer" />
               </Card>
@@ -185,7 +170,7 @@
 import contentEn from "../static/content-en.js";
 import contentTr from "../static/content-tr.js";
 import { useMouse, useDark, useToggle } from "@vueuse/core";
-import { motion, useScroll } from "motion-v";
+import { useScroll } from "motion-v";
 
 const switchingLocale = ref(false);
 const switchingTheme = ref(false);

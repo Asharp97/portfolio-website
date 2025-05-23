@@ -1,10 +1,10 @@
 <template>
   <div
-    class="cursor-pointer rounded-full w-fit text-xl text-white flex justify-center items-center duration-300 transition-all"
+    class="cursor-pointer rounded-full w-fit text-xl text-white flex justify-center items-center duration-300 transition-all sharp"
     :class="[
       active
         ? 'p-1 rotate-90 bg-copper-500 dark:bg-slate-500'
-        : 'p-0 rotate-0 bg-copper-950 dark:bg-slate-300',
+        : 'p-0 rotate-0 bg-copper-950 dark:bg-white',
       'group-hover:p-1 group-hover:rotate-90 group-hover:bg-copper-500  dark:group-hover:bg-slate-500  hover:-translate-x-1',
       logo ? `` : `hover:scale-125`,
     ]">

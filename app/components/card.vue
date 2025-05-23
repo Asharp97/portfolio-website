@@ -29,7 +29,7 @@
                   },
                 }"
                 :space-between="50"
-                :speed="400"
+                :speed="swiperSpeed"
                 :autoplay="{
                   delay: contentDelay,
                   disableOnInteraction: false,
@@ -41,7 +41,7 @@
                     class="flex flex-col justify-between h-full duration-500">
                     <div class="flex justify-between items-center">
                       <div>
-                        <NuxtLink :to="e.titleLink">
+                        <NuxtLink :to="e.titleLink" target="_blank">
                           <h5
                             class="text-2xl sm:text-4xl flex font-light group">
                             {{ e.title }}
@@ -52,7 +52,7 @@
                             /></span>
                           </h5>
                         </NuxtLink>
-                        <NuxtLink :to="e.subtitleLink">
+                        <NuxtLink :to="e.subtitleLink" target="_blank">
                           <h2 class="group text-copper-700 dark:text-gray-400">
                             {{ e.subtitle }}
                             <span v-if="e.subtitleLink"
@@ -139,12 +139,17 @@ const paginationHandle = (e) => {
 
 // const mounted = ref(true);
 const mounted = ref(false);
+const swiperSpeed = ref(2000);
 onMounted(() => {
+  swiperSpeed.value = 2000;
   setTimeout(() => {
     mounted.value = true;
   }, 400);
   setTimeout(() => {
     paginationHandle(0);
+  }, 700);
+  setTimeout(() => {
+    swiperSpeed.value = 400;
   }, 700);
 });
 </script>

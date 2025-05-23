@@ -133,7 +133,7 @@ const socials = [
 const titles = [
   "Experiences",
   "Skills",
-  "Side Projects",
+  "Side-Projects",
   "Education",
   "Languages",
   "Certificates",
