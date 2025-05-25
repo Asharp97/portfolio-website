@@ -1,5 +1,5 @@
 <template>
-  <Transition name="tada">
+  <Transition name="tada" class="-my-1" tag="div">
     <div
       v-show="mounted"
       :style="{ '--delay': delay }"
@@ -9,7 +9,9 @@
           ? `border-copper-700 shadow-xl origin-left  `
           : 'border-transparent',
       ]">
-      <UCard :id="`#${name}`" class="h-full duration-300 default-bg relative">
+      <UCard
+        :id="`#${name}`"
+        class="h-full duration-300 default-bg relative rounded-none">
         <div
           v-if="content"
           class="flex flex-col sm:flex-row h-90 sm:h-full sm:items-center gap-2 w-full">
@@ -65,8 +67,12 @@
                       </div>
                       <div v-if="e.date || e.location" class="text-right">
                         <h6>{{ e.date }}</h6>
-                        <USeparator v-if="e.location" decorative="true" />
-                        <h6 class="font-semibold">{{ e.location }}</h6>
+                        <USeparator
+                          v-if="e.location"
+                          decorative="true"
+                          class="my-1"
+                          color="secondry" />
+                        <h6 class="font-light">{{ e.location }}</h6>
                       </div>
                     </div>
                     <p v-if="e.description"><MDC :value="e.description" /></p>
