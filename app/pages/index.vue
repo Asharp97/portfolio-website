@@ -6,61 +6,70 @@
         :text="title"
         :x="mouse.x.value"
         :y="mouse.y.value"
-        class="absolute z-20" />
+        class="absolute z-20"
+      />
 
       <header
-        class="max-w-380 flex justify-between top-15 left-1/2 -translate-1/2 px-10 fixed w-full">
+        class="max-w-380 flex justify-between top-15 left-1/2 -translate-1/2 px-10 fixed w-full"
+      >
         <Transition name="rotate" mode="out-in">
           <button
-            v-show="!switchingLocale"
+            v-show="!switchingLocale && scroll < 50"
             :class="bubbleClass"
-            @click="switchLocale()">
+            @click="switchLocale()"
+          >
             {{ locale == "en" ? "tr" : "en" }}
           </button>
         </Transition>
         <Transition name="rotate" mode="out-in">
           <button
-            v-show="!switchingTheme"
+            v-show="!switchingTheme && scroll < 50"
             :class="bubbleClass"
-            @click="switchTheme()">
+            @click="switchTheme()"
+          >
             <Icon
               :name="
                 isDark
                   ? 'material-symbols:light-mode'
                   : 'material-symbols:dark-mode'
-              " />
+              "
+            />
           </button>
         </Transition>
       </header>
-      <!-- <pre class="text-white fixed z-199 bg-black">{{ distances }}</pre> -->
+      <!-- <pre class="text-white fixed z-20">{{ distances }}</pre> -->
       <Transition name="switch">
         <div v-if="!switchingLocale" class="max-w-380 px-4 mx-auto">
           <!-- MAIN PARENT -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-3 w-full duration-500"
-            :class="{ 'gap-0!': distances[0] == 12 }">
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-3 w-full duration-500 relative"
+          >
             <!-- HERO -->
             <div
               :ref="boxes[0]"
-              class="col-span-1 group/outer sm:col-span-2 duration-500 md:col-span-6 lg:col-span-12 sticky top-3">
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12 sticky top-3 overflow-hidden transition-not-height"
+              :style="{ height: `${heightCalc(0)}px` }"
+            >
               <Card
-                :class="[{ 'scale-90': distances[0] == 12 }]"
-                class="card h-fit! duration-900"
-                @click="hideMouse('Merhabalar👋', 'Hi👋')"
+                class="card h-fit!"
+                @click="toggleMouse('Merhabalar👋', 'Hi👋')"
                 @mouseenter="activateContent('Merhabalar 👋', 'Hi👋')"
-                @hide-follower="activateContent()"
-                @mouseleave="activateContent()">
+                @mouseleave="activateContent()"
+              >
                 <Hero
                   :locale="locale"
                   :titles="content.titles"
                   :socials="content.socials"
-                  :summary="content.summary" />
+                  :summary="content.summary"
+                />
               </Card>
             </div>
             <!-- Experiences -->
             <div
               :ref="boxes[1]"
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-7 sticky top-3">
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-7"
+            >
+              <!-- :style="{ height: `${heightCalc(1)}px` }" -->
               <Card
                 :id="locale == 'en' ? `Experiences` : `Deneyimler`"
                 :class="[{ 'scale-90': distances[1] == 12 }]"
@@ -69,15 +78,17 @@
                 :active="activeContent == 0"
                 delay="300ms"
                 :name="content.titles[0]"
-                @click="hideMouse('Deneyimler', 'Experiences')"
+                @click="toggleMouse('Deneyimler', 'Experiences')"
                 @mouseenter="activateContent('Deneyimler', 'Experiences')"
-                @hide-follower="activateContent()"
-                @mouseleave="activateContent()" />
+                @mouseleave="activateContent()"
+              />
             </div>
             <!-- SKills -->
             <div
               :ref="boxes[2]"
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 sticky top-3">
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5"
+            >
+              <!-- :style="{ height: `${heightCalc(2)}px` }" -->
               <Card
                 :id="locale == 'en' ? `Skills` : `Yetenekler`"
                 :class="[{ 'scale-90': distances[2] == 12 }]"
@@ -86,15 +97,16 @@
                 delay="400ms"
                 :active="activeContent == 1"
                 :name="content.titles[1]"
-                @click="hideMouse('Yetenekler', 'Skills')"
+                @click="toggleMouse('Yetenekler', 'Skills')"
                 @mouseenter="activateContent('Yetenekler', 'Skills')"
-                @hide-follower="activateContent()"
-                @mouseleave="activateContent()" />
+                @mouseleave="activateContent()"
+              />
             </div>
             <!-- Side Projects -->
             <div
               :ref="boxes[3]"
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 sticky top-3">
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 relative"
+            >
               <Card
                 :id="locale == 'en' ? `Side-Projects` : `Projeler`"
                 :class="[{ 'scale-90': distances[3] == 12 }]"
@@ -103,15 +115,16 @@
                 delay="100ms"
                 :active="activeContent == 2"
                 :name="content.titles[2]"
-                @click="hideMouse('Projeler', 'Side-Projects')"
+                @click="toggleMouse('Projeler', 'Side-Projects')"
                 @mouseenter="activateContent('Projeler', 'Side-Projects')"
-                @hide-follower="activateContent()"
-                @mouseleave="activateContent()" />
+                @mouseleave="activateContent()"
+              />
             </div>
             <!-- Education -->
             <div
               :ref="boxes[4]"
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 sticky top-3">
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 relative"
+            >
               <Card
                 :id="locale == 'en' ? `Education` : `Eğitim`"
                 :class="[{ 'scale-90': distances[4] == 12 }]"
@@ -120,15 +133,16 @@
                 delay="150ms"
                 :active="activeContent == 3"
                 :name="content.titles[3]"
-                @click="hideMouse('Eğitim', 'Education')"
+                @click="toggleMouse('Eğitim', 'Education')"
                 @mouseenter="activateContent('Eğitim', 'Education')"
-                @hide-follower="activateContent()"
-                @mouseleave="activateContent()" />
+                @mouseleave="activateContent()"
+              />
             </div>
             <!-- Languages  -->
             <div
               :ref="boxes[5]"
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-2 lg:col-span-2 sticky top-3">
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-2 lg:col-span-2 relative"
+            >
               <Card
                 :id="locale == 'en' ? `Languages` : `Diller`"
                 :class="[{ 'scale-90': distances[5] == 12 }]"
@@ -136,17 +150,18 @@
                 delay="400ms"
                 :active="activeContent == 4"
                 :name="content.titles[4]"
-                @click="hideMouse('Diller', 'Languages')"
+                @click="toggleMouse('Diller', 'Languages')"
                 @mouseenter="activateContent('Diller', 'Languages')"
-                @hide-follower="activateContent()"
-                @mouseleave="activateContent()">
+                @mouseleave="activateContent()"
+              >
                 <Langs :content="content.languages.points" />
               </Card>
             </div>
             <!-- Certificates -->
             <div
               :ref="boxes[6]"
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-4 lg:col-span-6 sticky top-3">
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-4 lg:col-span-6 relative"
+            >
               <Card
                 :id="locale == 'en' ? `Certificates` : `Sertifikalar`"
                 :class="[{ 'scale-90': distances[6] == 12 }]"
@@ -155,30 +170,32 @@
                 :content="content.certificates"
                 :active="activeContent == 5"
                 :name="content.titles[5]"
-                @click="hideMouse('Sertifikalar', 'Certificates')"
+                @click="toggleMouse('Sertifikalar', 'Certificates')"
                 @mouseenter="activateContent('Sertifikalar', 'Certificates')"
-                @hide-follower="activateContent()"
-                @mouseleave="activateContent()" />
+                @mouseleave="activateContent()"
+              />
             </div>
             <!-- Contact Form-->
             <div
               :ref="boxes[7]"
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-6 sticky top-3">
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-6 relative"
+            >
               <Card
                 id="form"
                 class="card"
                 :active="activeContent == 6"
                 :name="content.titles[6]"
-                @click="hideMouse('Çekinme!', `Don't Be Shy!`)"
+                @click="toggleMouse('Çekinme!', `Don't Be Shy!`)"
                 @mouseenter="activateContent('Çekinme!', `Don't Be Shy!`)"
-                @hide-follower="activateContent()"
-                @mouseleave="activateContent()">
+                @mouseleave="activateContent()"
+              >
                 <Form-component :text="content.callMe" :locale="locale" />
               </Card>
             </div>
             <!-- Footer -->
             <div
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12 sticky top-3">
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12 relative"
+            >
               <Card class="card" delay="900ms">
                 <footer-component :content="content.footer" />
               </Card>
@@ -198,7 +215,6 @@ import { useElementTop } from "../utils/useElementTop";
 import { useScroll } from "motion-v";
 
 const boxes = Array.from({ length: 8 }, () => ref<HTMLElement | null>(null));
-
 const { distances } = useElementTop(boxes);
 
 const switchingLocale = ref(false);
@@ -243,7 +259,7 @@ const activateContent = (tr: string = "", en: string = "") => {
   title.value = locale.value === "tr" ? tr : en;
 };
 
-const hideMouse = (tr: string = "", en: string = "") => {
+const toggleMouse = (tr: string = "", en: string = "") => {
   if (title.value) {
     title.value = "";
   } else {
@@ -254,6 +270,27 @@ const hideMouse = (tr: string = "", en: string = "") => {
 const activeContent = ref(null);
 const bubbleClass =
   "text-lg uppercase text-white hover:tracking-widest font-normal bg-copper-500 dark:bg-slate-500 flex justify-center items-center w-15 h-15 hover:translate-y-1 duration-300 rounded-full cursor-pointer";
+
+const hasScrolled = ref(false);
+const handleScroll = () => {
+  hasScrolled.value = true;
+};
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+let h;
+const heightCalc = (n: number) => {
+  if (n == 0) h = 474;
+  else h = 282;
+  const top = distances.value[n + 1]?.top;
+
+  const formula = ref(Math.max(Math.min(top - 12 * 4, h), 0));
+
+  return hasScrolled.value ? formula.value : "unset";
+};
 </script>
 
 <style>
@@ -269,7 +306,6 @@ const bubbleClass =
 .rotate-enter-from,
 .rotate-leave-to {
   rotate: 360deg;
-  opacity: 0.7;
   filter: blur(2px);
 }
 

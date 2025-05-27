@@ -31,6 +31,10 @@
     }
   }
 }
+.transition-not-height {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 500ms;
+}
 
 h1 {
   font-size: var(--text-7xl);
