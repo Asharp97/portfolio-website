@@ -10,7 +10,10 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "en",
       },
-      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: "preload", href: "/assets/img/noise.jpg", as: "image" }, // Or the path Nuxt serves it from, e.g., /_nuxt/assets/img/noise.webp
+      ],
     },
   },
   modules: [
@@ -18,7 +21,6 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/fonts",
     "@nuxt/icon",
-    "@nuxtjs/mdc",
     "@nuxtjs/i18n",
     "nuxt3-lenis",
     "motion-v/nuxt",

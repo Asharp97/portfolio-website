@@ -13,7 +13,8 @@
               <!-- @click="scroll()" -->
               <button
                 class="flex items-center gap-1 mb-1 group cursor-pointer"
-                @click.prevent="scrollTo(name)">
+                @click.prevent="scrollTo(name)"
+              >
                 <Hashtag />
                 <h3>{{ name }}</h3>
               </button>
@@ -25,7 +26,8 @@
           <li v-for="social in socials" :key="social">
             <NuxtLink :to="social.link" target="_blank">
               <h3
-                class="capitalize underline hover:tracking-wider duration-300">
+                class="capitalize underline hover:tracking-wider duration-300"
+              >
                 {{ social.name }}
               </h3>
             </NuxtLink>
@@ -34,9 +36,11 @@
             <a
               :href="`/ali-elsayed-resume-${locale}.pdf`"
               skills="_blank"
-              rel="noopener noreferrer">
+              rel="noopener noreferrer"
+            >
               <h3
-                class="capitalize underline hover:tracking-wider duration-300">
+                class="capitalize underline hover:tracking-wider duration-300"
+              >
                 Résumé
               </h3>
             </a>
@@ -46,11 +50,10 @@
     </div>
     <div class="h-50" />
     <div class="flex justify-between items-end flex-wrap gap-3">
-      <p class="w-full md:w-1/2">
-        <client-only>
-          <MDC :value="summary" />
-        </client-only>
-      </p>
+      <client-only>
+        <Mark-down :text="summary" class="w-full md:w-1/2" />
+      </client-only>
+
       <div class="flex-1 md:flex justify-end items-end hidden">
         <Hashtag :active="true" :logo="true" />
       </div>
@@ -62,7 +65,7 @@
 defineProps(["socials", "titles", "summary", "locale"]);
 const mounted = ref(false);
 onMounted(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await wait(800);
   mounted.value = true;
 });
 const scrollTo = async (id) => {

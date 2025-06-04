@@ -1,0 +1,138 @@
+{
+  "callMe": "I'm always happy to connect, brainstorm, or even chat!",
+  "footer": ["All rights reserved", "Made with ❤️ in Istanbul"],
+  "titles": [
+    "Experiences",
+    "Skills",
+    "Side-Projects",
+    "Education",
+    "Languages",
+    "Certificates"
+  ],
+  "socials": [
+    {
+      "name": "github",
+      "link": "https://github.com/Asharp97"
+    },
+    {
+      "name": "LinkedIn",
+      "link": "https://www.linkedin.com/in/ali-elsayed-25974b130/"
+    }
+  ],
+  "summary": "**Machine Learning** & **Full-Stack Software Engineer** with a background in Computer Engineering. Experienced in building smart, scalable apps using **Vertex AI**, **TensorFlow**, **BigQuery**, **Vue.js**, **Node.js**, and **Python**—blending AI with clean, high-performance code for real-world impact.",
+  "languages": {
+    "title": "Languages",
+    "points": [
+      { "label": "English", "value": 100 },
+      { "label": "Arabic", "value": 100 },
+      { "label": "Turkish", "value": 95 }
+    ]
+  },
+  "education": [
+    {
+      "title": "Doğuş University",
+      "subtitle": "Bachelor Degree in Computer Engineering",
+      "titleLink": "https://www.dogus.edu.tr/",
+      "date": "2018 - 2024",
+      "location": "Istanbul, Türkiye",
+      "description": "Graduated with a **Bachelor’s in Computer Engineering** from **Doğuş University**, where I built a strong foundation in **machine learning, systems design, and algorithms**."
+    },
+    {
+      "title": "Canadian University",
+      "subtitle": "Computer Engineering Coursework",
+      "titleLink": "https://www.cud.ac.ae/",
+      "date": "2017 - 2018",
+      "location": "Dubai, UAE",
+      "description": "Studied at **Canadian University Dubai**, completing core coursework in **object-oriented programming**, **logic circuits**, and **computer architecture**, building early technical fluency in CS fundamentals."
+    }
+  ],
+  "projects": [
+    {
+      "title": "Quizly",
+      "subtitle": "A SaaS platform enabling users to create and take quizzes",
+      "titleLink": "https://quizly-app.tiiny.site/",
+      "description": "Built **Quizly**, a SaaS platform that uses a **RAG-based AI pipeline** to turn user-uploaded notes into personalized quizzes with interactive analytics. Designed for speed, simplicity, and intelligent content generation."
+    },
+    {
+      "title": "Landclub",
+      "subtitle": "A side project for a real estate investment company",
+      "description": "Developed **Landclub**, a real estate e-commerce platform with a custom admin panel, streamlined property uploads, and a **97% performance score**. Focused on scalability, responsive design, and clean UX."
+    }
+  ],
+  "certificates": [
+    {
+      "title": "Google Professional Machine Learning Engineer",
+      "description": "Earned Google’s **Professional Machine Learning Engineer** certification, demonstrating advanced expertise in designing, deploying, and maintaining scalable ML solutions on **Google Cloud Platform**."
+    },
+    {
+      "title": "Google Cloud Console Skill Badges",
+      "subtitle": "Credly",
+      "subtitleLink": "https://www.credly.com/users/ali-elsayed.b0f75bda",
+      "description": "Completed multiple **GCP skill badges** in areas like **Machine Learning Fundamentals** and **Data Engineering**, showcasing hands-on cloud expertise and practical understanding of real-world AI pipelines."
+    }
+  ],
+  "skills": [
+    {
+      "title": "Artificial Intelligence & Machine Learning",
+      "points": [
+        { "label": "Deep learning", "value": "TensorFlow" },
+        { "label": "ML workflows", "value": "Scikit-learn" },
+        { "label": "LLM apps", "value": "LangChain" }
+      ]
+    },
+    {
+      "title": "Software Engineering Principles",
+      "points": [
+        { "label": "Project lifecycle", "value": "SDLC" },
+        { "label": "Team processes", "value": "Agile Methodology" },
+        { "label": "System design", "value": "Scalable Architecture" },
+        { "label": "Data prep", "value": "Feature Engineering" }
+      ]
+    },
+    {
+      "title": "Programming Languages & Frameworks",
+      "points": [
+        { "label": "Languages", "value": "Python, JavaScript, TypeScript" },
+        { "label": "Frameworks", "value": "Nuxt.js, Vue.js, React.js" },
+        { "label": "Databases", "value": "SQL" }
+      ]
+    },
+    {
+      "title": "Cloud Computing & Services",
+      "points": [
+        { "label": "Platform", "value": "Google Cloud Platform (GCP)" },
+        { "label": "Services", "value": "Vertex AI, BigQuery, AutoML" },
+        {
+          "label": "Specialties",
+          "value": "Predictive Modeling, Data Analysis, Cloud-Based AI Solutions"
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Lead Software Engineer",
+      "subtitle": "Ayhanlar Holding",
+      "subtitleLink": "https://www.ayhanlar.com.tr/",
+      "description": "**Led the development of Paran Olacak**, a secure banking web app focused on performance, reliability, and user trust. Integrated **AI and large language models** to boost SEO by 100%, and handled all **infrastructure and deployment**, ensuring smooth, secure launches across environments.",
+      "date": "2025 | Present",
+      "location": "Istanbul, Türkiye"
+    },
+    {
+      "title": "Machine Learning Engineer",
+      "subtitle": "ITTI - Iman Trade Tourism ruction Ltd.",
+      "subtitleLink": "https://itti.com.tr/",
+      "description": "**Developed a real estate price prediction model**, utilizing Python, Scikit-learn, and advanced feature engineering techniques to analyze and manage a large dataset from the capital of Türkiye.",
+      "date": "2024 | 2025",
+      "location": "Istanbul, Türkiye"
+    },
+    {
+      "title": "Software Engineer",
+      "subtitle": "Hasel",
+      "subtitleLink": "https://hasel.com/",
+      "description": "Built **responsive**, **user-friendly web projects** with a strong focus on **accessibility**, **cross-device performance**, and **clean design**. **Led QA efforts** and consistently **delivered on time**, laying a solid foundation in **modern software development practices**.",
+      "date": "2023 | 2024",
+      "location": "Istanbul, Türkiye"
+    }
+  ]
+}

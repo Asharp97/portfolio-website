@@ -1,14 +1,9 @@
 <template>
-  <Transition name="tada" class="-my-1" tag="div">
+  <Transition name="tada" tag="div">
     <div
       v-show="mounted"
       :style="{ '--delay': delay }"
-      :class="[
-        'border-1 rounded-2xl duration-300 h-full ',
-        active
-          ? `border-copper-700 shadow-xl origin-left  `
-          : 'border-transparent',
-      ]"
+      class="rounded-2xl duration-300 h-full"
     >
       <UCard
         :id="`#${name}`"
@@ -19,8 +14,7 @@
           class="flex flex-col sm:flex-row h-90 sm:h-full sm:items-center gap-2 w-full"
         >
           <div
-            :class="active ? `scale-103` : ''"
-            class="flex sm:w-1/2 flex-1 lg:h-60 duration-300 w-full md:h-90 h-40"
+            class="flex sm:w-1/2 flex-1 lg:h-60 duration-300 w-full md:h-90 h-50"
           >
             <ClientOnly>
               <Swiper
@@ -83,15 +77,15 @@
                         <h6 class="font-light">{{ e.location }}</h6>
                       </div>
                     </div>
-                    <p v-if="e.description"><MDC :value="e.description" /></p>
+                    <Mark-down v-if="e.description" :text="e.description" />
                     <ul v-if="e.points" class="points">
                       <li
                         v-for="x in e.points"
                         :key="x"
-                        class="flex hover:bg-copper-100 dark:hover:bg-slate-600 duration-300 p-1 px-2 rounded-xl"
+                        class="flex gap-2 hover:bg-copper-100 dark:hover:bg-slate-500 duration-300 p-1 px-2 rounded-xl"
                       >
-                        <MDC :value="x.label" class="w-37 font-semibold" />
-                        <MDC :value="x.value" class="flex-1" />
+                        <span class="w-37 font-semibold">{{ x.label }} </span>
+                        <span class="flex-1">{{ x.value }}</span>
                       </li>
                     </ul>
                   </div>
@@ -121,7 +115,6 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/mousewheel";
 import "swiper/css/autoplay";
 
 import getDelay from "../utils/getDelayByContent.js";
@@ -130,10 +123,10 @@ const slider = ref(null);
 
 const onSwiper = (swiper) => {
   slider.value = swiper;
-  slider.value.slideTo(props.content.length, 900);
+  slider.value.slideTo(props.content.length, 300);
 };
 
-const props = defineProps(["content", "active", "name", "delay"]);
+const props = defineProps(["content", "name", "delay"]);
 
 const pagination = ref(0);
 const contentDelay = ref();
@@ -150,20 +143,15 @@ const paginationHandle = (e) => {
   if (slider.value) slider.value.slideTo(e);
 };
 
-// const mounted = ref(true);
 const mounted = ref(false);
-const swiperSpeed = ref(2000);
-onMounted(() => {
-  swiperSpeed.value = 2000;
-  setTimeout(() => {
-    mounted.value = true;
-  }, 400);
-  setTimeout(() => {
-    paginationHandle(0);
-  }, 700);
-  setTimeout(() => {
-    swiperSpeed.value = 400;
-  }, 700);
+const swiperSpeed = ref(800);
+onMounted(async () => {
+  swiperSpeed.value = 800;
+  await wait(400);
+  mounted.value = true;
+  await wait(200);
+  paginationHandle(0);
+  swiperSpeed.value = 400;
 });
 </script>
 

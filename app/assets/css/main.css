@@ -31,10 +31,6 @@
     }
   }
 }
-.transition-not-height {
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-  transition-duration: 500ms;
-}
 
 h1 {
   font-size: var(--text-7xl);
@@ -42,8 +38,16 @@ h1 {
   letter-spacing: var(--tracking-wide);
   font-weight: 100;
 }
-h1 span {
-  font-weight: 200;
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: var(--text-6xl);
+  }
+}
+@media only screen and (max-width: 360px) {
+  h1 {
+    font-size: var(--text-5xl);
+  }
 }
 
 h2 {
@@ -71,6 +75,6 @@ h4 {
 }
 .tada-enter-active,
 .tada-leave-active {
-  transition: 2s;
+  transition: 0.8s;
   transition-timing-function: var(--drift);
 }

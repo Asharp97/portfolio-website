@@ -1,43 +1,45 @@
 <template>
-  <div id="home">
+  <div id="home" ref="bod">
     <div class="noise bg-[var(--overlay)] dark:bg-transparent" />
     <div class="bg-white dark:bg-dark-900 min-h-dvh text-black py-30">
-      <Mouse-Follower
-        :text="title"
-        :x="mouse.x.value"
-        :y="mouse.y.value"
-        class="absolute z-20"
-      />
+      <Mouse-Follower :text="title" class="absolute z-20 hidden md:block" />
 
-      <header
-        class="max-w-380 flex justify-between top-15 left-1/2 -translate-1/2 px-10 fixed w-full"
-      >
-        <Transition name="rotate" mode="out-in">
-          <button
-            v-show="!switchingLocale && scroll < 50"
-            :class="bubbleClass"
-            @click="switchLocale()"
-          >
-            {{ locale == "en" ? "tr" : "en" }}
-          </button>
-        </Transition>
-        <Transition name="rotate" mode="out-in">
-          <button
-            v-show="!switchingTheme && scroll < 50"
-            :class="bubbleClass"
-            @click="switchTheme()"
-          >
-            <Icon
-              :name="
-                isDark
-                  ? 'material-symbols:light-mode'
-                  : 'material-symbols:dark-mode'
-              "
-            />
-          </button>
-        </Transition>
-      </header>
-      <!-- <pre class="text-white fixed z-20">{{ distances }}</pre> -->
+      <Transition name="go-down" appear>
+        <header
+          v-show="scroll < 50 && mounted"
+          class="flex top-15 left-1/2 -translate-1/2 px-10 fixed w-full max-w-380"
+        >
+          <Transition name="rotate" mode="out-in">
+            <button
+              v-show="!switchingLocale"
+              :class="bubbleClass"
+              class="mr-auto"
+              @click="switchLocale()"
+            >
+              {{ locale == "en" ? "tr" : "en" }}
+            </button>
+          </Transition>
+          <client-only>
+            <Transition name="rotate" mode="out-in">
+              <button
+                v-show="!switchingTheme"
+                :class="bubbleClass"
+                class="ml-auto"
+                @click="switchTheme()"
+              >
+                <Icon
+                  :name="
+                    isDark
+                      ? 'material-symbols:light-mode'
+                      : 'material-symbols:dark-mode'
+                  "
+                />
+              </button>
+            </Transition>
+          </client-only>
+        </header>
+      </Transition>
+
       <Transition name="switch">
         <div v-if="!switchingLocale" class="max-w-380 px-4 mx-auto">
           <!-- MAIN PARENT -->
@@ -46,14 +48,12 @@
           >
             <!-- HERO -->
             <div
-              :ref="boxes[0]"
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12 sticky top-3 overflow-hidden transition-not-height"
-              :style="{ height: `${heightCalc(0)}px` }"
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12"
             >
               <Card
                 class="card h-fit!"
-                @click="toggleMouse('Merhabalar👋', 'Hi👋')"
-                @mouseenter="activateContent('Merhabalar 👋', 'Hi👋')"
+                @click="toggleMouse('Merhabalar', 'Hi')"
+                @mouseenter="activateContent('Merhabalar ', 'Hi')"
                 @mouseleave="activateContent()"
               >
                 <Hero
@@ -66,17 +66,13 @@
             </div>
             <!-- Experiences -->
             <div
-              :ref="boxes[1]"
               class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-7"
             >
-              <!-- :style="{ height: `${heightCalc(1)}px` }" -->
               <Card
                 :id="locale == 'en' ? `Experiences` : `Deneyimler`"
-                :class="[{ 'scale-90': distances[1] == 12 }]"
                 class="card"
                 :content="content.experience"
-                :active="activeContent == 0"
-                delay="300ms"
+                :delay="3 * delayCoeff + 'ms'"
                 :name="content.titles[0]"
                 @click="toggleMouse('Deneyimler', 'Experiences')"
                 @mouseenter="activateContent('Deneyimler', 'Experiences')"
@@ -85,17 +81,13 @@
             </div>
             <!-- SKills -->
             <div
-              :ref="boxes[2]"
               class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5"
             >
-              <!-- :style="{ height: `${heightCalc(2)}px` }" -->
               <Card
                 :id="locale == 'en' ? `Skills` : `Yetenekler`"
-                :class="[{ 'scale-90': distances[2] == 12 }]"
                 class="card"
                 :content="content.skills"
-                delay="400ms"
-                :active="activeContent == 1"
+                :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[1]"
                 @click="toggleMouse('Yetenekler', 'Skills')"
                 @mouseenter="activateContent('Yetenekler', 'Skills')"
@@ -104,16 +96,13 @@
             </div>
             <!-- Side Projects -->
             <div
-              :ref="boxes[3]"
               class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 relative"
             >
               <Card
                 :id="locale == 'en' ? `Side-Projects` : `Projeler`"
-                :class="[{ 'scale-90': distances[3] == 12 }]"
                 class="card"
                 :content="content.projects"
-                delay="100ms"
-                :active="activeContent == 2"
+                :delay="1 * delayCoeff + 'ms'"
                 :name="content.titles[2]"
                 @click="toggleMouse('Projeler', 'Side-Projects')"
                 @mouseenter="activateContent('Projeler', 'Side-Projects')"
@@ -122,16 +111,13 @@
             </div>
             <!-- Education -->
             <div
-              :ref="boxes[4]"
               class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 relative"
             >
               <Card
                 :id="locale == 'en' ? `Education` : `Eğitim`"
-                :class="[{ 'scale-90': distances[4] == 12 }]"
                 class="card"
                 :content="content.education"
-                delay="150ms"
-                :active="activeContent == 3"
+                :delay="1 * delayCoeff + 'ms'"
                 :name="content.titles[3]"
                 @click="toggleMouse('Eğitim', 'Education')"
                 @mouseenter="activateContent('Eğitim', 'Education')"
@@ -140,15 +126,12 @@
             </div>
             <!-- Languages  -->
             <div
-              :ref="boxes[5]"
               class="col-span-1 group/outer sm:col-span-2 md:col-span-2 lg:col-span-2 relative"
             >
               <Card
                 :id="locale == 'en' ? `Languages` : `Diller`"
-                :class="[{ 'scale-90': distances[5] == 12 }]"
                 class="card"
-                delay="400ms"
-                :active="activeContent == 4"
+                :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[4]"
                 @click="toggleMouse('Diller', 'Languages')"
                 @mouseenter="activateContent('Diller', 'Languages')"
@@ -159,16 +142,13 @@
             </div>
             <!-- Certificates -->
             <div
-              :ref="boxes[6]"
               class="col-span-1 group/outer sm:col-span-2 md:col-span-4 lg:col-span-6 relative"
             >
               <Card
                 :id="locale == 'en' ? `Certificates` : `Sertifikalar`"
-                :class="[{ 'scale-90': distances[6] == 12 }]"
                 class="card"
-                delay="400ms"
+                :delay="4 * delayCoeff + 'ms'"
                 :content="content.certificates"
-                :active="activeContent == 5"
                 :name="content.titles[5]"
                 @click="toggleMouse('Sertifikalar', 'Certificates')"
                 @mouseenter="activateContent('Sertifikalar', 'Certificates')"
@@ -177,13 +157,11 @@
             </div>
             <!-- Contact Form-->
             <div
-              :ref="boxes[7]"
               class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-6 relative"
             >
               <Card
                 id="form"
                 class="card"
-                :active="activeContent == 6"
                 :name="content.titles[6]"
                 @click="toggleMouse('Çekinme!', `Don't Be Shy!`)"
                 @mouseenter="activateContent('Çekinme!', `Don't Be Shy!`)"
@@ -196,7 +174,7 @@
             <div
               class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12 relative"
             >
-              <Card class="card" delay="900ms">
+              <Card class="card" :delay="5 * delayCoeff + 'ms'">
                 <footer-component :content="content.footer" />
               </Card>
             </div>
@@ -208,14 +186,15 @@
 </template>
 
 <script setup lang="ts">
-import contentEn from "../static/content-en.js";
-import contentTr from "../static/content-tr.js";
-import { useMouse, useDark, useToggle } from "@vueuse/core";
-import { useElementTop } from "../utils/useElementTop";
+import contentEn from "../static/content-en.json";
+import contentTr from "../static/content-tr.json";
+import { useDark, useToggle } from "@vueuse/core";
 import { useScroll } from "motion-v";
 
-const boxes = Array.from({ length: 8 }, () => ref<HTMLElement | null>(null));
-const { distances } = useElementTop(boxes);
+onMounted(() => {
+  mounted.value = true;
+});
+const mounted = ref(false);
 
 const switchingLocale = ref(false);
 const switchingTheme = ref(false);
@@ -224,13 +203,13 @@ const isDark = useDark();
 const toggleDark = useToggle(isDark);
 const switchTheme = async () => {
   switchingTheme.value = true;
-  await new Promise((resolve) => setTimeout(resolve, 200));
+  await wait(100);
   toggleDark();
   switchingTheme.value = false;
 };
 const switchLocale = async () => {
   switchingLocale.value = true;
-  await new Promise((resolve) => setTimeout(resolve, 200));
+  await wait(100);
   await setLocale(locale.value == "en" ? "tr" : "en");
   switchingLocale.value = false;
 };
@@ -241,9 +220,7 @@ useMotionValueEvent(scrollY, "change", (latest) => {
   scroll.value = latest;
 });
 
-const mouse = useMouse();
 const { locale, setLocale } = useI18n();
-
 const content = computed(() => {
   switch (locale.value) {
     case "tr":
@@ -255,7 +232,7 @@ const content = computed(() => {
 });
 
 const title = ref("");
-const activateContent = (tr: string = "", en: string = "") => {
+const activateContent = async (tr: string = "", en: string = "") => {
   title.value = locale.value === "tr" ? tr : en;
 };
 
@@ -267,33 +244,18 @@ const toggleMouse = (tr: string = "", en: string = "") => {
   }
 };
 
-const activeContent = ref(null);
 const bubbleClass =
   "text-lg uppercase text-white hover:tracking-widest font-normal bg-copper-500 dark:bg-slate-500 flex justify-center items-center w-15 h-15 hover:translate-y-1 duration-300 rounded-full cursor-pointer";
 
-const hasScrolled = ref(false);
-const handleScroll = () => {
-  hasScrolled.value = true;
-};
-onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
-});
-onBeforeUnmount(() => {
-  window.removeEventListener("scroll", handleScroll);
-});
-let h;
-const heightCalc = (n: number) => {
-  if (n == 0) h = 474;
-  else h = 282;
-  const top = distances.value[n + 1]?.top;
-
-  const formula = ref(Math.max(Math.min(top - 12 * 4, h), 0));
-
-  return hasScrolled.value ? formula.value : "unset";
-};
+const delayCoeff = 80;
 </script>
 
 <style>
+.go-down-enter-active,
+.go-down-leave-active {
+  transition: all 1.4s var(--drift);
+}
+.go-up-leave-active,
 .rotate-leave-active,
 .switch-leave-active {
   transition: all 0.4s var(--drift);
@@ -306,6 +268,22 @@ const heightCalc = (n: number) => {
 .rotate-enter-from,
 .rotate-leave-to {
   rotate: 360deg;
+  opacity: 0;
+  filter: blur(2px);
+}
+
+.go-up-leave-to {
+  transform: translateY(-100px);
+  rotate: 360deg;
+  filter: blur(2px);
+  width: fit-content;
+  height: fit-content;
+}
+
+.go-down-leave-to,
+.go-down-enter-from {
+  transform: translateY(50px);
+  opacity: 0;
   filter: blur(2px);
 }
 

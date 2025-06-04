@@ -3,7 +3,8 @@
     class="-translatex-20 -translate-y-42"
     :style="{
       transform: `translate(${x}px, ${y}px)`,
-    }">
+    }"
+  >
     <AnimatePresence>
       <motion.div
         v-if="text"
@@ -11,7 +12,8 @@
         :initial="animateFrom"
         :animate="animateTo"
         :exit="animateFrom"
-        :transition="transition">
+        :transition="transition"
+      >
         <text-split :text="text" tap="h3" />
       </motion.div>
     </AnimatePresence>
@@ -20,7 +22,9 @@
 
 <script setup>
 import { AnimatePresence, motion } from "motion-v";
-defineProps(["text", "x", "y"]);
+import { useMouse } from "@vueuse/core";
+const { x, y } = useMouse();
+defineProps(["text"]);
 const animateFrom = {
   opacity: 0,
   y: -50,
@@ -38,6 +42,3 @@ const transition = {
   duration: 0.2,
 };
 </script>
-
-<style lang="scss" scoped></style>
-

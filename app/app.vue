@@ -1,9 +1,7 @@
 <template>
-  <UApp>
-    <!-- <Lenis root> -->
-    <NuxtPage />
-    <!-- </Lenis> -->
-  </UApp>
+  <!-- <Lenis root> -->
+  <NuxtPage />
+  <!-- </Lenis> -->
 </template>
 <style>
 html {

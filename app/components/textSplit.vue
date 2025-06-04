@@ -26,7 +26,7 @@ import { motion, AnimatePresence } from "motion-v";
 const props = defineProps(["text", "tag", "condition"]);
 const str = ref();
 const fromAniamtion = {
-  y: 120,
+  y: -120,
   opacity: 0,
 };
 const toAnimation = {
