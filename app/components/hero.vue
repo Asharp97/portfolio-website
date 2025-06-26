@@ -65,7 +65,7 @@
 defineProps(["socials", "titles", "summary", "locale"]);
 const mounted = ref(false);
 onMounted(async () => {
-  await wait(800);
+  await wait(400);
   mounted.value = true;
 });
 const scrollTo = async (id) => {

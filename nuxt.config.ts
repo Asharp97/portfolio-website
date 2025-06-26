@@ -1,9 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   supabase: {
     redirect: false,
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   app: {
     head: {
       title: "Machine Learning & Software Engineer", // default fallback title
@@ -12,7 +13,7 @@ export default defineNuxtConfig({
       },
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        { rel: "preload", href: "/assets/img/noise.jpg", as: "image" }, // Or the path Nuxt serves it from, e.g., /_nuxt/assets/img/noise.webp
+        { rel: "preload", href: "/_nuxt/assets/img/noise.jpg", as: "image" }, // Or the path Nuxt serves it from, e.g., /_nuxt/assets/img/noise.webp
       ],
     },
   },
@@ -28,8 +29,8 @@ export default defineNuxtConfig({
   ],
   i18n: {
     locales: [
-      { code: "en", language: "en-US" },
-      { code: "tr", language: "tr-TR" },
+      { code: "en", language: "en-US", file: "en.json" },
+      { code: "tr", language: "tr-TR", file: "tr.json" },
     ],
     defaultLocale: "en",
   },

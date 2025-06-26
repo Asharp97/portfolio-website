@@ -1,5 +1,6 @@
 <template>
   <!-- <Lenis root> -->
+  <Noise />
   <NuxtPage />
   <!-- </Lenis> -->
 </template>

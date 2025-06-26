@@ -1,6 +1,5 @@
 <template>
   <div id="home" ref="bod">
-    <div class="noise bg-[var(--overlay)] dark:bg-transparent" />
     <div class="bg-white dark:bg-dark-900 min-h-dvh text-black py-30">
       <Mouse-Follower :text="title" class="absolute z-20 hidden md:block" />
 
@@ -52,8 +51,8 @@
             >
               <Card
                 class="card h-fit!"
-                @click="toggleMouse('Merhabalar', 'Hi')"
-                @mouseenter="activateContent('Merhabalar ', 'Hi')"
+                @click="toggleMouse('heroGreeting')"
+                @mouseenter="activateContent('heroGreeting')"
                 @mouseleave="activateContent()"
               >
                 <Hero
@@ -74,8 +73,8 @@
                 :content="content.experience"
                 :delay="3 * delayCoeff + 'ms'"
                 :name="content.titles[0]"
-                @click="toggleMouse('Deneyimler', 'Experiences')"
-                @mouseenter="activateContent('Deneyimler', 'Experiences')"
+                @click="toggleMouse('experiencesTitle')"
+                @mouseenter="activateContent('experiencesTitle')"
                 @mouseleave="activateContent()"
               />
             </div>
@@ -89,8 +88,8 @@
                 :content="content.skills"
                 :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[1]"
-                @click="toggleMouse('Yetenekler', 'Skills')"
-                @mouseenter="activateContent('Yetenekler', 'Skills')"
+                @click="toggleMouse('skillsTitle')"
+                @mouseenter="activateContent('skillsTitle')"
                 @mouseleave="activateContent()"
               />
             </div>
@@ -104,8 +103,8 @@
                 :content="content.projects"
                 :delay="1 * delayCoeff + 'ms'"
                 :name="content.titles[2]"
-                @click="toggleMouse('Projeler', 'Side-Projects')"
-                @mouseenter="activateContent('Projeler', 'Side-Projects')"
+                @click="toggleMouse('projectsTitle')"
+                @mouseenter="activateContent('projectsTitle')"
                 @mouseleave="activateContent()"
               />
             </div>
@@ -119,8 +118,8 @@
                 :content="content.education"
                 :delay="1 * delayCoeff + 'ms'"
                 :name="content.titles[3]"
-                @click="toggleMouse('Eğitim', 'Education')"
-                @mouseenter="activateContent('Eğitim', 'Education')"
+                @click="toggleMouse('educationTitle')"
+                @mouseenter="activateContent('languagesTitle')"
                 @mouseleave="activateContent()"
               />
             </div>
@@ -133,8 +132,8 @@
                 class="card"
                 :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[4]"
-                @click="toggleMouse('Diller', 'Languages')"
-                @mouseenter="activateContent('Diller', 'Languages')"
+                @click="toggleMouse('languagesTitle')"
+                @mouseenter="activateContent('languagesTitle')"
                 @mouseleave="activateContent()"
               >
                 <Langs :content="content.languages.points" />
@@ -145,13 +144,13 @@
               class="col-span-1 group/outer sm:col-span-2 md:col-span-4 lg:col-span-6 relative"
             >
               <Card
-                :id="locale == 'en' ? `Certificates` : `Sertifikalar`"
+                :id="t('certificatesTitle')"
                 class="card"
                 :delay="4 * delayCoeff + 'ms'"
                 :content="content.certificates"
                 :name="content.titles[5]"
-                @click="toggleMouse('Sertifikalar', 'Certificates')"
-                @mouseenter="activateContent('Sertifikalar', 'Certificates')"
+                @click="toggleMouse('certificatesTitle')"
+                @mouseenter="activateContent('certificatesTitle')"
                 @mouseleave="activateContent()"
               />
             </div>
@@ -163,8 +162,8 @@
                 id="form"
                 class="card"
                 :name="content.titles[6]"
-                @click="toggleMouse('Çekinme!', `Don't Be Shy!`)"
-                @mouseenter="activateContent('Çekinme!', `Don't Be Shy!`)"
+                @click="toggleMouse('dontBeShy')"
+                @mouseenter="activateContent('dontBeShy')"
                 @mouseleave="activateContent()"
               >
                 <Form-component :text="content.callMe" :locale="locale" />
@@ -220,7 +219,7 @@ useMotionValueEvent(scrollY, "change", (latest) => {
   scroll.value = latest;
 });
 
-const { locale, setLocale } = useI18n();
+const { locale, setLocale, t } = useI18n();
 const content = computed(() => {
   switch (locale.value) {
     case "tr":
@@ -232,16 +231,12 @@ const content = computed(() => {
 });
 
 const title = ref("");
-const activateContent = async (tr: string = "", en: string = "") => {
-  title.value = locale.value === "tr" ? tr : en;
+const activateContent = async (key: string = "") => {
+  title.value = key ? t(key) : "";
 };
 
-const toggleMouse = (tr: string = "", en: string = "") => {
-  if (title.value) {
-    title.value = "";
-  } else {
-    title.value = locale.value === "tr" ? tr : en;
-  }
+const toggleMouse = (key: string = "") => {
+  title.value = title.value ? "" : t(key);
 };
 
 const bubbleClass =
@@ -285,64 +280,5 @@ const delayCoeff = 80;
   transform: translateY(50px);
   opacity: 0;
   filter: blur(2px);
-}
-
-.noise {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  pointer-events: none;
-  z-index: 100;
-}
-
-.noise::after {
-  background-image: url(../../app/assets/img/noise.jpg);
-  content: "";
-  width: calc(100% + 20rem);
-  height: calc(100% + 20rem);
-  position: absolute;
-  left: -10rem;
-  top: -10rem;
-  opacity: 0.08;
-  will-change: transform;
-  animation: noise 1s steps(2) infinite;
-}
-@keyframes noise {
-  0% {
-    transform: translate3d(0, 9rem, 0);
-  }
-
-  10% {
-    transform: translate3d(-1rem, -4rem, 0);
-  }
-  20% {
-    transform: translate3d(-8rem, 2rem, 0);
-  }
-  30% {
-    transform: translate3d(9rem, -9rem, 0);
-  }
-  40% {
-    transform: translate3d(-2rem, 7rem, 0);
-  }
-  50% {
-    transform: translate3d(-9rem, -4rem, 0);
-  }
-  60% {
-    transform: translate3d(2rem, 6rem, 0);
-  }
-  70% {
-    transform: translate3d(7rem, -8rem, 0);
-  }
-  80% {
-    transform: translate3d(-9rem, 1rem, 0);
-  }
-  90% {
-    transform: translate3d(6rem, -5rem, 0);
-  }
-  100% {
-    transform: translate3d(-7rem, 0, 0);
-  }
 }
 </style>

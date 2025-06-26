@@ -5,11 +5,13 @@
         class="h-full flex items-center"
         :allow-slide-next="swiperLock"
         :allow-slide-prev="swiperLock"
-        @swiper="onSwiper">
+        @swiper="onSwiper"
+      >
         <Swiper-slide>
           <div class="flex flex-wrap gap-8 h-full">
             <div
-              class="flex-1 rounded-lg text-md text-gray-800 dark:text-gray-50 transition duration-300">
+              class="flex-1 rounded-lg text-md text-gray-800 dark:text-gray-50 transition duration-300"
+            >
               <p class="text-3xl font-light text-right">
                 {{ text }}
               </p>
@@ -17,13 +19,15 @@
             <UForm
               :state="state"
               class="space-y-4 w-full sm:w-1/2"
-              @submit="onSubmit">
+              @submit="onSubmit"
+            >
               <TransitionGroup name="list">
                 <UFormField name="email">
                   <UInput
                     v-model="state.email"
                     :placeholder="locale == 'tr' ? 'Eposta' : 'Email'"
-                    @blur="validate('email')" />
+                    @blur="validate('email')"
+                  />
                 </UFormField>
                 <div v-if="errorMsg['email']" :class="errorClass">
                   {{ errorMsg["email"] }}
@@ -32,7 +36,8 @@
                   <UInput
                     v-model="state.name"
                     :placeholder="locale == 'tr' ? 'Isim' : 'Name'"
-                    @blur="validate('name')" />
+                    @blur="validate('name')"
+                  />
                 </UFormField>
                 <div v-if="errorMsg['name']" :class="errorClass">
                   {{ errorMsg["name"] }}
@@ -41,14 +46,16 @@
                   <UTextarea
                     v-model="state.msg"
                     :placeholder="locale == 'tr' ? 'Mesaj' : 'Message'"
-                    @blur="validate('msg')" />
+                    @blur="validate('msg')"
+                  />
                 </UFormField>
                 <div v-if="errorMsg['msg']" :class="errorClass">
                   {{ errorMsg["msg"] }}
                 </div>
                 <UButton
                   type="submit"
-                  class="text-white dark:bg-slate-700 dark:hover:bg-slate-500 duration-300 cursor-pointer">
+                  class="text-white dark:bg-slate-700 dark:hover:bg-slate-500 duration-300 cursor-pointer"
+                >
                   {{ locale == "tr" ? "Gönder" : "Send" }}
                 </UButton>
               </TransitionGroup>
@@ -124,13 +131,12 @@ const schema = z.object({
   }),
 });
 
-const validate = (field) => {
+const validate = async (field) => {
   const { success, error } = schema.shape[field].safeParse(state[field]);
   if (!success) {
     errorMsg[field] = error.issues[0].message;
-    setTimeout(() => {
-      errorMsg[field] = "";
-    }, 3000);
+    await wait(3000);
+    errorMsg[field] = "";
   } else errorMsg[field] = "";
 
   return success;
