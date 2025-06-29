@@ -51,12 +51,20 @@
       "title": "Quizly",
       "subtitle": "A SaaS platform enabling users to create and take quizzes",
       "titleLink": "https://quizly-app.tiiny.site/",
-      "description": "Built **Quizly**, a SaaS platform that uses a **RAG-based AI pipeline** to turn user-uploaded notes into personalized quizzes with interactive analytics. Designed for speed, simplicity, and intelligent content generation."
+      "description": "Built **Quizly**, a SaaS platform that uses a **RAG-based AI pipeline** to turn user-uploaded notes into personalized quizzes with interactive analytics. Designed for speed, simplicity, and intelligent content generation.",
+      "tags": ["Nuxt.js", "Node.js", "TypeScript", "OpenAI API", "RAG", "SaaS"]
     },
     {
       "title": "Landclub",
       "subtitle": "A side project for a real estate investment company",
-      "description": "Developed **Landclub**, a real estate e-commerce platform with a custom admin panel, streamlined property uploads, and a **97% performance score**. Focused on scalability, responsive design, and clean UX."
+      "description": "Developed **Landclub**, a real estate e-commerce platform with a custom admin panel, streamlined property uploads, and a **97% performance score**. Focused on scalability, responsive design, and clean UX.",
+      "tags": [
+        "Next.js",
+        "Admin Panel",
+        "Supabase",
+        "State Management",
+        "E-Commerce"
+      ]
     }
   ],
   "certificates": [
@@ -109,30 +117,48 @@
       ]
     }
   ],
+
   "experience": [
+    {
+      "title": "Senior Backend Engineer",
+      "subtitle": "İşin Olacak Teknolojileri",
+      "subtitleLink": "https://isinolacak.com/",
+      "description": "Developed **GraphQL schemas** and **CRUD models** with **NestJS**, **Prisma**, and **PostgreSQL**, building a **scalable, high-performance backend** for **İşin Olacak**, an **AI-driven career platform** that helps users **create CVs and find jobs**. Delivered features efficiently in an **Agile Scrum environment**, collaborating with a **cross-functional team** for smooth, timely releases.",
+      "date": "2025 | Present",
+      "location": "Istanbul, Türkiye",
+      "tags": ["GraphQL", "NestJS", "Prisma", "PostgreSQL", "Scrum", "Agile"]
+    },
     {
       "title": "Lead Software Engineer",
       "subtitle": "Ayhanlar Holding",
       "subtitleLink": "https://www.ayhanlar.com.tr/",
       "description": "**Led the development of Paran Olacak**, a secure banking web app focused on performance, reliability, and user trust. Integrated **AI and large language models** to boost SEO by 100%, and handled all **infrastructure and deployment**, ensuring smooth, secure launches across environments.",
-      "date": "2025 | Present",
-      "location": "Istanbul, Türkiye"
+      "date": "2024 | 2025",
+      "location": "Istanbul, Türkiye",
+      "tags": ["Nuxt Js", "TypeScript", "Node.js", "Fastify"]
     },
     {
       "title": "Machine Learning Engineer",
       "subtitle": "ITTI - Iman Trade Tourism ruction Ltd.",
       "subtitleLink": "https://itti.com.tr/",
       "description": "**Developed a real estate price prediction model**, utilizing Python, Scikit-learn, and advanced feature engineering techniques to analyze and manage a large dataset from the capital of Türkiye.",
-      "date": "2024 | 2025",
-      "location": "Istanbul, Türkiye"
+      "date": "2023 | 2024",
+      "location": "Istanbul, Türkiye",
+      "tags": [
+        "Python",
+        "Scikit-learn",
+        "Machine Learning",
+        "Feature Engineering"
+      ]
     },
     {
       "title": "Software Engineer",
       "subtitle": "Hasel",
       "subtitleLink": "https://hasel.com/",
       "description": "Built **responsive**, **user-friendly web projects** with a strong focus on **accessibility**, **cross-device performance**, and **clean design**. **Led QA efforts** and consistently **delivered on time**, laying a solid foundation in **modern software development practices**.",
-      "date": "2023 | 2024",
-      "location": "Istanbul, Türkiye"
+      "date": "2022 | 2023",
+      "location": "Istanbul, Türkiye",
+      "tags": ["HTML", "CSS", "Vue Js", "Responsive Design", "QA"]
     }
   ]
 }

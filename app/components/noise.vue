@@ -20,7 +20,7 @@
   position: absolute;
   left: -10rem;
   top: -10rem;
-  opacity: 0.08;
+  opacity: 0.06;
   will-change: transform;
   animation: noise 1s steps(2) infinite;
 }

@@ -51,12 +51,20 @@
       "title": "Quizly",
       "subtitle": "Kullanıcıların kendi quizlerini oluşturup çözebildiği bir SaaS platformu",
       "titleLink": "https://quizly-app.tiiny.site/",
-      "description": "**Quizly** platformunu sıfırdan geliştirdim. Kullanıcıların yüklediği notlardan **RAG tabanlı bir AI pipeline** ile kişisel quizler oluşturan, etkileşimli analizler sunan bir sistem. Hızlı, sade ve akıllı içerik üretimi odaklı tasarlandı."
+      "description": "**Quizly** platformunu sıfırdan geliştirdim. Kullanıcıların yüklediği notlardan **RAG tabanlı bir AI pipeline** ile kişisel quizler oluşturan, etkileşimli analizler sunan bir sistem. Hızlı, sade ve akıllı içerik üretimi odaklı tasarlandı.",
+      "tags": ["Nuxt.js", "Node.js", "TypeScript", "OpenAI API", "RAG", "SaaS"]
     },
     {
       "title": "Landclub",
       "subtitle": "Bir gayrimenkul yatırım şirketi için yan proje",
-      "description": "**Landclub** adlı e-ticaret gayrimenkul platformunu geliştirdim. Özel bir yönetim paneli, kolay mülk yükleme sistemi ve **%97 performans skoru** ile tamamlandı. Ölçeklenebilirlik, duyarlı tasarım ve temiz kullanıcı deneyimine odaklandım."
+      "description": "**Landclub** adlı e-ticaret gayrimenkul platformunu geliştirdim. Özel bir yönetim paneli, kolay mülk yükleme sistemi ve **%97 performans skoru** ile tamamlandı. Ölçeklenebilirlik, duyarlı tasarım ve temiz kullanıcı deneyimine odaklandım.",
+      "tags": [
+        "Next.js",
+        "Yönetim Paneli",
+        "Supabase",
+        "State Management",
+        "E-Ticaret"
+      ]
     }
   ],
   "certificates": [
@@ -111,28 +119,45 @@
   ],
   "experience": [
     {
+      "title": "Kıdemli Backend Mühendisi",
+      "subtitle": "İşin Olacak Teknolojileri",
+      "subtitleLink": "https://isinolacak.com/",
+      "description": " **NestJS**, **Prisma** ve **PostgreSQL** kullanarak **GraphQL şemaları** ve **CRUD modelleri** geliştirdim. Kullanıcıların **CV oluşturup iş bulmasına** olanak tanıyan **AI destekli İşin Olacak** platformu için **ölçeklenebilir, yüksek performanslı bir backend** kurdum. **Çevik Scrum ortamında**, **çapraz işlevli ekiple** birlikte sorunsuz ve zamanında teslimatlar sağladım.",
+      "date": "2025 | Şu Anda",
+      "location": "İstanbul, Türkiye",
+      "tags": ["GraphQL", "NestJS", "Prisma", "PostgreSQL", "Scrum", "Agile"]
+    },
+    {
       "title": "Lead Software Engineer",
       "subtitle": "Ayhanlar Holding",
       "subtitleLink": "https://www.ayhanlar.com.tr/",
       "description": "**Paran Olacak** adlı güvenli bankacılık web uygulamasının geliştirilmesine liderlik ettim. Performans, güvenilirlik ve kullanıcı güveni önceliğiydi. **SEO'yu %100 artırmak için AI ve büyük dil modellerini entegre ettim**, ayrıca tüm **altyapı ve dağıtım süreçlerini** üstlenerek her ortamda sorunsuz geçişler sağladım.",
-      "date": "2025 | Günümüz",
-      "location": "İstanbul, Türkiye"
+      "date": "2024 | 2025",
+      "location": "İstanbul, Türkiye",
+      "tags": ["Nuxt Js", "TypeScript", "Node.js", "Fastify"]
     },
     {
       "title": "Makine Öğrenmesi Mühendisi",
       "subtitle": "ITTI - Iman Trade Tourism Construction Ltd.",
       "subtitleLink": "https://itti.com.tr/",
       "description": "Türkiye’nin başkentinden elde edilen büyük bir veri kümesi üzerinde çalışarak, Python ve Scikit-learn kullanarak **emlak fiyat tahmin modeli** geliştirdim. Bu süreçte ileri seviye özellik mühendisliği tekniklerinden yararlandım.",
-      "date": "2024 | 2025",
-      "location": "İstanbul, Türkiye"
+      "date": "2023 | 2024",
+      "location": "İstanbul, Türkiye",
+      "tags": [
+        "Python",
+        "Scikit-learn",
+        "Makine Öğrenmesi",
+        "Özellik Mühendisliği"
+      ]
     },
     {
       "title": "Yazılım Mühendisi",
       "subtitle": "Hasel",
       "subtitleLink": "https://hasel.com/",
       "description": "**Erişilebilirlik**, **cihazlar arası performans** ve **temiz tasarım** odaklı, kullanıcı dostu web projeleri geliştirdim. **Kalite kontrol süreçlerine liderlik ettim** ve projeleri **zamanında teslim ederek** modern yazılım geliştirme pratiklerinde sağlam bir temel edindim.",
-      "date": "2023 | 2024",
-      "location": "İstanbul, Türkiye"
+      "date": "2022 | 2023",
+      "location": "İstanbul, Türkiye",
+      "tags": ["HTML", "CSS", "Vue Js", "Responsive Tasarım", "QA"]
     }
   ]
 }

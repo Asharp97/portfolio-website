@@ -38,13 +38,13 @@ h1 {
   letter-spacing: var(--tracking-wide);
   font-weight: 100;
 }
+h6 {
+  font-size: var(--text-lg);
+  line-height: var(--text-7xl--line-height);
+  /* letter-spacing: var(--tracking-wide); */
+}
 
 @media only screen and (max-width: 600px) {
-  h1 {
-    font-size: var(--text-6xl);
-  }
-}
-@media only screen and (max-width: 360px) {
   h1 {
     font-size: var(--text-5xl);
   }
