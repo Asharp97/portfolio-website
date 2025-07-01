@@ -6,15 +6,13 @@
       <Transition name="go-down" appear>
         <header
           v-show="scroll < 50 && mounted"
-          class="flex top-15 left-1/2 -translate-1/2 px-10 fixed w-full max-w-380"
-        >
+          class="flex top-15 left-1/2 -translate-1/2 px-10 fixed w-full max-w-380">
           <Transition name="rotate" mode="out-in">
             <button
               v-show="!switchingLocale"
               :class="bubbleClass"
               class="mr-auto"
-              @click="switchLocale()"
-            >
+              @click="switchLocale()">
               {{ locale == "en" ? "tr" : "en" }}
             </button>
           </Transition>
@@ -24,15 +22,13 @@
                 v-show="!switchingTheme"
                 :class="bubbleClass"
                 class="ml-auto"
-                @click="switchTheme()"
-              >
+                @click="switchTheme()">
                 <Icon
                   :name="
                     isDark
                       ? 'material-symbols:light-mode'
                       : 'material-symbols:dark-mode'
-                  "
-                />
+                  " />
               </button>
             </Transition>
           </client-only>
@@ -43,136 +39,116 @@
         <div v-if="!switchingLocale" class="max-w-380 px-4 mx-auto">
           <!-- MAIN PARENT -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-3 w-full duration-500 relative"
-          >
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-3 w-full duration-500 relative">
             <!-- HERO -->
             <div
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12"
-            >
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12">
               <Card
                 class="card h-fit!"
-                @click="toggleMouse('heroGreeting')"
-                @mouseenter="activateContent('heroGreeting')"
-                @mouseleave="activateContent()"
-              >
+                @click="toggleMouse('title.hero')"
+                @mouseenter="activateContent('title.hero')"
+                @mouseleave="activateContent()">
                 <Hero
                   :locale="locale"
                   :titles="content.titles"
-                  :socials="content.socials"
-                  :summary="content.summary"
-                />
+                  :summary="content.summary" />
               </Card>
             </div>
             <!-- Experiences -->
             <div
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-7"
-            >
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-7">
               <Card
-                :id="locale == 'en' ? `Experiences` : `Deneyimler`"
+                :id="t('title.experiences')"
                 class="card"
                 :content="content.experience"
                 :delay="3 * delayCoeff + 'ms'"
                 :name="content.titles[0]"
-                @click="toggleMouse('experiencesTitle')"
-                @mouseenter="activateContent('experiencesTitle')"
-                @mouseleave="activateContent()"
-              />
+                @click="toggleMouse('title.experiences')"
+                @mouseenter="activateContent('title.experiences')"
+                @mouseleave="activateContent()" />
             </div>
             <!-- SKills -->
             <div
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5"
-            >
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5">
               <Card
-                :id="locale == 'en' ? `Skills` : `Yetenekler`"
+                :id="t('title.skills')"
                 class="card"
                 :content="content.skills"
                 :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[1]"
-                @click="toggleMouse('skillsTitle')"
-                @mouseenter="activateContent('skillsTitle')"
-                @mouseleave="activateContent()"
-              />
+                @click="toggleMouse('title.skills')"
+                @mouseenter="activateContent('title.skills')"
+                @mouseleave="activateContent()" />
             </div>
             <!-- Side Projects -->
             <div
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 relative"
-            >
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 relative">
               <Card
-                :id="locale == 'en' ? `Side-Projects` : `Projeler`"
+                :id="t('title.projects')"
                 class="card"
                 :content="content.projects"
                 :delay="1 * delayCoeff + 'ms'"
                 :name="content.titles[2]"
-                @click="toggleMouse('projectsTitle')"
-                @mouseenter="activateContent('projectsTitle')"
-                @mouseleave="activateContent()"
-              />
+                @click="toggleMouse('title.projects')"
+                @mouseenter="activateContent('title.projects')"
+                @mouseleave="activateContent()" />
             </div>
             <!-- Education -->
             <div
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 relative"
-            >
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-3 lg:col-span-5 relative">
               <Card
-                :id="locale == 'en' ? `Education` : `Eğitim`"
+                :id="t('title.education')"
                 class="card"
                 :content="content.education"
                 :delay="1 * delayCoeff + 'ms'"
                 :name="content.titles[3]"
-                @click="toggleMouse('educationTitle')"
-                @mouseenter="activateContent('languagesTitle')"
-                @mouseleave="activateContent()"
-              />
+                @click="toggleMouse('title.education')"
+                @mouseenter="activateContent('title.education')"
+                @mouseleave="activateContent()" />
             </div>
             <!-- Languages  -->
             <div
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-2 lg:col-span-2 relative"
-            >
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-2 lg:col-span-2 relative">
               <Card
-                :id="locale == 'en' ? `Languages` : `Diller`"
+                :id="t('title.languages')"
                 class="card"
                 :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[4]"
-                @click="toggleMouse('languagesTitle')"
-                @mouseenter="activateContent('languagesTitle')"
-                @mouseleave="activateContent()"
-              >
+                @click="toggleMouse('title.languages')"
+                @mouseenter="activateContent('title.languages')"
+                @mouseleave="activateContent()">
                 <Langs :content="content.languages.points" />
               </Card>
             </div>
             <!-- Certificates -->
             <div
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-4 lg:col-span-6 relative"
-            >
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-4 lg:col-span-6 relative">
               <Card
-                :id="t('certificatesTitle')"
+                :id="t('title.certificates')"
                 class="card"
                 :delay="4 * delayCoeff + 'ms'"
                 :content="content.certificates"
                 :name="content.titles[5]"
-                @click="toggleMouse('certificatesTitle')"
-                @mouseenter="activateContent('certificatesTitle')"
-                @mouseleave="activateContent()"
-              />
+                @click="toggleMouse('title.certificates')"
+                @mouseenter="activateContent('title.certificates')"
+                @mouseleave="activateContent()" />
             </div>
             <!-- Contact Form-->
             <div
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-6 relative"
-            >
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-6 relative">
               <Card
                 id="form"
                 class="card"
                 :name="content.titles[6]"
-                @click="toggleMouse('dontBeShy')"
-                @mouseenter="activateContent('dontBeShy')"
-                @mouseleave="activateContent()"
-              >
-                <Form-component :text="content.callMe" :locale="locale" />
+                @click="toggleMouse('title.form')"
+                @mouseenter="activateContent('title.form')"
+                @mouseleave="activateContent()">
+                <Form-component />
               </Card>
             </div>
             <!-- Footer -->
             <div
-              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12 relative"
-            >
+              class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12 relative">
               <Card class="card" :delay="5 * delayCoeff + 'ms'">
                 <footer-component :content="content.footer" />
               </Card>

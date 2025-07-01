@@ -2,7 +2,9 @@
   <div class="w-full">
     <UCard class="flex-col">
       <template #header>
-        <Icon :name="icon" class="text-copper-500 text-6xl" />
+        <Icon
+          :name="icon"
+          class="text-copper-500 dark:text-slate-500 text-6xl" />
       </template>
 
       <template #footer>

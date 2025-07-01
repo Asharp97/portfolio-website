@@ -22,7 +22,7 @@
         </nav>
 
         <ul class="flex flex-col items-end flex-wrap w-full lg:w-20 text-right">
-          <li v-for="social in socials" :key="social">
+          <li v-for="social in common.socials" :key="social">
             <NuxtLink :to="social.link" target="_blank">
               <h3
                 class="capitalize underline hover:tracking-wider duration-300">
@@ -58,7 +58,8 @@
 </template>
 
 <script setup>
-defineProps(["socials", "titles", "summary", "locale"]);
+import common from "../static/common.json";
+defineProps(["titles", "summary", "locale"]);
 const mounted = ref(false);
 onMounted(async () => {
   await wait(400);

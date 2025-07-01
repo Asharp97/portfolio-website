@@ -1,12 +1,35 @@
 {
-  "errorHeader": "Hata! Bu sayfa yok.",
-  "errorText": "Galiba yanlışlıkla kayboldun. Sorun değil — seni ana sayfaya götürelim.",
-  "heroGreeting": "Merhabalar",
-  "experiencesTitle": "Deneyimler",
-  "skillsTitle": "Yetenekler",
-  "projectsTitle": "Projeler",
-  "educationTitle": "Eğitim",
-  "languagesTitle": "Diller",
-  "certificatesTitle": "Sertifikalar",
-  "dontBeShy": "Çekinme!"
+  "error": {
+    "header": "Hata! Bu sayfa yok.",
+    "text": "Galiba yanlışlıkla kayboldun. Sorun değil — seni ana sayfaya götürelim.",
+    "button": "Ana Sayfa"
+  },
+  "title": {
+    "hero": "Merhabalar",
+    "experiences": "Deneyimler",
+    "skills": "Yetenekler",
+    "projects": "Projeler",
+    "education": "Eğitim",
+    "languages": "Diller",
+    "certificates": "Sertifikalar",
+    "form": "Çekinme!"
+  },
+  "message": {
+    "Success": "Mesajınızı aldım! Teşekkürler – en kısa sürede size geri döneceğim.",
+    "Error": "Aman! Bir şeyler yolunda gitmedi. İnternetine bir göz atıp",
+    "Loading": "Sizden haber almak için çok heyecanlıyım! Bir saniye lütfen...",
+    "button": "tekrar denesene?",
+    "text": "İletişim kurmak, fikir alışverişi yapmak ya da sadece sohbet etmek istersen her zaman buradayım!"
+  },
+  "validation": {
+    "email": "Geçerli bir e-posta adresi giriniz.",
+    "name_min": "İsim en az {min} karakter olmalıdır.",
+    "msg_min": "Mesaj en az {min} karakter olmalıdır."
+  },
+  "placeholder": {
+    "email": "Eposta",
+    "name": "Isim",
+    "message": "Mesaj",
+    "button": "Gönder"
+  }
 }

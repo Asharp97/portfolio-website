@@ -1,5 +1,4 @@
 {
-  "callMe": "I'm always happy to connect, brainstorm, or even chat!",
   "footer": ["All rights reserved", "Made with ❤️ in Istanbul"],
   "titles": [
     "Experiences",
@@ -8,16 +7,6 @@
     "Education",
     "Languages",
     "Certificates"
-  ],
-  "socials": [
-    {
-      "name": "github",
-      "link": "https://github.com/Asharp97"
-    },
-    {
-      "name": "LinkedIn",
-      "link": "https://www.linkedin.com/in/ali-elsayed-25974b130/"
-    }
   ],
   "summary": "**Machine Learning** & **Full-Stack Software Engineer** with a background in Computer Engineering. Experienced in building smart, scalable apps using **Vertex AI**, **TensorFlow**, **BigQuery**, **Vue.js**, **Node.js**, and **Python**—blending AI with clean, high-performance code for real-world impact.",
   "languages": {

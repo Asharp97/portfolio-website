@@ -25,6 +25,11 @@ export default defineAppConfig({
         variant: "solid",
       },
     },
+    button: {
+      slots: {
+        base: "dark:bg-slate-500 dark:hover:bg-slate-700 bg-copper-500 text-white! cursor-pointer duration-300",
+      },
+    },
     input: {
       slots: {
         root: inputRootSettings,

@@ -1,5 +1,4 @@
 {
-  "callMe": "İletişim kurmak, fikir alışverişi yapmak ya da sadece sohbet etmek istersen her zaman buradayım!",
   "footer": ["Tüm hakları saklıdır", "İstanbul’da ❤️'la geliştirildi"],
   "titles": [
     "Deneyimler",
@@ -8,16 +7,6 @@
     "Eğitim",
     "Diller",
     "Sertifikalar"
-  ],
-  "socials": [
-    {
-      "name": "github",
-      "link": "https://github.com/Asharp97"
-    },
-    {
-      "name": "LinkedIn",
-      "link": "https://www.linkedin.com/in/ali-elsayed-25974b130/"
-    }
   ],
   "summary": "**Makine Öğrenmesi** ve **Full-Stack Yazılım Mühendisliği** alanında uzman, Bilgisayar Mühendisliği geçmişine sahip bir mühendisim. **Vertex AI**, **TensorFlow**, **BigQuery**, **Vue.js**, **Node.js** ve **Python** kullanarak akıllı, ölçeklenebilir uygulamalar geliştiriyor, yapay zekâyı sade ve yüksek performanslı kodlarla gerçeğe dönüştürüyorum.",
   "languages": {

@@ -1,3 +1,3 @@
-export default function wait(ms: number | undefined) {
+export default function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

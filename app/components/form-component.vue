@@ -5,29 +5,25 @@
         class="h-full flex items-center"
         :allow-slide-next="swiperLock"
         :allow-slide-prev="swiperLock"
-        @swiper="onSwiper"
-      >
+        @swiper="onSwiper">
         <Swiper-slide>
           <div class="flex flex-wrap gap-8 h-full">
             <div
-              class="flex-1 rounded-lg text-md text-gray-800 dark:text-gray-50 transition duration-300"
-            >
+              class="flex-1 rounded-lg text-md text-gray-800 dark:text-gray-50 transition duration-300">
               <p class="text-3xl font-light text-right">
-                {{ text }}
+                {{ $t("message.text") }}
               </p>
             </div>
             <UForm
               :state="state"
               class="space-y-4 w-full sm:w-1/2"
-              @submit="onSubmit"
-            >
+              @submit="onSubmit">
               <TransitionGroup name="list">
                 <UFormField name="email">
                   <UInput
                     v-model="state.email"
-                    :placeholder="locale == 'tr' ? 'Eposta' : 'Email'"
-                    @blur="validate('email')"
-                  />
+                    :placeholder="t('placeholder.email')"
+                    @blur="validate('email')" />
                 </UFormField>
                 <div v-if="errorMsg['email']" :class="errorClass">
                   {{ errorMsg["email"] }}
@@ -35,9 +31,8 @@
                 <UFormField name="name">
                   <UInput
                     v-model="state.name"
-                    :placeholder="locale == 'tr' ? 'Isim' : 'Name'"
-                    @blur="validate('name')"
-                  />
+                    :placeholder="t('placeholder.name')"
+                    @blur="validate('name')" />
                 </UFormField>
                 <div v-if="errorMsg['name']" :class="errorClass">
                   {{ errorMsg["name"] }}
@@ -45,18 +40,14 @@
                 <UFormField name="msg">
                   <UTextarea
                     v-model="state.msg"
-                    :placeholder="locale == 'tr' ? 'Mesaj' : 'Message'"
-                    @blur="validate('msg')"
-                  />
+                    :placeholder="t('placeholder.message')"
+                    @blur="validate('msg')" />
                 </UFormField>
                 <div v-if="errorMsg['msg']" :class="errorClass">
                   {{ errorMsg["msg"] }}
                 </div>
-                <UButton
-                  type="submit"
-                  class="text-white dark:bg-slate-700 dark:hover:bg-slate-500 duration-300 cursor-pointer"
-                >
-                  {{ locale == "tr" ? "Gönder" : "Send" }}
+                <UButton type="submit">
+                  {{ $t("placeholder.button") }}
                 </UButton>
               </TransitionGroup>
             </UForm>
@@ -64,29 +55,21 @@
         </Swiper-slide>
         <Swiper-slide>
           <Feedback icon="eos-icons:three-dots-loading">
-            {{
-              locale === "tr"
-                ? "Sizden haber almak için çok heyecanlıyım! Bir saniye lütfen..."
-                : "I'm super excited to hear from you! Just give me a second..."
-            }}
+            {{ $t("message.Loading") }}
           </Feedback>
         </Swiper-slide>
         <Swiper-slide>
           <Feedback icon="line-md:confirm-circle-twotone">
-            {{
-              locale === "tr"
-                ? "Mesajınızı aldım! Teşekkürler – en kısa sürede size geri döneceğim."
-                : "Got your message! Thanks a lot – I'll get back to you as soon as I can."
-            }}
+            {{ $t("message.Success") }}
           </Feedback>
         </Swiper-slide>
         <Swiper-slide>
           <Feedback icon="material-symbols:error">
-            {{
-              locale === "tr"
-                ? "Aman! Bir şeyler yolunda gitmedi. İnternetine bir göz atıp tekrar denesene?"
-                : "Uh-oh! Looks like something didn’t go through. Maybe check your internet and give it another shot?"
-            }}
+            {{ $t("message.Error") }}
+
+            <UButton @click="goToSlide(1)">
+              {{ $t("message.button") }}
+            </UButton>
           </Feedback>
         </Swiper-slide>
       </Swiper>
@@ -98,8 +81,8 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import { z } from "zod";
+const { t } = useI18n();
 const supabase = useSupabaseClient();
-const props = defineProps(["text", "locale"]);
 const state = reactive({
   email: "",
   name: "",
@@ -112,22 +95,13 @@ const errorMsg = reactive({
 });
 const schema = z.object({
   email: z.string().email({
-    message:
-      props.locale === "tr"
-        ? "Geçerli bir e-posta adresi giriniz."
-        : "Please enter a valid email address.",
+    message: t("validation.email"),
   }),
   name: z.string().min(2, {
-    message:
-      props.locale === "tr"
-        ? "İsim en az 2 karakter olmalıdır."
-        : "Name must be at least 2 characters long.",
+    message: t("validation.name_min", { min: 2 }),
   }),
   msg: z.string().min(10, {
-    message:
-      props.locale === "tr"
-        ? "Mesaj en az 10 karakter olmalıdır."
-        : "Message must be at least 10 characters long.",
+    message: t("validation.msg_min", { min: 10 }),
   }),
 });
 
@@ -157,12 +131,19 @@ const onSubmit = async () => {
     swiperLock.value = true;
     await slider.value.slideTo(1);
     const { error } = await send();
-    if (!error) {
-      await slider.value.slideTo(2);
-    } else await slider.value.slideTo(3);
+    if (!error) await slider.value.slideTo(2);
+    else {
+      await slider.value.slideTo(3);
+      console.log(error);
+    }
     swiperLock.value = false;
   }
 };
+async function goToSlide(x) {
+  swiperLock.value = true;
+  await slider.value.slideTo(x);
+  swiperLock.value = false;
+}
 </script>
 
 <style scoped>
