@@ -33,7 +33,7 @@ export default defineNuxtConfig({
   },
   mail: {
     message: {
-      to: process.env.MY_EMAIL,
+      to: process.env.MY_EMAIL || "ali-hisham@hotmail.com",
       from: process.env.LOGIN,
     },
     smtp: {
