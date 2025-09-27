@@ -13,8 +13,7 @@
           damping: 50,
           delay: 0.02 * n,
           duration: 0.2,
-        }"
-      >
+        }">
         {{ charachter }}
       </motion.div>
     </component>
@@ -46,9 +45,12 @@ onMounted(() => {
   spl();
 });
 
-watch(props.text, () => {
-  spl();
-});
+watch(
+  () => props.text,
+  (newVal, oldVal) => {
+    spl();
+  }
+);
 </script>
 
 <style lang="scss" scoped></style>

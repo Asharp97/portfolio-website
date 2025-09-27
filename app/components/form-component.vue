@@ -19,36 +19,53 @@
               class="space-y-4 w-full sm:w-1/2"
               @submit="onSubmit">
               <TransitionGroup name="list">
-                <UFormField name="email">
-                  <UInput
-                    v-model="state.email"
-                    :placeholder="t('placeholder.email')"
-                    @blur="validate('email')" />
-                </UFormField>
-                <div v-if="errorMsg['email']" :class="errorClass">
+                <div :key="'email'">
+                  <UFormField name="email">
+                    <UInput
+                      v-model="state.email"
+                      :placeholder="t('placeholder.email')"
+                      @blur="validate('email')" />
+                  </UFormField>
+                </div>
+                <div
+                  v-if="errorMsg['email']"
+                  :key="'email-error'"
+                  :class="errorClass">
                   {{ errorMsg["email"] }}
                 </div>
-                <UFormField name="name">
-                  <UInput
-                    v-model="state.name"
-                    :placeholder="t('placeholder.name')"
-                    @blur="validate('name')" />
-                </UFormField>
-                <div v-if="errorMsg['name']" :class="errorClass">
+                <div :key="'name'">
+                  <UFormField name="name">
+                    <UInput
+                      v-model="state.name"
+                      :placeholder="t('placeholder.name')"
+                      @blur="validate('name')" />
+                  </UFormField>
+                </div>
+                <div
+                  v-if="errorMsg['name']"
+                  :key="'name-error'"
+                  :class="errorClass">
                   {{ errorMsg["name"] }}
                 </div>
-                <UFormField name="msg">
-                  <UTextarea
-                    v-model="state.msg"
-                    :placeholder="t('placeholder.message')"
-                    @blur="validate('msg')" />
-                </UFormField>
-                <div v-if="errorMsg['msg']" :class="errorClass">
+                <div :key="'msg'">
+                  <UFormField name="msg">
+                    <UTextarea
+                      v-model="state.msg"
+                      :placeholder="t('placeholder.message')"
+                      @blur="validate('msg')" />
+                  </UFormField>
+                </div>
+                <div
+                  v-if="errorMsg['msg']"
+                  :key="'msg-error'"
+                  :class="errorClass">
                   {{ errorMsg["msg"] }}
                 </div>
-                <UButton type="submit">
-                  {{ $t("placeholder.button") }}
-                </UButton>
+                <div :key="'submit'">
+                  <UButton type="submit">
+                    {{ $t("placeholder.button") }}
+                  </UButton>
+                </div>
               </TransitionGroup>
             </UForm>
           </div>
@@ -82,7 +99,8 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import { z } from "zod";
 const { t } = useI18n();
-const supabase = useSupabaseClient();
+const mail = useMail();
+
 const state = reactive({
   email: "",
   name: "",
@@ -120,22 +138,18 @@ const onSwiper = (swiper) => {
   slider.value = swiper;
 };
 const errorClass = "text-red-500 text-sm";
-const send = async () => {
-  return await supabase.from("contacts").insert(state);
-};
 
 const swiperLock = ref(false);
 
 const onSubmit = async () => {
   if (validate("email") && validate("name") && validate("msg")) {
     swiperLock.value = true;
-    await slider.value.slideTo(1);
-    const { error } = await send();
-    if (!error) await slider.value.slideTo(2);
-    else {
-      await slider.value.slideTo(3);
-      console.log(error);
-    }
+    await mail.send({
+      subject: `portofolio message from ${state.name}`,
+      text: `FROM: ${state.email}/
+        MESSAGE: ${state.msg}`,
+    });
+    await slider.value.slideTo(3); // Success slide
     swiperLock.value = false;
   }
 };

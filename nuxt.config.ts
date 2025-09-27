@@ -1,9 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  supabase: {
-    redirect: false,
-  },
   devtools: { enabled: false },
   app: {
     head: {
@@ -25,7 +22,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "nuxt3-lenis",
     "motion-v/nuxt",
-    "@nuxtjs/supabase",
+    "nuxt-mail",
   ],
   i18n: {
     locales: [
@@ -33,6 +30,20 @@ export default defineNuxtConfig({
       { code: "tr", language: "tr-TR", file: "tr.json" },
     ],
     defaultLocale: "en",
+  },
+  mail: {
+    message: {
+      to: process.env.MY_EMAIL,
+      from: process.env.LOGIN,
+    },
+    smtp: {
+      host: process.env.SMTP_SERVER,
+      port: Number(process.env.SMTP_PORT),
+      auth: {
+        user: process.env.LOGIN,
+        pass: process.env.PASSWORD,
+      },
+    },
   },
 
   css: ["~/assets/css/main.css"],

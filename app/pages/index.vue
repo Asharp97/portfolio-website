@@ -1,7 +1,10 @@
 <template>
   <div id="home" ref="bod">
     <div class="bg-white dark:bg-dark-900 min-h-dvh text-black py-30">
-      <Mouse-Follower :text="title" class="absolute z-20 hidden md:block" />
+      <Mouse-Follower
+        :enable-follower="enableFollower"
+        :text="title"
+        class="absolute z-20 hidden md:block" />
 
       <Transition name="go-down" appear>
         <header
@@ -45,7 +48,7 @@
               class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12">
               <Card
                 class="card h-fit!"
-                @click="toggleMouse('title.hero')"
+                @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.hero')"
                 @mouseleave="activateContent()">
                 <Hero
@@ -63,7 +66,7 @@
                 :content="content.experience"
                 :delay="3 * delayCoeff + 'ms'"
                 :name="content.titles[0]"
-                @click="toggleMouse('title.experiences')"
+                @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.experiences')"
                 @mouseleave="activateContent()" />
             </div>
@@ -76,7 +79,7 @@
                 :content="content.skills"
                 :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[1]"
-                @click="toggleMouse('title.skills')"
+                @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.skills')"
                 @mouseleave="activateContent()" />
             </div>
@@ -89,7 +92,7 @@
                 :content="content.projects"
                 :delay="1 * delayCoeff + 'ms'"
                 :name="content.titles[2]"
-                @click="toggleMouse('title.projects')"
+                @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.projects')"
                 @mouseleave="activateContent()" />
             </div>
@@ -102,7 +105,7 @@
                 :content="content.education"
                 :delay="1 * delayCoeff + 'ms'"
                 :name="content.titles[3]"
-                @click="toggleMouse('title.education')"
+                @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.education')"
                 @mouseleave="activateContent()" />
             </div>
@@ -114,7 +117,7 @@
                 class="card"
                 :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[4]"
-                @click="toggleMouse('title.languages')"
+                @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.languages')"
                 @mouseleave="activateContent()">
                 <Langs :content="content.languages.points" />
@@ -129,7 +132,7 @@
                 :delay="4 * delayCoeff + 'ms'"
                 :content="content.certificates"
                 :name="content.titles[5]"
-                @click="toggleMouse('title.certificates')"
+                @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.certificates')"
                 @mouseleave="activateContent()" />
             </div>
@@ -140,7 +143,7 @@
                 id="form"
                 class="card"
                 :name="content.titles[6]"
-                @click="toggleMouse('title.form')"
+                @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.form')"
                 @mouseleave="activateContent()">
                 <Form-component />
@@ -210,10 +213,7 @@ const title = ref("");
 const activateContent = async (key: string = "") => {
   title.value = key ? t(key) : "";
 };
-
-const toggleMouse = (key: string = "") => {
-  title.value = title.value ? "" : t(key);
-};
+const enableFollower = ref(true);
 
 const bubbleClass =
   "text-lg uppercase text-white hover:tracking-widest font-normal bg-copper-500 dark:bg-slate-500 flex justify-center items-center w-15 h-15 hover:translate-y-1 duration-300 rounded-full cursor-pointer";

@@ -66,7 +66,7 @@
                           <h6>{{ e.date }}</h6>
                           <USeparator
                             v-if="e.location"
-                            decorative="true"
+                            :decorative="true"
                             class="my-1"
                             color="secondry" />
                           <h6 class="font-light">{{ e.location }}</h6>
