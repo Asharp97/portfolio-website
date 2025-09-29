@@ -31,22 +31,6 @@ export default defineNuxtConfig({
     ],
     defaultLocale: "en",
   },
-  // mail: {
-  //   message: {
-  //     to: process.env.MY_EMAIL || "ali-hisham@hotmail.com",
-  //     from: process.env.LOGIN,
-  //   },
-  //   smtp: {
-  //     host: process.env.SMTP_SERVER,
-  //     port: Number(process.env.SMTP_PORT),
-  //     auth: {
-  //       user: process.env.LOGIN,
-  //       pass: process.env.PASSWORD,
-  //     },
-  //   },
-  // },
-
-  // to: process.env.MY_EMAIL || "ali-hisham@hotmail.com",
   nodemailer: {
     from: process.env.SENDER || "ali-hisham@hotmail.com",
     host: process.env.SMTP_SERVER || "smtp-relay.brevo.com",

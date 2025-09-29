@@ -87,7 +87,7 @@
           <Feedback icon="material-symbols:error">
             {{ $t("message.Error") }}
 
-            <UButton @click="goToSlide(1)">
+            <UButton @click="goToSlide(0)">
               {{ $t("message.button") }}
             </UButton>
           </Feedback>
@@ -179,7 +179,6 @@ const onSubmit = async () => {
 const goToSlide = async (x) => {
   swiperLock.value = false;
   await slider.value.slideTo(x);
-  console.log("went to slide", x);
   swiperLock.value = true;
 };
 </script>
