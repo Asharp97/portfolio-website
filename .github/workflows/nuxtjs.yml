@@ -38,6 +38,7 @@ jobs:
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           LOGIN: ${{ secrets.LOGIN }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          SENDER: ${{ secrets.SENDER }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

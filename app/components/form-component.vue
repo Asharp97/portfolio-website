@@ -9,7 +9,10 @@
         <Swiper-slide>
           <div class="flex flex-wrap gap-8 h-full">
             <div
-              class="flex-1 rounded-lg text-md text-gray-800 dark:text-gray-50 transition duration-300">
+              class="flex-1 rounded-lg text-md text-gray-800 dark:text-gray-50 transition duration-300"
+              @click="$emit('triggerFollower')"
+              @mouseenter="$emit('enableTooltip')"
+              @mouseleave="$emit('disableTooltip')">
               <p class="text-3xl font-light text-right">
                 {{ $t("message.text") }}
               </p>
@@ -99,7 +102,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import { z } from "zod";
 const { t } = useI18n();
-const mail = useMail();
+defineEmits(["enableTooltip", "disableTooltip", "triggerFollower"]);
 
 const state = reactive({
   email: "",
@@ -130,7 +133,6 @@ const validate = async (field) => {
     await wait(3000);
     errorMsg[field] = "";
   } else errorMsg[field] = "";
-
   return success;
 };
 const slider = ref(null);
@@ -142,22 +144,44 @@ const errorClass = "text-red-500 text-sm";
 const swiperLock = ref(false);
 
 const onSubmit = async () => {
-  if (validate("email") && validate("name") && validate("msg")) {
-    swiperLock.value = true;
-    await mail.send({
-      subject: `portofolio message from ${state.name}`,
-      text: `FROM: ${state.email}/
-        MESSAGE: ${state.msg}`,
-    });
-    await slider.value.slideTo(3); // Success slide
-    swiperLock.value = false;
+  const validEmail = await validate("email");
+  const validName = await validate("name");
+  const validMsg = await validate("msg");
+
+  if (validEmail && validName && validMsg) {
+    await goToSlide(1); // Loading slide
+
+    try {
+      const result = await $fetch("/api/sendMail", {
+        method: "POST",
+        body: JSON.stringify({
+          email: state.email,
+          name: state.name,
+          msg: state.msg,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Check if the mail was accepted
+      if (result && result.accepted && result.accepted.length > 0) {
+        await goToSlide(2); // Success slide
+      } else {
+        await goToSlide(3); // Error slide
+      }
+    } catch (e) {
+      await goToSlide(3); // Error slide
+      console.error("Mail send error:", e);
+    }
   }
 };
-async function goToSlide(x) {
-  swiperLock.value = true;
-  await slider.value.slideTo(x);
+const goToSlide = async (x) => {
   swiperLock.value = false;
-}
+  await slider.value.slideTo(x);
+  console.log("went to slide", x);
+  swiperLock.value = true;
+};
 </script>
 
 <style scoped>

@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "nuxt3-lenis",
     "motion-v/nuxt",
-    "nuxt-mail",
+    "nuxt-nodemailer",
   ],
   i18n: {
     locales: [
@@ -31,21 +31,32 @@ export default defineNuxtConfig({
     ],
     defaultLocale: "en",
   },
-  mail: {
-    message: {
-      to: process.env.MY_EMAIL || "ali-hisham@hotmail.com",
-      from: process.env.LOGIN,
-    },
-    smtp: {
-      host: process.env.SMTP_SERVER,
-      port: Number(process.env.SMTP_PORT),
-      auth: {
-        user: process.env.LOGIN,
-        pass: process.env.PASSWORD,
-      },
+  // mail: {
+  //   message: {
+  //     to: process.env.MY_EMAIL || "ali-hisham@hotmail.com",
+  //     from: process.env.LOGIN,
+  //   },
+  //   smtp: {
+  //     host: process.env.SMTP_SERVER,
+  //     port: Number(process.env.SMTP_PORT),
+  //     auth: {
+  //       user: process.env.LOGIN,
+  //       pass: process.env.PASSWORD,
+  //     },
+  //   },
+  // },
+
+  // to: process.env.MY_EMAIL || "ali-hisham@hotmail.com",
+  nodemailer: {
+    from: process.env.SENDER || "ali-hisham@hotmail.com",
+    host: process.env.SMTP_SERVER || "smtp-relay.brevo.com",
+    port: process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587,
+    secure: false,
+    auth: {
+      user: process.env.LOGIN,
+      pass: process.env.PASSWORD,
     },
   },
-
   css: ["~/assets/css/main.css"],
 
   future: {

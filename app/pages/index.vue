@@ -139,14 +139,11 @@
             <!-- Contact Form-->
             <div
               class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-6 relative">
-              <Card
-                id="form"
-                class="card"
-                :name="content.titles[6]"
-                @click="enableFollower = !enableFollower"
-                @mouseenter="activateContent('title.form')"
-                @mouseleave="activateContent()">
-                <Form-component />
+              <Card id="form" class="card" :name="content.titles[6]">
+                <Form-component
+                  @trigger-follower="enableFollower = !enableFollower"
+                  @enable-tooltip="activateContent('title.form')"
+                  @disable-tooltip="activateContent()" />
               </Card>
             </div>
             <!-- Footer -->
