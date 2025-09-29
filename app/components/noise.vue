@@ -13,7 +13,7 @@
 }
 
 .noise::after {
-  background-image: url(../../app/assets/img/noise.jpg);
+  background-image: url(/img/noise.jpg);
   content: "";
   width: calc(100% + 20rem);
   height: calc(100% + 20rem);
