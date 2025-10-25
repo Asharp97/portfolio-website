@@ -33,7 +33,7 @@
     "button": "Send"
   },
   "cookie": {
-    "message": "We use cookies to remember your preferences.",
-    "subtitle": "By using our site, you agree to this."
+    "message": "Hey! I use cookies to make your experience better.",
+    "subtitle": "Don't worry, they're harmless cookies 😋"
   }
 }
