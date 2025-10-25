@@ -138,11 +138,17 @@ const validate = async (field) => {
 const slider = ref(null);
 const onSwiper = (swiper) => {
   slider.value = swiper;
+  if (formSubmittedCookie.value === "submitted") {
+    goToSlide(2); // Success slide
+  }
 };
 const errorClass = "text-red-500 text-sm";
 
 const swiperLock = ref(false);
 
+const formSubmittedCookie = useCookie("form-submitted", {
+  expires: new Date(Date.now() + 24 * 60 * 60 * 1000),// 1 day
+});
 const onSubmit = async () => {
   const validEmail = await validate("email");
   const validName = await validate("name");
@@ -155,9 +161,9 @@ const onSubmit = async () => {
       const result = await $fetch("/api/sendMail", {
         method: "POST",
         body: JSON.stringify({
-          email: state.email,
-          name: state.name,
-          msg: state.msg,
+          email: state.email.trim(),
+          name: state.name.trim(),
+          msg: state.msg.trim(),
         }),
         headers: {
           "Content-Type": "application/json",
@@ -167,6 +173,7 @@ const onSubmit = async () => {
       // Check if the mail was accepted
       if (result && result.accepted && result.accepted.length > 0) {
         await goToSlide(2); // Success slide
+        cookieForm.value = "submitted";
       } else {
         await goToSlide(3); // Error slide
       }

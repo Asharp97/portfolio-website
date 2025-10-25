@@ -5,7 +5,7 @@
       active
         ? 'p-1 rotate-90 bg-copper-500 dark:bg-slate-500'
         : 'p-0 rotate-0 bg-copper-900 dark:bg-white',
-      logo ? `` : `hover:scale-125`,
+      logo ? `` : `hover:scale-125 origin-center`,
       'group-hover:p-1 group-hover:rotate-90 group-hover:bg-copper-500  dark:group-hover:bg-slate-500  hover:-translate-x-1',
     ]">
     <Icon

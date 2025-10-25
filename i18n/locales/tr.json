@@ -31,5 +31,9 @@
     "name": "Isim",
     "message": "Mesaj",
     "button": "Gönder"
+  },
+  "cookie": {
+    "message": "Tercihlerinizi hatırlamak için çerezleri kullanıyoruz.",
+    "subtitle": "Sitemizi kullanarak bunu kabul etmiş oluyorsunuz."
   }
 }

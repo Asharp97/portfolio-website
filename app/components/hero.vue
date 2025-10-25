@@ -47,7 +47,7 @@
     <div class="h-50" />
     <div class="flex justify-between items-end flex-wrap gap-3">
       <client-only>
-        <Mark-down :text="summary" class="w-full md:w-1/2" />
+        <Mark-down :text="processedSummary" class="w-full md:w-1/2" />
       </client-only>
 
       <div class="flex-1 md:flex justify-end items-end hidden">
@@ -59,7 +59,7 @@
 
 <script setup>
 import common from "../static/common.json";
-defineProps(["titles", "summary", "locale"]);
+const props = defineProps(["titles", "summary", "locale"]);
 const mounted = ref(false);
 onMounted(async () => {
   await wait(400);
@@ -75,6 +75,10 @@ const scrollTo = async (id) => {
     });
   }
 };
+const processedSummary = computed(() => {
+  const years = new Date().getFullYear() - 2020;
+  return props.summary.replace("{{years}}", years);
+});
 </script>
 
 <style lang="scss" scoped></style>

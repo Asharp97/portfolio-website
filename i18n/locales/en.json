@@ -31,5 +31,9 @@
     "name": "Name",
     "message": "Message",
     "button": "Send"
+  },
+  "cookie": {
+    "message": "We use cookies to remember your preferences.",
+    "subtitle": "By using our site, you agree to this."
   }
 }

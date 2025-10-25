@@ -9,7 +9,7 @@
       <Transition name="go-down" appear>
         <header
           v-show="scroll < 50 && mounted"
-          class="flex top-15 left-1/2 -translate-1/2 px-10 fixed w-full max-w-380">
+          class="flex top-15 left-1/2 -translate-1/2 px-10 fixed w-full max-w-380 gap-2">
           <Transition name="rotate" mode="out-in">
             <button
               v-show="!switchingLocale"
@@ -19,6 +19,16 @@
               {{ locale == "en" ? "tr" : "en" }}
             </button>
           </Transition>
+          <div
+            v-if="showCookieDisclaimer"
+            class="text-md text-gray-900 dark:text-gray-100 text-center px-2 bg-gray-100 dark:bg-slate-800 rounded-lg p-2 relative">
+            🍪 {{ t('cookie.message') }}<br>
+            <div class="font-light text-sm">{{ t('cookie.subtitle') }}</div>
+            <Icon
+              name="ic:sharp-cancel"
+              class="absolute -top-1 -right-2 text-lg hover:rotate-90 duration-300 hover:scale-110 cursor-pointer"
+              @click="closeCookieDisclaimer()" />
+          </div>
           <client-only>
             <Transition name="rotate" mode="out-in">
               <button
@@ -216,6 +226,14 @@ const bubbleClass =
   "text-lg uppercase text-white hover:tracking-widest font-normal bg-copper-500 dark:bg-slate-500 flex justify-center items-center w-15 h-15 hover:translate-y-1 duration-300 rounded-full cursor-pointer";
 
 const delayCoeff = 80;
+const cookieDisclaimer = useCookie("cookie-disclaimer", {
+  expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+});
+const showCookieDisclaimer = ref(cookieDisclaimer.value !== "accepted");
+const closeCookieDisclaimer = () => {
+  cookieDisclaimer.value = "accepted";
+  showCookieDisclaimer.value = false;
+};
 </script>
 
 <style>

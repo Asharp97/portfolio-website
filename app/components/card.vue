@@ -37,7 +37,7 @@
                   <div
                     class="flex flex-col justify-between h-full duration-500">
                     <div>
-                      <div class="flex justify-between">
+                      <div class="flex justify-between gap-2">
                         <div>
                           <NuxtLink :to="e.titleLink" target="_blank">
                             <h5

@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   app: {
     head: {
-      title: "Machine Learning & Software Engineer", // default fallback title
+      title: "Software Engineer | Ali Elsayed", // default fallback title
       htmlAttrs: {
         lang: "en",
       },
