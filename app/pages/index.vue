@@ -19,7 +19,8 @@
               {{ locale == "en" ? "tr" : "en" }}
             </button>
           </Transition>
-          <Transition name="go-down">
+          <!-- cookie disclaimer -->
+          <Transition name="go-up">
             <div
               v-if="showCookieDisclaimer"
               class="text-md text-gray-900 dark:text-gray-100 text-center px-2 bg-gray-100 dark:bg-slate-800 rounded-lg p-2 relative">
@@ -252,6 +253,7 @@ const closeCookieDisclaimer = () => {
   transition: all 1.4s var(--drift);
 }
 .go-up-leave-active,
+.go-up-enter-active,
 .rotate-leave-active,
 .switch-leave-active {
   transition: all 0.4s var(--drift);
@@ -268,17 +270,15 @@ const closeCookieDisclaimer = () => {
   filter: blur(2px);
 }
 
-.go-up-leave-to {
-  transform: translateY(-100px);
-  rotate: 360deg;
-  filter: blur(2px);
-  width: fit-content;
-  height: fit-content;
-}
-
 .go-down-leave-to,
 .go-down-enter-from {
   transform: translateY(50px);
+  opacity: 0;
+  filter: blur(2px);
+}
+.go-up-leave-to,
+.go-up-enter-from {
+  transform: translateY(-50px);
   opacity: 0;
   filter: blur(2px);
 }

@@ -1,7 +1,9 @@
 <template>
   <!-- <Lenis root> -->
   <Noise />
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
   <!-- </Lenis> -->
 </template>
 <style>
