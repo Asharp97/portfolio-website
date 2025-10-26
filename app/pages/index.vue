@@ -19,16 +19,18 @@
               {{ locale == "en" ? "tr" : "en" }}
             </button>
           </Transition>
-          <div
-            v-if="showCookieDisclaimer"
-            class="text-md text-gray-900 dark:text-gray-100 text-center px-2 bg-gray-100 dark:bg-slate-800 rounded-lg p-2 relative">
-            🍪 {{ t('cookie.message') }}<br>
-            <div class="font-light text-sm">{{ t('cookie.subtitle') }}</div>
-            <Icon
-              name="ic:sharp-cancel"
-              class="absolute -top-1 -right-2 text-lg hover:rotate-90 duration-300 hover:scale-110 cursor-pointer"
-              @click="closeCookieDisclaimer()" />
-          </div>
+          <Transition name="go-down">
+            <div
+              v-if="showCookieDisclaimer"
+              class="text-md text-gray-900 dark:text-gray-100 text-center px-2 bg-gray-100 dark:bg-slate-800 rounded-lg p-2 relative">
+              🍪 {{ t("cookie.message") }}<br />
+              <div class="font-light text-sm">{{ t("cookie.subtitle") }}</div>
+              <Icon
+                name="ic:sharp-cancel"
+                class="absolute -top-1 -right-2 text-lg hover:rotate-90 duration-300 hover:scale-110 cursor-pointer"
+                @click="closeCookieDisclaimer()" />
+            </div>
+          </Transition>
           <client-only>
             <Transition name="rotate" mode="out-in">
               <button
@@ -176,9 +178,6 @@ import contentTr from "../static/content-tr.json";
 import { useDark, useToggle } from "@vueuse/core";
 import { useScroll } from "motion-v";
 
-onMounted(() => {
-  mounted.value = true;
-});
 const mounted = ref(false);
 
 const switchingLocale = ref(false);
@@ -229,7 +228,18 @@ const delayCoeff = 80;
 const cookieDisclaimer = useCookie("cookie-disclaimer", {
   expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
 });
-const showCookieDisclaimer = ref(cookieDisclaimer.value !== "accepted");
+const showCookieDisclaimer = ref(false);
+
+onMounted(async () => {
+  mounted.value = true;
+
+  // Show cookie disclaimer after 3 seconds if not accepted
+  if (cookieDisclaimer.value !== "accepted") {
+    await wait(2000);
+    showCookieDisclaimer.value = true;
+  }
+});
+
 const closeCookieDisclaimer = () => {
   cookieDisclaimer.value = "accepted";
   showCookieDisclaimer.value = false;

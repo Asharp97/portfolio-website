@@ -39,16 +39,16 @@
                     <div>
                       <div class="flex justify-between gap-2">
                         <div>
-                          <NuxtLink :to="e.titleLink" target="_blank">
+                          <NuxtLink :to="e.titleLink" target="_blank" class="inline-flex">
                             <h5
-                              class="text-2xl sm:text-4xl flex font-light group">
+                              class="text-2xl sm:text-4xl font-light group w-fit">
                               {{ e.title }}
-                              <span v-if="e.titleLink"
-                                ><Icon
-                                  class="text-sm group-hover:translate-x-1 group-hover:-translate-y-1 duration-300"
-                                  name="cuida:open-in-new-tab-outline"
-                              /></span>
                             </h5>
+                            <span v-if="e.titleLink" class="mt-auto ml-2"
+                              ><Icon
+                                class="text-sm group-hover:translate-x-1 group-hover:-translate-y-1 duration-300"
+                                name="cuida:open-in-new-tab-outline"
+                            /></span>
                           </NuxtLink>
                           <NuxtLink :to="e.subtitleLink" target="_blank">
                             <h2
