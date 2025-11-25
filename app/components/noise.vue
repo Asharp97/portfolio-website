@@ -1,6 +1,20 @@
 <template>
-  <div class="noise bg-[var(--overlay)] dark:bg-transparent" />
+  <div
+    :class="['noise', { loaded: mounted }]"
+    class="bg-[var(--overlay)] dark:bg-transparent" />
 </template>
+<script setup>
+const mounted = ref(false);
+onMounted(() => {
+  // Defer noise texture loading to not block FCP
+  requestIdleCallback(
+    () => {
+      mounted.value = true;
+    },
+    { timeout: 1000 }
+  );
+});
+</script>
 <style>
 .noise {
   width: 100%;
@@ -13,16 +27,21 @@
 }
 
 .noise::after {
-  background-image: url(/img/noise.jpg);
   content: "";
   width: calc(100% + 20rem);
   height: calc(100% + 20rem);
   position: absolute;
   left: -10rem;
   top: -10rem;
-  opacity: 0.06;
+  opacity: 0;
   will-change: transform;
   animation: noise 1s steps(2) infinite;
+  transition: opacity 0.3s ease;
+}
+
+.noise.loaded::after {
+  background-image: url(/img/noise.jpg);
+  opacity: 0.08;
 }
 @keyframes noise {
   0% {

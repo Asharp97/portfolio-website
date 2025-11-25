@@ -3,7 +3,8 @@
     <div class="flex justify-between flex-wrap gap-3">
       <div class="flex-1">
         <NuxtLink to="#home">
-          <text-split v-if="mounted" text="Ali Elsayed" tag="h1" />
+          <h1 v-if="!mounted" class="text-7xl font-bold">Ali Elsayed</h1>
+          <text-split v-else text="Ali Elsayed" tag="h1" />
         </NuxtLink>
       </div>
       <div class="flex flex-1 justify-between flex-wrap gap-2 w-full">
@@ -46,10 +47,7 @@
     </div>
     <div class="h-50" />
     <div class="flex justify-between items-end flex-wrap gap-3">
-      <client-only>
-        <Mark-down :text="processedSummary" class="w-full md:w-1/2" />
-      </client-only>
-
+      <Mark-down :text="processedSummary" class="w-full md:w-1/2" />
       <div class="flex-1 md:flex justify-end items-end hidden">
         <Hashtag :active="true" :logo="true" />
       </div>
@@ -61,8 +59,7 @@
 import common from "../static/common.json";
 const props = defineProps(["titles", "summary", "locale"]);
 const mounted = ref(false);
-onMounted(async () => {
-  await wait(400);
+onMounted(() => {
   mounted.value = true;
 });
 const scrollTo = async (id) => {

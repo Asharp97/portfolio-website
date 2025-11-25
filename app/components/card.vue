@@ -39,7 +39,10 @@
                     <div>
                       <div class="flex justify-between gap-2">
                         <div>
-                          <NuxtLink :to="e.titleLink" target="_blank" class="inline-flex">
+                          <NuxtLink
+                            :to="e.titleLink"
+                            target="_blank"
+                            class="inline-flex">
                             <h5
                               class="text-2xl sm:text-4xl font-light group w-fit">
                               {{ e.title }}
@@ -148,14 +151,12 @@ const paginationHandle = (e) => {
 };
 
 const mounted = ref(false);
-const swiperSpeed = ref(800);
-onMounted(async () => {
-  swiperSpeed.value = 800;
-  await wait(400);
+const swiperSpeed = ref(400);
+onMounted(() => {
   mounted.value = true;
-  await wait(200);
-  paginationHandle(0);
-  swiperSpeed.value = 400;
+  nextTick(() => {
+    paginationHandle(0);
+  });
 });
 </script>
 

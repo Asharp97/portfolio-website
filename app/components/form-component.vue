@@ -27,7 +27,12 @@
                     <UInput
                       v-model="state.email"
                       :placeholder="t('placeholder.email')"
-                      @blur="validate('email')" />
+                      @blur="
+                        () => {
+                          validate('email');
+                          clearErrorAfterDelay('email');
+                        }
+                      " />
                   </UFormField>
                 </div>
                 <div
@@ -41,7 +46,12 @@
                     <UInput
                       v-model="state.name"
                       :placeholder="t('placeholder.name')"
-                      @blur="validate('name')" />
+                      @blur="
+                        () => {
+                          validate('name');
+                          clearErrorAfterDelay('name');
+                        }
+                      " />
                   </UFormField>
                 </div>
                 <div
@@ -55,7 +65,12 @@
                     <UTextarea
                       v-model="state.msg"
                       :placeholder="t('placeholder.message')"
-                      @blur="validate('msg')" />
+                      @blur="
+                        () => {
+                          validate('msg');
+                          clearErrorAfterDelay('msg');
+                        }
+                      " />
                   </UFormField>
                 </div>
                 <div
@@ -126,14 +141,19 @@ const schema = z.object({
   }),
 });
 
-const validate = async (field) => {
+const validate = (field) => {
   const { success, error } = schema.shape[field].safeParse(state[field]);
   if (!success) {
     errorMsg[field] = error.issues[0].message;
-    await wait(3000);
+  } else {
     errorMsg[field] = "";
-  } else errorMsg[field] = "";
+  }
   return success;
+};
+
+const clearErrorAfterDelay = async (field) => {
+  await wait(3000);
+  errorMsg[field] = "";
 };
 const slider = ref(null);
 const onSwiper = (swiper) => {
@@ -147,12 +167,12 @@ const errorClass = "text-red-500 text-sm";
 const swiperLock = ref(false);
 
 const formSubmittedCookie = useCookie("form-submitted", {
-  expires: new Date(Date.now() + 24 * 60 * 60 * 1000),// 1 day
+  expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
 });
 const onSubmit = async () => {
-  const validEmail = await validate("email");
-  const validName = await validate("name");
-  const validMsg = await validate("msg");
+  const validEmail = validate("email");
+  const validName = validate("name");
+  const validMsg = validate("msg");
 
   if (validEmail && validName && validMsg) {
     await goToSlide(1); // Loading slide
@@ -172,8 +192,8 @@ const onSubmit = async () => {
 
       // Check if the mail was accepted
       if (result && result.accepted && result.accepted.length > 0) {
+        formSubmittedCookie.value = "submitted";
         await goToSlide(2); // Success slide
-        cookieForm.value = "submitted";
       } else {
         await goToSlide(3); // Error slide
       }

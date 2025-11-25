@@ -1,7 +1,8 @@
 <template>
   <div id="home" ref="bod">
     <div class="bg-white dark:bg-dark-900 min-h-dvh text-black py-30">
-      <Mouse-Follower
+      <LazyMouseFollower
+        v-if="mounted"
         :enable-follower="enableFollower"
         :text="title"
         class="absolute z-20 hidden md:block" />
@@ -24,7 +25,7 @@
             <div
               v-if="showCookieDisclaimer"
               class="text-md text-gray-900 dark:text-gray-100 text-center px-2 bg-gray-100 dark:bg-slate-800 rounded-lg p-2 relative">
-              🍪 {{ t("cookie.message") }}<br />
+              🍪 {{ t("cookie.message") }}
               <div class="font-light text-sm">{{ t("cookie.subtitle") }}</div>
               <Icon
                 name="ic:sharp-cancel"
@@ -153,7 +154,7 @@
             <div
               class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-6 relative">
               <Card id="form" class="card" :name="content.titles[6]">
-                <Form-component
+                <LazyFormComponent
                   @trigger-follower="enableFollower = !enableFollower"
                   @enable-tooltip="activateContent('title.form')"
                   @disable-tooltip="activateContent()" />
@@ -163,7 +164,7 @@
             <div
               class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12 relative">
               <Card class="card" :delay="5 * delayCoeff + 'ms'">
-                <footer-component :content="content.footer" />
+                <LazyFooterComponent :content="content.footer" />
               </Card>
             </div>
           </div>
@@ -216,6 +217,32 @@ const content = computed(() => {
   }
 });
 
+// Dynamic SEO meta tags based on locale
+useHead({
+  title: computed(() =>
+    locale.value === "tr"
+      ? "Ali Elsayed | Makine Öğrenmesi & Full-Stack Yazılım Mühendisi"
+      : "Ali Elsayed | Machine Learning & Full-Stack Software Engineer"
+  ),
+  htmlAttrs: {
+    lang: computed(() => locale.value),
+  },
+  meta: [
+    {
+      name: "description",
+      content: computed(() =>
+        locale.value === "tr"
+          ? "4+ yıllık deneyime sahip Makine Öğrenmesi ve Full-Stack Yazılım Mühendisi. TensorFlow, Vue.js, React, NestJS ve Python konularında uzman. İstanbul'da akıllı ve ölçeklenebilir uygulamalar geliştiriyorum."
+          : "Machine Learning & Full-Stack Software Engineer with 4+ years of experience. Specialized in TensorFlow, Vue.js, React, NestJS, and Python. Building smart, scalable applications in Istanbul."
+      ),
+    },
+    {
+      property: "og:locale",
+      content: computed(() => (locale.value === "tr" ? "tr_TR" : "en_US")),
+    },
+  ],
+});
+
 const title = ref("");
 const activateContent = async (key: string = "") => {
   title.value = key ? t(key) : "";
@@ -231,12 +258,11 @@ const cookieDisclaimer = useCookie("cookie-disclaimer", {
 });
 const showCookieDisclaimer = ref(false);
 
-onMounted(async () => {
+onMounted(() => {
   mounted.value = true;
 
-  // Show cookie disclaimer after 3 seconds if not accepted
+  // Show cookie disclaimer immediately if not accepted
   if (cookieDisclaimer.value !== "accepted") {
-    await wait(2000);
     showCookieDisclaimer.value = true;
   }
 });

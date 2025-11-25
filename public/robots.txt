@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://ali-elsayed.vercel.app/sitemap.xml
+
+# Disallow admin/private paths (if any in future)
+# Disallow: /admin/
