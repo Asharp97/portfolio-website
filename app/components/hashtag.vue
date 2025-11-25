@@ -19,7 +19,7 @@
     <Icon
       v-else
       name="majesticons:hashtag-line"
-      class="pause-on-hover duration-300 transition-all animate-spin-slower text-[56rem]" />
+      class="pause-on-hover duration-300 transition-all animate-spin-slower text-9xl" />
   </div>
 </template>
 
