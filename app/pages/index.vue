@@ -68,7 +68,8 @@
                 <Hero
                   :locale="locale"
                   :titles="content.titles"
-                  :summary="content.summary" />
+                  :summary="content.summary"
+                  :is-mobile="isMobile" />
               </Card>
             </div>
             <!-- Experiences -->
@@ -252,13 +253,18 @@ const enableFollower = ref(true);
 const bubbleClass =
   "text-lg uppercase text-white hover:tracking-widest font-normal bg-copper-500 dark:bg-slate-500 flex justify-center items-center w-15 h-15 hover:translate-y-1 duration-300 rounded-full cursor-pointer";
 
-const delayCoeff = 80;
+const isMobile = ref(false);
+const delayCoeff = computed(() => (isMobile.value ? 0 : 80));
+
 const cookieDisclaimer = useCookie("cookie-disclaimer", {
   expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
 });
 const showCookieDisclaimer = ref(false);
 
 onMounted(() => {
+  // Detect mobile for performance optimizations
+  isMobile.value = window.innerWidth < 768;
+
   mounted.value = true;
 
   // Show cookie disclaimer immediately if not accepted

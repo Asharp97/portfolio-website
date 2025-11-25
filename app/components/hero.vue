@@ -3,7 +3,9 @@
     <div class="flex justify-between flex-wrap gap-3">
       <div class="flex-1">
         <NuxtLink to="#home">
-          <h1 v-if="!mounted" class="text-7xl font-bold">Ali Elsayed</h1>
+          <h1 v-if="!mounted || isMobile" class="text-7xl font-bold">
+            Ali Elsayed
+          </h1>
           <text-split v-else text="Ali Elsayed" tag="h1" />
         </NuxtLink>
       </div>
@@ -57,7 +59,7 @@
 
 <script setup>
 import common from "../static/common.json";
-const props = defineProps(["titles", "summary", "locale"]);
+const props = defineProps(["titles", "summary", "locale", "isMobile"]);
 const mounted = ref(false);
 onMounted(() => {
   mounted.value = true;

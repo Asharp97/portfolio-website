@@ -81,11 +81,16 @@ export default defineNuxtConfig({
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: "canonical", href: "https://ali-elsayed.vercel.app" },
-        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        {
+          rel: "preconnect",
+          href: "https://fonts.googleapis.com",
+          fetchpriority: "high",
+        },
         {
           rel: "preconnect",
           href: "https://fonts.gstatic.com",
           crossorigin: "anonymous",
+          fetchpriority: "high",
         },
         { rel: "dns-prefetch", href: "https://api.iconify.design" },
       ],
@@ -168,6 +173,21 @@ export default defineNuxtConfig({
 
   experimental: {
     renderJsonPayloads: true,
+    viewTransition: false,
+  },
+
+  vite: {
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            motion: ["motion-v"],
+            swiper: ["swiper/vue", "swiper/modules"],
+          },
+        },
+      },
+    },
   },
 
   nitro: {
