@@ -62,6 +62,9 @@
               class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-12">
               <Card
                 class="card h-fit!"
+                :class="
+                  title === '' || title === t('title.hero') ? '' : fadeBack
+                "
                 @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.hero')"
                 @mouseleave="activateContent()">
@@ -78,6 +81,11 @@
               <Card
                 :id="t('title.experiences')"
                 class="card"
+                :class="
+                  title === '' || title === content.titles[0]
+                    ? ''
+                    : fadeBack
+                "
                 :content="content.experience"
                 :delay="3 * delayCoeff + 'ms'"
                 :name="content.titles[0]"
@@ -91,6 +99,11 @@
               <Card
                 :id="t('title.skills')"
                 class="card"
+                :class="
+                  title === '' || title === content.titles[1]
+                    ? ''
+                    : fadeBack
+                "
                 :content="content.skills"
                 :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[1]"
@@ -104,6 +117,11 @@
               <Card
                 :id="t('title.projects')"
                 class="card"
+                :class="
+                  title === '' || title === content.titles[2]
+                    ? ''
+                    : fadeBack
+                "
                 :content="content.projects"
                 :delay="1 * delayCoeff + 'ms'"
                 :name="content.titles[2]"
@@ -117,6 +135,11 @@
               <Card
                 :id="t('title.education')"
                 class="card"
+                :class="
+                  title === '' || title === content.titles[3]
+                    ? ''
+                    : fadeBack
+                "
                 :content="content.education"
                 :delay="1 * delayCoeff + 'ms'"
                 :name="content.titles[3]"
@@ -132,6 +155,11 @@
                 class="card"
                 :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[4]"
+                :class="
+                  title === '' || title === content.titles[4]
+                    ? ''
+                    : fadeBack
+                "
                 @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.languages')"
                 @mouseleave="activateContent()">
@@ -144,6 +172,11 @@
               <Card
                 :id="t('title.certificates')"
                 class="card"
+                :class="
+                  title === '' || title === content.titles[5]
+                    ? ''
+                    : fadeBack
+                "
                 :delay="4 * delayCoeff + 'ms'"
                 :content="content.certificates"
                 :name="content.titles[5]"
@@ -154,7 +187,13 @@
             <!-- Contact Form-->
             <div
               class="col-span-1 group/outer sm:col-span-2 md:col-span-6 lg:col-span-6 relative">
-              <Card id="form" class="card" :name="content.titles[6]">
+              <Card
+                id="form"
+                class="card"
+                :class="
+                  title === '' || title === t('title.form') ? '' : fadeBack
+                "
+                :name="t('title.form')">
                 <LazyFormComponent
                   @trigger-follower="enableFollower = !enableFollower"
                   @enable-tooltip="activateContent('title.form')"
@@ -277,6 +316,7 @@ const closeCookieDisclaimer = () => {
   cookieDisclaimer.value = "accepted";
   showCookieDisclaimer.value = false;
 };
+const fadeBack = 'opacity-60 scale-99 grayscale-25 blur-[2px] sepia-50';
 </script>
 
 <style>

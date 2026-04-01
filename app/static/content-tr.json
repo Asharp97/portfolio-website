@@ -58,14 +58,16 @@
   ],
   "certificates": [
     {
-      "title": "Google Professional Machine Learning Engineer",
-      "description": "Google’ın **Profesyonel Makine Öğrenmesi Mühendisi** sertifikasını alarak, **Google Cloud Platform** üzerinde ölçeklenebilir ML çözümleri tasarlama, yayına alma ve sürdürme konularında ileri seviye uzmanlık kazandım."
+      "title": "Meta Front-End Developer Professional Certificate",
+      "subtitle": "Coursera",
+      "subtitleLink": "https://www.coursera.org/account/accomplishments/professional-cert/B7PN8H13YG4T",
+      "description": "Coursera üzerinde **Meta Front-End Developer Professional Certificate** programını tamamladım. **HTML, CSS, JavaScript** ve **React** kullanarak duyarlı ve kullanıcı dostu web uygulamaları geliştirme konusunda uzmanlık kazandım. Uygulamalı projeler ve gerçek dünya senaryoları sayesinde pratik deneyim edindim."
     },
     {
       "title": "Google Cloud Console Skill Badges",
       "subtitle": "Credly",
       "subtitleLink": "https://www.credly.com/users/ali-elsayed.b0f75bda",
-      "description": "**Makine Öğrenmesi Temelleri** ve **Veri Mühendisliği** gibi alanlarda tamamladığım çeşitli **GCP beceri rozetleri**, pratik cloud deneyimimi ve gerçek dünyaya uygun AI akışlarındaki bilgimi yansıtmaktadır."
+      "description": "**Machine Learning Fundamentals** ve **Data Engineering** gibi alanlarda birden fazla **GCP yetkinlik rozeti** tamamladım. Bu rozetler, bulut teknolojilerinde uygulamalı uzmanlığımı ve gerçek dünya yapay zeka süreçlerine dair pratik anlayışımı göstermektedir."
     }
   ],
   "skills": [

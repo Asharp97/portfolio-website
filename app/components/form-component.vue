@@ -3,8 +3,8 @@
     <ClientOnly>
       <Swiper
         class="h-full flex items-center"
-        :allow-slide-next="swiperLock"
-        :allow-slide-prev="swiperLock"
+        :allow-slide-next="!swiperLock"
+        :allow-slide-prev="!swiperLock"
         @swiper="onSwiper">
         <Swiper-slide>
           <div class="flex flex-wrap gap-8 h-full">
@@ -156,14 +156,16 @@ const clearErrorAfterDelay = async (field) => {
   errorMsg[field] = "";
 };
 const slider = ref(null);
-const onSwiper = (swiper) => {
+const onSwiper = async (swiper) => {
   slider.value = swiper;
   if (formSubmittedCookie.value === "submitted") {
-    goToSlide(2); // Success slide
+    await nextTick();
+    await goToSlide(2);
   }
 };
 const errorClass = "text-red-500 text-sm";
 
+// Locking inverted: true = locked, false = free. Start unlocked so auto-slide works.
 const swiperLock = ref(false);
 
 const formSubmittedCookie = useCookie("form-submitted", {
@@ -204,9 +206,11 @@ const onSubmit = async () => {
   }
 };
 const goToSlide = async (x) => {
-  swiperLock.value = false;
+  if (!slider.value) return;
+  swiperLock.value = false; // unlock to allow navigation
+  await nextTick(); // ensure swiper DOM is ready before sliding
   await slider.value.slideTo(x);
-  swiperLock.value = true;
+  swiperLock.value = true; // re-lock after navigation
 };
 </script>
 

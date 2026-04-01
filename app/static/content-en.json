@@ -58,8 +58,10 @@
   ],
   "certificates": [
     {
-      "title": "Google Professional Machine Learning Engineer",
-      "description": "Earned Google’s **Professional Machine Learning Engineer** certification, demonstrating advanced expertise in designing, deploying, and maintaining scalable ML solutions on **Google Cloud Platform**."
+      "title": "Meta Front-End Developer Professional Certificate",
+      "subtitle": "Coursera",
+      "subtitleLink": "https://www.coursera.org/account/accomplishments/professional-cert/B7PN8H13YG4T",
+      "description": "Completed the **Meta Front-End Developer Professional Certificate** on Coursera, mastering **HTML, CSS, JavaScript**, and **React** to build responsive, user-friendly web applications. Gained practical experience through hands-on projects and real-world scenarios."
     },
     {
       "title": "Google Cloud Console Skill Badges",
