@@ -72,38 +72,96 @@
   ],
   "skills": [
     {
-      "title": "Yapay Zeka & Makine Öğrenmesi",
+      "title": "Programlama Dilleri ve Framework'ler",
       "points": [
-        { "label": "Derin öğrenme", "value": "TensorFlow" },
-        { "label": "ML süreçleri", "value": "Scikit-learn" },
-        { "label": "LLM uygulamaları", "value": "LangChain" }
+        {
+          "label": "Diller",
+          "value": "TypeScript, JavaScript, Java, Python"
+        },
+        {
+          "label": "Frontend",
+          "value": "Vue.js (Nuxt), React.js, Tailwind CSS"
+        },
+        {
+          "label": "State Yönetimi ve UI",
+          "value": "Pinia, Redux, SCSS, Three.js"
+        }
+      ]
+    },
+    {
+      "title": "Backend Geliştirme ve API'ler",
+      "points": [
+        {
+          "label": "Temel Teknolojiler",
+          "value": "Node.js, NestJS, Spring Boot"
+        },
+        {
+          "label": "API ve ORM",
+          "value": "GraphQL, RESTful API'ler, Prisma ORM, Hibernate"
+        },
+        {
+          "label": "Test",
+          "value": "JUnit, Mockito, TDD"
+        }
+      ]
+    },
+    {
+      "title": "Veri ve Arama Mühendisliği",
+      "points": [
+        {
+          "label": "İlişkisel Veritabanları",
+          "value": "PostgreSQL, SQL"
+        },
+        {
+          "label": "Arama ve NoSQL",
+          "value": "Elasticsearch, NoSQL"
+        }
+      ]
+    },
+    {
+      "title": "DevOps, Altyapı ve Güvenlik",
+      "points": [
+        {
+          "label": "Container Teknolojileri",
+          "value": "Docker, Kubernetes"
+        },
+        {
+          "label": "CI/CD ve Versiyon Kontrol",
+          "value": "GitHub Actions, Git"
+        },
+        {
+          "label": "Güvenlik",
+          "value": "JWT Auth, Rate Limiting, OWASP Top 10"
+        }
+      ]
+    },
+    {
+      "title": "Yapay Zeka ve Makine Öğrenmesi",
+      "points": [
+        {
+          "label": "LLM ve RAG",
+          "value": "LangChain, RAG Pipelines"
+        },
+        {
+          "label": "Derin Öğrenme",
+          "value": "TensorFlow"
+        }
       ]
     },
     {
       "title": "Yazılım Mühendisliği Prensipleri",
       "points": [
-        { "label": "Proje yaşam döngüsü", "value": "SDLC" },
-        { "label": "Ekip süreçleri", "value": "Çevik (Agile) Yöntemoloji" },
-        { "label": "Sistem tasarımı", "value": "Ölçeklenebilir Mimari" },
-        { "label": "Veri hazırlığı", "value": "Öznitelik Mühendisliği" }
-      ]
-    },
-    {
-      "title": "Programlama Dilleri & Framework'ler",
-      "points": [
-        { "label": "Diller", "value": "Python, JavaScript, TypeScript" },
-        { "label": "Framework'ler", "value": "Nuxt.js, Vue.js, React.js" },
-        { "label": "Veritabanları", "value": "SQL" }
-      ]
-    },
-    {
-      "title": "Bulut Bilişim & Servisler",
-      "points": [
-        { "label": "Platform", "value": "Google Cloud Platform (GCP)" },
-        { "label": "Servisler", "value": "Vertex AI, BigQuery, AutoML" },
         {
-          "label": "Uzmanlıklar",
-          "value": "Tahmine Dayalı Modelleme, Veri Analizi, Bulut Tabanlı AI Çözümleri"
+          "label": "Sistem Tasarımı",
+          "value": "Scalable Architecture, Microservices"
+        },
+        {
+          "label": "Takım Süreçleri",
+          "value": "Agile, Mentorluk"
+        },
+        {
+          "label": "Proje Yaşam Döngüsü",
+          "value": "SDLC"
         }
       ]
     }

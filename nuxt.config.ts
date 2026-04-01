@@ -141,7 +141,6 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxt/icon",
     "@nuxtjs/i18n",
-    "nuxt3-lenis",
     "motion-v/nuxt",
     "nuxt-nodemailer",
   ],
@@ -171,11 +170,6 @@ export default defineNuxtConfig({
   },
   css: ["~/assets/css/main.css"],
 
-  experimental: {
-    renderJsonPayloads: true,
-    viewTransition: false,
-  },
-
   vite: {
     build: {
       cssCodeSplit: true,
@@ -191,7 +185,6 @@ export default defineNuxtConfig({
           manualChunks: {
             motion: ["motion-v"],
             swiper: ["swiper/vue", "swiper/modules"],
-            ui: ["@nuxt/ui"],
           },
         },
       },
@@ -215,9 +208,5 @@ export default defineNuxtConfig({
     },
   },
 
-  future: {
-    compatibilityVersion: 4,
-  },
-
-  compatibilityDate: "2024-11-27",
+  compatibilityDate: "2025-07-15",
 });

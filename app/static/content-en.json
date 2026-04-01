@@ -72,43 +72,67 @@
   ],
   "skills": [
     {
+      "title": "Programming Languages & Frameworks",
+      "points": [
+        {
+          "label": "Languages",
+          "value": "TypeScript, JavaScript, Java, Python"
+        },
+        {
+          "label": "Frontend",
+          "value": "Vue.js (Nuxt), React.js, Tailwind CSS"
+        },
+        { "label": "State & UI", "value": "Pinia, Redux, SCSS, Three.js" }
+      ]
+    },
+    {
+      "title": "Backend Development & APIs",
+      "points": [
+        { "label": "Core", "value": "Node.js, NestJS, Spring Boot" },
+        {
+          "label": "APIs & ORM",
+          "value": "GraphQL, RESTful APIs, Prisma ORM, Hibernate"
+        },
+        { "label": "Testing", "value": "JUnit, Mockito, TDD" }
+      ]
+    },
+    {
+      "title": "Data & Search Engineering",
+      "points": [
+        { "label": "Relational", "value": "PostgreSQL, SQL" },
+        { "label": "Search & NoSQL", "value": "Elasticsearch, NoSQL" }
+      ]
+    },
+    {
+      "title": "DevOps, Infrastructure & Security",
+      "points": [
+        { "label": "Containers", "value": "Docker, Kubernetes" },
+        { "label": "CI/CD & VCS", "value": "GitHub Actions, Git" },
+        {
+          "label": "Security",
+          "value": "JWT Auth, Rate Limiting, OWASP Top 10"
+        }
+      ]
+    },
+    {
       "title": "Artificial Intelligence & Machine Learning",
       "points": [
-        { "label": "Deep learning", "value": "TensorFlow" },
-        { "label": "ML workflows", "value": "Scikit-learn" },
-        { "label": "LLM apps", "value": "LangChain" }
+        { "label": "LLM & RAG", "value": "LangChain, RAG Pipelines" },
+        { "label": "Deep Learning", "value": "TensorFlow" }
       ]
     },
     {
       "title": "Software Engineering Principles",
       "points": [
-        { "label": "Project lifecycle", "value": "SDLC" },
-        { "label": "Team processes", "value": "Agile Methodology" },
-        { "label": "System design", "value": "Scalable Architecture" },
-        { "label": "Data prep", "value": "Feature Engineering" }
-      ]
-    },
-    {
-      "title": "Programming Languages & Frameworks",
-      "points": [
-        { "label": "Languages", "value": "Python, JavaScript, TypeScript" },
-        { "label": "Frameworks", "value": "Nuxt.js, Vue.js, React.js" },
-        { "label": "Databases", "value": "SQL" }
-      ]
-    },
-    {
-      "title": "Cloud Computing & Services",
-      "points": [
-        { "label": "Platform", "value": "Google Cloud Platform (GCP)" },
-        { "label": "Services", "value": "Vertex AI, BigQuery, AutoML" },
         {
-          "label": "Specialties",
-          "value": "Predictive Modeling, Data Analysis, Cloud-Based AI Solutions"
-        }
+          "label": "System design",
+          "value": "Scalable Architecture, Microservices"
+        },
+        { "label": "Team processes", "value": "Agile, Mentorship" },
+        { "label": "Project lifecycle", "value": "SDLC" }
       ]
     }
   ],
-
   "experience": [
     {
       "title": "Senior Backend Engineer",
