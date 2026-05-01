@@ -58,6 +58,12 @@
   ],
   "certificates": [
     {
+      "title": "IBM Java Developer Professional Certificate",
+      "subtitle": "Coursera",
+      "subtitleLink": "https://www.coursera.org/account/accomplishments/verify/P5YJIQ4CIP90",
+      "description": "Mastered **Core Java**, **Spring Boot**, and **Microservices** to develop scalable enterprise applications. Focused on **RESTful APIs**, **Docker**, and **Kubernetes** for cloud-native deployment, implementing robust backend logic and automated testing frameworks."
+    },
+    {
       "title": "Meta Front-End Developer Professional Certificate",
       "subtitle": "Coursera",
       "subtitleLink": "https://www.coursera.org/account/accomplishments/professional-cert/B7PN8H13YG4T",

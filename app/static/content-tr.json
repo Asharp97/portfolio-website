@@ -58,6 +58,12 @@
   ],
   "certificates": [
     {
+      "title": "IBM Java Developer Professional Certificate",
+      "subtitle": "Coursera",
+      "subtitleLink": "https://www.coursera.org/account/accomplishments/verify/P5YJIQ4CIP90",
+      "description": "Ölçeklenebilir kurumsal uygulamalar geliştirmek için **Java**, **Spring Boot** ve **Mikroservis** mimarilerinde uzmanlık kazandım. Bulut tabanlı dağıtım için **RESTful API'lar**, **Docker** ve **Kubernetes** konularına odaklanarak; güçlü backend mantığı ve otomatik test çerçeveleri uygulama becerisi edindim."
+    },
+    {
       "title": "Meta Front-End Developer Professional Certificate",
       "subtitle": "Coursera",
       "subtitleLink": "https://www.coursera.org/account/accomplishments/professional-cert/B7PN8H13YG4T",

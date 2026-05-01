@@ -21,6 +21,18 @@
   --color-dark-500: #212123;
   --color-dark-900: #141414;
 
+  --color-slate-50: #f2f1ef;
+  --color-slate-100: #efe4d6;
+  --color-slate-200: #dec7a9;
+  --color-slate-300: #cda87c;
+  --color-slate-400: #c18f5e;
+  --color-slate-500: #b57549;
+  --color-slate-600: #a05e3f;
+  --color-slate-700: #864837;
+  --color-slate-800: #6e3c32;
+  --color-slate-900: #5c322b;
+  --color-slate-950: #020100;
+
   --animate-spin: spin 20s linear infinite;
   --animate-spin-slower: spin 60s ease infinite;
 

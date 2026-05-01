@@ -16,7 +16,7 @@ export default defineAppConfig({
       variants: {
         variant: {
           solid: {
-            root: "bg-inverted text-inverted bg-gray-100 dark:bg-dark-500 dark:text-white text-black rounded-2xl flex items-center group-hover/outer:scale-99 root",
+            root: "bg-inverted text-inverted bg-white dark:bg-dark-500 dark:text-white text-black flex items-center group-hover/outer:scale-99",
             base: "w-full",
           },
         },

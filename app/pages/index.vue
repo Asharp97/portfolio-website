@@ -1,12 +1,14 @@
 <template>
   <div id="home" ref="bod">
-    <div class="bg-white dark:bg-dark-900 min-h-dvh text-black py-30">
+    <div
+      class="min-h-dvh bg-[radial-gradient(circle,#f2f2f2_20%,transparent_200%),url('/img/bg.svg')] dark:bg-[radial-gradient(circle,black_10%,transparent_170%),url('/img/bg.svg')] bg-repeat bg-size-[100%_100%,200px] bg-[no-repeat,repeat] bg-fixed py-30">
       <LazyMouseFollower
         v-if="mounted"
         :enable-follower="enableFollower"
         :text="title"
         class="absolute z-20 hidden md:block" />
 
+      <!-- Header -->
       <Transition name="go-down" appear>
         <header
           v-show="scroll < 50 && mounted"
@@ -52,6 +54,7 @@
         </header>
       </Transition>
 
+      <!-- Main -->
       <Transition name="switch">
         <div v-if="!switchingLocale" class="max-w-380 px-4 mx-auto">
           <!-- MAIN PARENT -->
@@ -63,16 +66,29 @@
               <Card
                 class="card h-fit!"
                 :class="
-                  title === '' || title === t('title.hero') ? '' : fadeBack
+                  heroHovered || title === '' || title === t('title.hero')
+                    ? ''
+                    : fadeBack
                 "
                 @click="enableFollower = !enableFollower"
-                @mouseenter="activateContent('title.hero')"
-                @mouseleave="activateContent()">
-                <Hero
+                @mouseenter="
+                  () => {
+                    activateContent('title.hero');
+                    heroHovered = true;
+                  }
+                "
+                @mouseleave="
+                  () => {
+                    activateContent('');
+                    heroHovered = false;
+                  }
+                ">
+                <Hero-component
                   :locale="locale"
                   :titles="content.titles"
                   :summary="content.summary"
-                  :is-mobile="isMobile" />
+                  :is-mobile="isMobile"
+                  @set-title="activateContent" />
               </Card>
             </div>
             <!-- Experiences -->
@@ -82,9 +98,7 @@
                 :id="t('title.experiences')"
                 class="card"
                 :class="
-                  title === '' || title === content.titles[0]
-                    ? ''
-                    : fadeBack
+                  title === '' || title === content.titles[0] ? '' : fadeBack
                 "
                 :content="content.experience"
                 :delay="3 * delayCoeff + 'ms'"
@@ -100,9 +114,7 @@
                 :id="t('title.skills')"
                 class="card"
                 :class="
-                  title === '' || title === content.titles[1]
-                    ? ''
-                    : fadeBack
+                  title === '' || title === content.titles[1] ? '' : fadeBack
                 "
                 :content="content.skills"
                 :delay="4 * delayCoeff + 'ms'"
@@ -118,9 +130,7 @@
                 :id="t('title.projects')"
                 class="card"
                 :class="
-                  title === '' || title === content.titles[2]
-                    ? ''
-                    : fadeBack
+                  title === '' || title === content.titles[2] ? '' : fadeBack
                 "
                 :content="content.projects"
                 :delay="1 * delayCoeff + 'ms'"
@@ -136,9 +146,7 @@
                 :id="t('title.education')"
                 class="card"
                 :class="
-                  title === '' || title === content.titles[3]
-                    ? ''
-                    : fadeBack
+                  title === '' || title === content.titles[3] ? '' : fadeBack
                 "
                 :content="content.education"
                 :delay="1 * delayCoeff + 'ms'"
@@ -156,9 +164,7 @@
                 :delay="4 * delayCoeff + 'ms'"
                 :name="content.titles[4]"
                 :class="
-                  title === '' || title === content.titles[4]
-                    ? ''
-                    : fadeBack
+                  title === '' || title === content.titles[4] ? '' : fadeBack
                 "
                 @click="enableFollower = !enableFollower"
                 @mouseenter="activateContent('title.languages')"
@@ -173,9 +179,7 @@
                 :id="t('title.certificates')"
                 class="card"
                 :class="
-                  title === '' || title === content.titles[5]
-                    ? ''
-                    : fadeBack
+                  title === '' || title === content.titles[5] ? '' : fadeBack
                 "
                 :delay="4 * delayCoeff + 'ms'"
                 :content="content.certificates"
@@ -262,7 +266,7 @@ useHead({
   title: computed(() =>
     locale.value === "tr"
       ? "Ali Elsayed | Makine Öğrenmesi & Full-Stack Yazılım Mühendisi"
-      : "Ali Elsayed | Machine Learning & Full-Stack Software Engineer"
+      : "Ali Elsayed | Machine Learning & Full-Stack Software Engineer",
   ),
   htmlAttrs: {
     lang: computed(() => locale.value),
@@ -273,7 +277,7 @@ useHead({
       content: computed(() =>
         locale.value === "tr"
           ? "4+ yıllık deneyime sahip Makine Öğrenmesi ve Full-Stack Yazılım Mühendisi. TensorFlow, Vue.js, React, NestJS ve Python konularında uzman. İstanbul'da akıllı ve ölçeklenebilir uygulamalar geliştiriyorum."
-          : "Machine Learning & Full-Stack Software Engineer with 4+ years of experience. Specialized in TensorFlow, Vue.js, React, NestJS, and Python. Building smart, scalable applications in Istanbul."
+          : "Machine Learning & Full-Stack Software Engineer with 4+ years of experience. Specialized in TensorFlow, Vue.js, React, NestJS, and Python. Building smart, scalable applications in Istanbul.",
       ),
     },
     {
@@ -284,6 +288,7 @@ useHead({
 });
 
 const title = ref("");
+const heroHovered = ref(false);
 const activateContent = async (key: string = "") => {
   title.value = key ? t(key) : "";
 };
@@ -316,7 +321,7 @@ const closeCookieDisclaimer = () => {
   cookieDisclaimer.value = "accepted";
   showCookieDisclaimer.value = false;
 };
-const fadeBack = 'opacity-60 scale-99 grayscale-25 blur-[2px] sepia-50';
+const fadeBack = "opacity-60 grayscale-25 blur-[2px] ";
 </script>
 
 <style>

@@ -16,7 +16,9 @@
               <!-- @click="scroll()" -->
               <button
                 class="flex items-center gap-1 mb-1 group cursor-pointer"
-                @click.prevent="scrollTo(name)">
+                @mouseover="emit('setTitle', name)"
+                @mouseleave="emit('setTitle', '')"
+                >
                 <Hashtag />
                 <h3>{{ name }}</h3>
               </button>
@@ -60,20 +62,11 @@
 <script setup>
 import common from "../static/common.json";
 const props = defineProps(["titles", "summary", "locale", "isMobile"]);
+const emit = defineEmits(["setTitle"]);
 const mounted = ref(false);
 onMounted(() => {
   mounted.value = true;
 });
-const scrollTo = async (id) => {
-  await nextTick();
-  const element = document.getElementById(id);
-  if (element) {
-    window.scrollTo({
-      top: element.offsetTop,
-      behavior: "smooth",
-    });
-  }
-};
 const processedSummary = computed(() => {
   const years = new Date().getFullYear() - 2020;
   return props.summary.replace("{{years}}", years);

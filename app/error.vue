@@ -1,6 +1,6 @@
 <template>
   <div class="h-dvh flex justify-center items-center">
-    <Noise />
+    <Noise-overlay />
     <h5
       class="text-[50rem] w-full h-full flex justify-center items-center font-black dark:text-gray-950 text-amber-50 absolute -z-10">
       404

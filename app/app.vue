@@ -1,6 +1,6 @@
 <template>
   <!-- <Lenis root> -->
-  <Noise />
+  <Noise-overlay />
   <NuxtLayout>
     <Analytics />
     <NuxtPage />
